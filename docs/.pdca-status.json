@@ -1,0 +1,29 @@
+{
+  "version": "2.0",
+  "lastUpdated": "2026-03-11T16:11:06.398Z",
+  "activeFeatures": ["domain-model", "api-spec"],
+  "primaryFeature": "api-spec",
+  "features": {
+    "domain-model": {
+      "phase": "design",
+      "startedAt": "2026-03-12T00:00:00.000Z",
+      "lastUpdated": "2026-03-12T00:00:00.000Z"
+    },
+    "api-spec": {
+      "phase": "design",
+      "startedAt": "2026-03-12T00:00:00.000Z",
+      "lastUpdated": "2026-03-12T00:00:00.000Z"
+    }
+  },
+  "pipeline": {
+    "currentPhase": 1,
+    "level": "Dynamic",
+    "phaseHistory": []
+  },
+  "session": {
+    "startedAt": "2026-03-11T16:11:06.398Z",
+    "onboardingCompleted": false,
+    "lastActivity": "2026-03-11T16:11:06.398Z"
+  },
+  "history": []
+}
