@@ -1,10 +1,26 @@
 {
-  "sessionCount": 4,
+  "sessionCount": 8,
   "lastSession": {
-    "startedAt": "2026-03-12T08:23:46.430Z",
+    "startedAt": "2026-03-14T06:00:00.000Z",
     "platform": "claude",
     "level": "Dynamic"
   },
-  "currentFeature": "domain-model",
-  "currentPhase": "design"
+  "currentFeature": "api-spec",
+  "currentPhase": "check",
+  "features": {
+    "domain-model": {
+      "phase": "do",
+      "note": "Entity, Repository, Global infra implemented"
+    },
+    "api-spec": {
+      "phase": "check",
+      "matchRate": 22,
+      "gaps": {
+        "missing": 43,
+        "added": 4,
+        "matched": 27
+      },
+      "analyzedAt": "2026-03-14"
+    }
+  }
 }
