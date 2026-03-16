@@ -22,3 +22,27 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Secrets & local config
+.env
+.env.local
+.env.*.local
+application-local.properties
+application-local.yml
+application-secret.properties
+application-secret.yml
+
+# Build output
+build/
+out/
+target/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Gradle
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
