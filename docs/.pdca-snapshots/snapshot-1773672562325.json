@@ -1,0 +1,695 @@
+{
+  "timestamp": "2026-03-16T14:49:22.325Z",
+  "reason": "compaction",
+  "status": {
+    "version": "2.0",
+    "lastUpdated": "2026-03-16T14:42:18.829Z",
+    "activeFeatures": [
+      "domain-model",
+      "api-spec",
+      "config",
+      "entity",
+      "repository",
+      "exception",
+      "response",
+      "validation",
+      "security",
+      "jwt",
+      "dto",
+      "service",
+      "controller"
+    ],
+    "primaryFeature": "api-spec",
+    "features": {
+      "domain-model": {
+        "phase": "design",
+        "startedAt": "2026-03-12T00:00:00.000Z",
+        "lastUpdated": "2026-03-12T00:00:00.000Z"
+      },
+      "api-spec": {
+        "phase": "design",
+        "startedAt": "2026-03-12T00:00:00.000Z",
+        "lastUpdated": "2026-03-12T00:00:00.000Z"
+      },
+      "config": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-14T08:02:10.934Z",
+          "lastUpdated": "2026-03-16T14:42:18.829Z"
+        },
+        "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\config\\FlywayConfig.java"
+      },
+      "entity": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-14T08:02:19.354Z",
+          "lastUpdated": "2026-03-14T08:09:43.128Z"
+        },
+        "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\auth\\entity\\RefreshToken.java"
+      },
+      "repository": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-14T08:03:59.417Z",
+          "lastUpdated": "2026-03-16T10:28:39.183Z"
+        },
+        "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\reservation\\repository\\ReservationRepository.java"
+      },
+      "exception": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-14T08:04:34.772Z",
+          "lastUpdated": "2026-03-16T10:28:25.439Z"
+        },
+        "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\exception\\GlobalExceptionHandler.java"
+      },
+      "response": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-14T08:04:44.924Z",
+          "lastUpdated": "2026-03-14T08:04:50.583Z"
+        },
+        "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\response\\ErrorResponse.java"
+      },
+      "validation": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-14T08:05:07.654Z",
+          "lastUpdated": "2026-03-14T08:09:24.260Z"
+        },
+        "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\validation\\NoSqlInjectionValidator.java"
+      },
+      "security": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-14T09:09:48.688Z",
+          "lastUpdated": "2026-03-14T09:09:48.688Z"
+        },
+        "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\security\\UserPrincipal.java"
+      },
+      "jwt": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-14T09:09:58.729Z",
+          "lastUpdated": "2026-03-14T09:10:06.272Z"
+        },
+        "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\auth\\jwt\\JwtAuthenticationFilter.java"
+      },
+      "dto": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-14T09:10:30.521Z",
+          "lastUpdated": "2026-03-14T09:13:58.331Z"
+        },
+        "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\auth\\dto\\AuthTokens.java"
+      },
+      "service": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-14T09:11:46.079Z",
+          "lastUpdated": "2026-03-16T10:28:59.765Z"
+        },
+        "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\admin\\service\\AdminService.java"
+      },
+      "controller": {
+        "phase": "do",
+        "phaseNumber": 3,
+        "matchRate": null,
+        "iterationCount": 0,
+        "requirements": [],
+        "documents": {},
+        "timestamps": {
+          "started": "2026-03-14T09:13:04.125Z",
+          "lastUpdated": "2026-03-16T10:28:14.991Z"
+        },
+        "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\reservation\\controller\\ReservationController.java"
+      }
+    },
+    "pipeline": {
+      "currentPhase": 1,
+      "level": "Dynamic",
+      "phaseHistory": []
+    },
+    "session": {
+      "startedAt": "2026-03-11T16:11:06.398Z",
+      "onboardingCompleted": false,
+      "lastActivity": "2026-03-16T14:42:18.829Z"
+    },
+    "history": [
+      {
+        "timestamp": "2026-03-14T08:02:10.934Z",
+        "feature": "config",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:02:19.354Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:02:29.067Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:02:48.291Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:02:57.057Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:03:13.851Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:03:21.026Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:03:28.630Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:03:41.816Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:03:59.418Z",
+        "feature": "repository",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:04:11.195Z",
+        "feature": "repository",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:04:21.729Z",
+        "feature": "repository",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:04:25.596Z",
+        "feature": "repository",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:04:34.772Z",
+        "feature": "exception",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:04:38.268Z",
+        "feature": "exception",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:04:44.924Z",
+        "feature": "response",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:04:50.583Z",
+        "feature": "response",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:05:00.200Z",
+        "feature": "exception",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:05:07.654Z",
+        "feature": "validation",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:05:14.371Z",
+        "feature": "validation",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:05:23.313Z",
+        "feature": "validation",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:08:30.147Z",
+        "feature": "repository",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:08:37.765Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:08:41.299Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:08:45.833Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:08:50.281Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:08:54.807Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:08:58.590Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:09:03.251Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:09:06.695Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:09:10.005Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:09:13.437Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:09:24.260Z",
+        "feature": "validation",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:09:29.821Z",
+        "feature": "exception",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:09:36.651Z",
+        "feature": "exception",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T08:09:43.128Z",
+        "feature": "entity",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:09:48.689Z",
+        "feature": "security",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:09:58.729Z",
+        "feature": "jwt",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:10:06.272Z",
+        "feature": "jwt",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:10:23.401Z",
+        "feature": "config",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:10:30.521Z",
+        "feature": "dto",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:10:34.317Z",
+        "feature": "dto",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:10:39.706Z",
+        "feature": "dto",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:10:44.392Z",
+        "feature": "dto",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:10:52.958Z",
+        "feature": "dto",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:10:57.534Z",
+        "feature": "dto",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:11:03.214Z",
+        "feature": "dto",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:11:11.629Z",
+        "feature": "dto",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:11:20.532Z",
+        "feature": "dto",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:11:28.293Z",
+        "feature": "dto",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:11:34.253Z",
+        "feature": "dto",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:11:37.738Z",
+        "feature": "dto",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:11:46.079Z",
+        "feature": "service",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:11:58.985Z",
+        "feature": "service",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:12:14.206Z",
+        "feature": "service",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:12:34.588Z",
+        "feature": "service",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:12:49.837Z",
+        "feature": "service",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:13:04.125Z",
+        "feature": "controller",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:13:22.261Z",
+        "feature": "controller",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:13:34.908Z",
+        "feature": "controller",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:13:48.563Z",
+        "feature": "controller",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-14T09:13:58.331Z",
+        "feature": "dto",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:27:34.646Z",
+        "feature": "config",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:27:36.354Z",
+        "feature": "repository",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:27:38.356Z",
+        "feature": "exception",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:27:43.640Z",
+        "feature": "repository",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:27:44.788Z",
+        "feature": "config",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:27:46.300Z",
+        "feature": "config",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:27:50.177Z",
+        "feature": "controller",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:27:51.822Z",
+        "feature": "controller",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:27:53.253Z",
+        "feature": "controller",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:27:58.166Z",
+        "feature": "controller",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:27:59.415Z",
+        "feature": "controller",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:28:00.532Z",
+        "feature": "controller",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:28:06.909Z",
+        "feature": "controller",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:28:09.069Z",
+        "feature": "controller",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:28:12.239Z",
+        "feature": "controller",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:28:14.991Z",
+        "feature": "controller",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:28:25.439Z",
+        "feature": "exception",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:28:26.739Z",
+        "feature": "repository",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:28:39.183Z",
+        "feature": "repository",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:28:47.544Z",
+        "feature": "service",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T10:28:59.765Z",
+        "feature": "service",
+        "phase": "do",
+        "action": "updated"
+      },
+      {
+        "timestamp": "2026-03-16T14:42:18.829Z",
+        "feature": "config",
+        "phase": "do",
+        "action": "updated"
+      }
+    ]
+  }
+}

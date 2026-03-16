@@ -10,8 +10,11 @@ import com.ryu.room_reservation.user.dto.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/api/v1/admin")
 @RequiredArgsConstructor
@@ -96,8 +100,8 @@ public class AdminController {
     @GetMapping("/stats/rooms")
     @Operation(summary = "회의실별 예약률 통계")
     public ResponseEntity<ApiResponse<List<RoomStatsResponse>>> getRoomStats(
-            @RequestParam Integer year,
-            @RequestParam Integer month) {
+            @RequestParam @Min(2000) @Max(2100) Integer year,
+            @RequestParam @Min(1) @Max(12) Integer month) {
         return ResponseEntity.ok(ApiResponse.ok(adminService.getRoomStats(year, month)));
     }
 }

@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-14T09:13:58.331Z",
+  "lastUpdated": "2026-03-16T15:19:19.983Z",
   "activeFeatures": [
     "domain-model",
     "api-spec",
@@ -37,9 +37,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T08:02:10.934Z",
-        "lastUpdated": "2026-03-14T09:10:23.401Z"
+        "lastUpdated": "2026-03-16T15:19:19.983Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\config\\SecurityConfig.java"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\config\\DataInitializer.java"
     },
     "entity": {
       "phase": "do",
@@ -63,7 +63,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T08:03:59.417Z",
-        "lastUpdated": "2026-03-14T08:08:30.147Z"
+        "lastUpdated": "2026-03-16T10:28:39.183Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\reservation\\repository\\ReservationRepository.java"
     },
@@ -76,7 +76,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T08:04:34.772Z",
-        "lastUpdated": "2026-03-14T08:09:36.651Z"
+        "lastUpdated": "2026-03-16T10:28:25.439Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\exception\\GlobalExceptionHandler.java"
     },
@@ -154,7 +154,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T09:11:46.079Z",
-        "lastUpdated": "2026-03-14T09:12:49.837Z"
+        "lastUpdated": "2026-03-16T10:28:59.765Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\admin\\service\\AdminService.java"
     },
@@ -167,9 +167,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T09:13:04.125Z",
-        "lastUpdated": "2026-03-14T09:13:48.563Z"
+        "lastUpdated": "2026-03-16T10:28:14.991Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\admin\\controller\\AdminController.java"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\reservation\\controller\\ReservationController.java"
     }
   },
   "pipeline": {
@@ -180,7 +180,7 @@
   "session": {
     "startedAt": "2026-03-11T16:11:06.398Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-14T09:13:58.331Z"
+    "lastActivity": "2026-03-16T15:19:19.983Z"
   },
   "history": [
     {
@@ -552,6 +552,144 @@
     {
       "timestamp": "2026-03-14T09:13:58.331Z",
       "feature": "dto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:27:34.646Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:27:36.354Z",
+      "feature": "repository",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:27:38.356Z",
+      "feature": "exception",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:27:43.640Z",
+      "feature": "repository",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:27:44.788Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:27:46.300Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:27:50.177Z",
+      "feature": "controller",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:27:51.822Z",
+      "feature": "controller",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:27:53.253Z",
+      "feature": "controller",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:27:58.166Z",
+      "feature": "controller",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:27:59.415Z",
+      "feature": "controller",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:28:00.532Z",
+      "feature": "controller",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:28:06.909Z",
+      "feature": "controller",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:28:09.069Z",
+      "feature": "controller",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:28:12.239Z",
+      "feature": "controller",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:28:14.991Z",
+      "feature": "controller",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:28:25.439Z",
+      "feature": "exception",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:28:26.739Z",
+      "feature": "repository",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:28:39.183Z",
+      "feature": "repository",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:28:47.544Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T10:28:59.765Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T14:42:18.829Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-16T15:19:19.983Z",
+      "feature": "config",
       "phase": "do",
       "action": "updated"
     }

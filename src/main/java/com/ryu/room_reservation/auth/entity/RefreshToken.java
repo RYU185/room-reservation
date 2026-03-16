@@ -2,10 +2,7 @@ package com.ryu.room_reservation.auth.entity;
 
 import com.ryu.room_reservation.user.entity.User;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -14,6 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "refresh_tokens")
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @EntityListeners(AuditingEntityListener.class)

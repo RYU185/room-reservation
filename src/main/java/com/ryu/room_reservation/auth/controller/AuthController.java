@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,9 @@ import java.time.Duration;
 public class AuthController {
 
     private final AuthService authService;
+
+    @Value("${cookie.secure}")
+    private boolean cookieSecure;
 
     @PostMapping("/login")
     @Operation(summary = "이메일/비밀번호 로그인")
@@ -60,6 +64,7 @@ public class AuthController {
         authService.logout(principal.userId());
         ResponseCookie deleteCookie = ResponseCookie.from("refreshToken", "")
                 .httpOnly(true)
+                .secure(cookieSecure)
                 .path("/api/v1/auth")
                 .maxAge(Duration.ZERO)
                 .sameSite("Strict")
@@ -80,6 +85,7 @@ public class AuthController {
     private ResponseCookie buildRefreshTokenCookie(AuthTokens tokens) {
         return ResponseCookie.from("refreshToken", tokens.refreshToken())
                 .httpOnly(true)
+                .secure(cookieSecure)
                 .path("/api/v1/auth")
                 .maxAge(Duration.ofSeconds(tokens.refreshTokenExpiry()))
                 .sameSite("Strict")

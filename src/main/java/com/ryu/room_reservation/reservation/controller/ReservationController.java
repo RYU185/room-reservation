@@ -11,7 +11,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/api/v1/reservations")
 @RequiredArgsConstructor
@@ -53,8 +57,8 @@ public class ReservationController {
     @GetMapping("/calendar")
     @Operation(summary = "전체 예약 캘린더 조회")
     public ResponseEntity<ApiResponse<List<ReservationResponse>>> getCalendar(
-            @RequestParam int year,
-            @RequestParam int month,
+            @RequestParam @Min(2000) @Max(2100) int year,
+            @RequestParam @Min(1) @Max(12) int month,
             @RequestParam(required = false) Long roomId) {
         return ResponseEntity.ok(ApiResponse.ok(
                 reservationService.getCalendar(year, month, roomId)));

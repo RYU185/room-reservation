@@ -8,6 +8,7 @@ import com.ryu.room_reservation.reservation.dto.ReservationResponse;
 import com.ryu.room_reservation.reservation.entity.Reservation;
 import com.ryu.room_reservation.reservation.entity.ReservationStatus;
 import com.ryu.room_reservation.reservation.repository.ReservationRepository;
+import com.ryu.room_reservation.room.entity.Room;
 import com.ryu.room_reservation.room.repository.RoomRepository;
 import com.ryu.room_reservation.user.dto.UserResponse;
 import com.ryu.room_reservation.user.repository.UserRepository;
@@ -24,6 +25,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -65,23 +68,24 @@ public class AdminService {
         LocalDateTime end = start.plusMonths(1);
         long totalMinutes = Duration.between(start, end).toMinutes();
 
-        return roomRepository.findAll().stream()
-                .filter(room -> room.isActive())
+        List<Room> activeRooms = roomRepository.findByActiveTrue();
+        List<Reservation> allReservations = reservationRepository.findAllByRangeWithRoom(start, end);
+
+        Map<Long, List<Reservation>> byRoom = allReservations.stream()
+                .collect(Collectors.groupingBy(r -> r.getRoom().getId()));
+
+        return activeRooms.stream()
                 .map(room -> {
-                    Specification<Reservation> spec = (root, query, cb) -> cb.and(
-                            cb.equal(root.get("room").get("id"), room.getId()),
-                            cb.greaterThanOrEqualTo(root.get("startTime"), start),
-                            cb.lessThan(root.get("startTime"), end)
-                    );
-                    List<Reservation> reservations = reservationRepository.findAll(spec);
+                    List<Reservation> reservations = byRoom.getOrDefault(room.getId(), List.of());
                     int total = reservations.size();
-                    int confirmed = (int) reservations.stream()
-                            .filter(r -> r.getStatus() == ReservationStatus.CONFIRMED)
-                            .count();
-                    long confirmedMinutes = reservations.stream()
-                            .filter(r -> r.getStatus() == ReservationStatus.CONFIRMED)
-                            .mapToLong(r -> Duration.between(r.getStartTime(), r.getEndTime()).toMinutes())
-                            .sum();
+                    int confirmed = 0;
+                    long confirmedMinutes = 0;
+                    for (Reservation r : reservations) {
+                        if (r.getStatus() == ReservationStatus.CONFIRMED) {
+                            confirmed++;
+                            confirmedMinutes += Duration.between(r.getStartTime(), r.getEndTime()).toMinutes();
+                        }
+                    }
                     double utilizationRate = totalMinutes > 0
                             ? (double) confirmedMinutes / totalMinutes * 100
                             : 0.0;

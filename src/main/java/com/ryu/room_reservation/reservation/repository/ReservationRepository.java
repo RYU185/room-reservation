@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long>, JpaSpecificationExecutor<Reservation> {
 
@@ -22,6 +23,19 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long>,
      * 충돌 조건: newStart < existingEnd AND newEnd > existingStart
      * DB 레벨 제약: V5 마이그레이션의 EXCLUDE 제약 조건이 1차 방어선.
      */
+    /**
+     * 통계용: 지정 기간 내 모든 예약을 회의실 정보와 함께 단일 쿼리로 조회 (N+1 방지)
+     */
+    @Query("""
+            SELECT r FROM Reservation r
+            JOIN FETCH r.room
+            WHERE r.startTime >= :start AND r.startTime < :end
+            """)
+    List<Reservation> findAllByRangeWithRoom(
+            @Param("start") LocalDateTime start,
+            @Param("end") LocalDateTime end
+    );
+
     @Query("""
             SELECT COUNT(r) > 0
             FROM Reservation r
