@@ -8,6 +8,7 @@ import com.ryu.room_reservation.reservation.dto.ReservationResponse;
 import com.ryu.room_reservation.reservation.entity.ReservationStatus;
 import com.ryu.room_reservation.user.dto.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Max;
@@ -37,6 +38,11 @@ public class AdminController {
 
     @GetMapping("/reservations")
     @Operation(summary = "전체 예약 목록 조회 (검색/필터 포함)")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "조회 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 필요"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "관리자 권한 필요")
+    })
     public ResponseEntity<ApiResponse<List<AdminReservationResponse>>> getAllReservations(
             @PageableDefault(size = 20, sort = "startTime", direction = Sort.Direction.DESC) Pageable pageable,
             @RequestParam(required = false) Long roomId,
@@ -59,6 +65,12 @@ public class AdminController {
 
     @PatchMapping("/reservations/{id}/cancel")
     @Operation(summary = "예약 강제 취소")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "취소 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 필요"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "관리자 권한 필요"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "예약 없음")
+    })
     public ResponseEntity<Void> cancelReservation(@PathVariable Long id) {
         adminService.cancelReservation(id);
         return ResponseEntity.noContent().build();
@@ -66,6 +78,11 @@ public class AdminController {
 
     @GetMapping("/users")
     @Operation(summary = "전체 사용자 목록 조회")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "조회 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 필요"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "관리자 권한 필요")
+    })
     public ResponseEntity<ApiResponse<List<UserResponse>>> getAllUsers(
             @PageableDefault(size = 20, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<UserResponse> page = adminService.getAllUsers(pageable);
@@ -82,6 +99,12 @@ public class AdminController {
 
     @GetMapping("/users/{id}/reservations")
     @Operation(summary = "특정 사용자 예약 이력 조회")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "조회 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 필요"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "관리자 권한 필요"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "사용자 없음")
+    })
     public ResponseEntity<ApiResponse<List<ReservationResponse>>> getUserReservations(
             @PathVariable Long id,
             @PageableDefault(size = 20, sort = "startTime", direction = Sort.Direction.DESC) Pageable pageable) {
@@ -99,6 +122,11 @@ public class AdminController {
 
     @GetMapping("/stats/rooms")
     @Operation(summary = "회의실별 예약률 통계")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "조회 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 필요"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "관리자 권한 필요")
+    })
     public ResponseEntity<ApiResponse<List<RoomStatsResponse>>> getRoomStats(
             @RequestParam @Min(2000) @Max(2100) Integer year,
             @RequestParam @Min(1) @Max(12) Integer month) {

@@ -55,6 +55,12 @@ public class AuthService {
         return issueTokens(stored.getUser());
     }
 
+    public AuthTokens issueTokensForOAuth2(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
+        return issueTokens(user);
+    }
+
     public void logout(Long userId) {
         refreshTokenRepository.deleteByUserId(userId);
     }

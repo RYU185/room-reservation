@@ -10,6 +10,7 @@ import com.ryu.room_reservation.global.response.ApiResponse;
 import com.ryu.room_reservation.global.security.UserPrincipal;
 import com.ryu.room_reservation.user.dto.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -36,6 +37,11 @@ public class AuthController {
 
     @PostMapping("/login")
     @Operation(summary = "이메일/비밀번호 로그인")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "로그인 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "입력값 오류"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "이메일/비밀번호 불일치")
+    })
     public ResponseEntity<ApiResponse<TokenResponse>> login(
             @Valid @RequestBody LoginRequest request) {
         AuthTokens tokens = authService.login(request);
@@ -46,6 +52,10 @@ public class AuthController {
 
     @PostMapping("/refresh")
     @Operation(summary = "Access Token 갱신")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "갱신 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Refresh Token 없음 또는 만료")
+    })
     public ResponseEntity<ApiResponse<TokenResponse>> refresh(
             @CookieValue(name = "refreshToken", required = false) String refreshToken) {
         if (refreshToken == null) {
@@ -60,6 +70,10 @@ public class AuthController {
     @PostMapping("/logout")
     @Operation(summary = "로그아웃")
     @SecurityRequirement(name = "bearerAuth")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "로그아웃 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 필요")
+    })
     public ResponseEntity<Void> logout(@AuthenticationPrincipal UserPrincipal principal) {
         authService.logout(principal.userId());
         ResponseCookie deleteCookie = ResponseCookie.from("refreshToken", "")
@@ -77,6 +91,10 @@ public class AuthController {
     @GetMapping("/me")
     @Operation(summary = "현재 로그인 사용자 정보 조회")
     @SecurityRequirement(name = "bearerAuth")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "조회 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 필요")
+    })
     public ResponseEntity<ApiResponse<UserResponse>> getMyInfo(
             @AuthenticationPrincipal UserPrincipal principal) {
         return ResponseEntity.ok(ApiResponse.ok(authService.getMyInfo(principal.userId())));

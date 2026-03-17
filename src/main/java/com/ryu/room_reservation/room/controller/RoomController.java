@@ -6,6 +6,7 @@ import com.ryu.room_reservation.room.dto.RoomRequest;
 import com.ryu.room_reservation.room.dto.RoomResponse;
 import com.ryu.room_reservation.room.service.RoomService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -32,6 +33,10 @@ public class RoomController {
 
     @GetMapping
     @Operation(summary = "회의실 목록 조회 (활성 회의실만)")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "조회 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 필요")
+    })
     public ResponseEntity<ApiResponse<List<RoomResponse>>> getRooms(
             @PageableDefault(size = 20, sort = "name") Pageable pageable,
             @RequestParam(required = false) String location,
@@ -50,12 +55,22 @@ public class RoomController {
 
     @GetMapping("/{id}")
     @Operation(summary = "회의실 상세 조회")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "조회 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 필요"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "회의실 없음")
+    })
     public ResponseEntity<ApiResponse<RoomResponse>> getRoom(@PathVariable Long id) {
         return ResponseEntity.ok(ApiResponse.ok(roomService.getRoom(id)));
     }
 
     @GetMapping("/{id}/availability")
     @Operation(summary = "회의실 가용 여부 조회")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "조회 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 필요"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "회의실 없음")
+    })
     public ResponseEntity<ApiResponse<RoomAvailabilityResponse>> checkAvailability(
             @PathVariable Long id,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
@@ -66,6 +81,12 @@ public class RoomController {
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "회의실 등록 (관리자 전용)")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "생성 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "입력값 오류"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 필요"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "권한 없음")
+    })
     public ResponseEntity<ApiResponse<RoomResponse>> createRoom(@Valid @RequestBody RoomRequest request) {
         return ResponseEntity.status(201).body(ApiResponse.ok(roomService.createRoom(request)));
     }
@@ -73,6 +94,13 @@ public class RoomController {
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "회의실 정보 전체 수정 (관리자 전용)")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "수정 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "입력값 오류"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 필요"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "권한 없음"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "회의실 없음")
+    })
     public ResponseEntity<ApiResponse<RoomResponse>> updateRoom(
             @PathVariable Long id,
             @Valid @RequestBody RoomRequest request) {
@@ -82,6 +110,12 @@ public class RoomController {
     @PatchMapping("/{id}/deactivate")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "회의실 비활성화 (관리자 전용)")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "비활성화 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 필요"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "403", description = "권한 없음"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "회의실 없음")
+    })
     public ResponseEntity<Void> deactivateRoom(@PathVariable Long id) {
         roomService.deactivateRoom(id);
         return ResponseEntity.noContent().build();

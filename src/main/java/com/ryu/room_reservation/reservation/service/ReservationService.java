@@ -20,6 +20,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +35,27 @@ public class ReservationService {
     private final UserRepository userRepository;
 
     public Page<ReservationResponse> getMyReservations(
-            Long userId, Pageable pageable, ReservationStatus status) {
-        Page<Reservation> page = status != null
-                ? reservationRepository.findByUserIdAndStatus(userId, status, pageable)
-                : reservationRepository.findByUserId(userId, pageable);
-        return page.map(r -> ReservationResponse.from(r, false));
+            Long userId, Pageable pageable, ReservationStatus status, LocalDate from, LocalDate to) {
+        LocalDateTime fromDt = from != null ? from.atStartOfDay() : null;
+        LocalDateTime toDt = to != null ? to.plusDays(1).atStartOfDay() : null;
+
+        Specification<Reservation> spec = (root, query, cb) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            predicates.add(cb.equal(root.get("user").get("id"), userId));
+            if (status != null) {
+                predicates.add(cb.equal(root.get("status"), status));
+            }
+            if (fromDt != null) {
+                predicates.add(cb.greaterThanOrEqualTo(root.get("startTime"), fromDt));
+            }
+            if (toDt != null) {
+                predicates.add(cb.lessThan(root.get("startTime"), toDt));
+            }
+            return cb.and(predicates.toArray(new Predicate[0]));
+        };
+
+        return reservationRepository.findAll(spec, pageable)
+                .map(r -> ReservationResponse.from(r, false));
     }
 
     public ReservationResponse getReservation(Long id, Long userId, boolean isAdmin) {
