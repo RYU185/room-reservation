@@ -4,7 +4,8 @@
       "Bash(./gradlew test:*)",
       "Bash(./gradlew compileTestJava)",
       "Bash(./gradlew clean:*)",
-      "Bash(find build/classes/java/test -name *.class)"
+      "Bash(find build/classes/java/test -name *.class)",
+      "Bash(./gradlew --info test --tests \"com.ryu.room_reservation.auth.jwt.JwtProviderTest\")"
     ]
   }
 }
