@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-17T08:42:48.871Z",
+  "lastUpdated": "2026-03-18T08:50:37.651Z",
   "activeFeatures": [
     "domain-model",
     "api-spec",
@@ -15,7 +15,8 @@
     "dto",
     "service",
     "controller",
-    "oauth2"
+    "oauth2",
+    "filter"
   ],
   "primaryFeature": "api-spec",
   "features": {
@@ -38,7 +39,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T08:02:10.934Z",
-        "lastUpdated": "2026-03-17T08:42:10.883Z"
+        "lastUpdated": "2026-03-18T08:13:39.606Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\config\\SecurityConfig.java"
     },
@@ -181,9 +182,22 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-17T08:41:03.683Z",
-        "lastUpdated": "2026-03-17T08:42:48.871Z"
+        "lastUpdated": "2026-03-18T07:43:35.446Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\test\\java\\com\\ryu\\room_reservation\\auth\\oauth2\\OAuth2AuthenticationSuccessHandlerTest.java"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\auth\\oauth2\\OAuth2AuthenticationFailureHandler.java"
+    },
+    "filter": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-18T08:50:37.651Z",
+        "lastUpdated": "2026-03-18T08:50:37.651Z"
+      },
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\filter\\RequestIdFilter.java"
     }
   },
   "pipeline": {
@@ -194,7 +208,7 @@
   "session": {
     "startedAt": "2026-03-11T16:11:06.398Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-17T08:42:48.871Z"
+    "lastActivity": "2026-03-18T08:50:37.651Z"
   },
   "history": [
     {
@@ -956,6 +970,36 @@
     {
       "timestamp": "2026-03-17T08:42:48.871Z",
       "feature": "oauth2",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-18T07:43:35.446Z",
+      "feature": "oauth2",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-18T08:12:39.141Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-18T08:13:35.694Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-18T08:13:39.606Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-18T08:50:37.651Z",
+      "feature": "filter",
       "phase": "do",
       "action": "updated"
     }

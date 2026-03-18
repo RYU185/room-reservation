@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <springProperty scope="context" name="APP_NAME"
+                    source="spring.application.name" defaultValue="room-reservation"/>
+
+    <!-- ── JSON Console Appender ─────────────────────────────────── -->
+    <appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"service":"${APP_NAME}"}</customFields>
+            <timeZone>UTC</timeZone>
+            <fieldNames>
+                <timestamp>timestamp</timestamp>
+                <message>message</message>
+                <level>level</level>
+                <logger>logger</logger>
+                <thread>[ignore]</thread>
+                <version>[ignore]</version>
+                <levelValue>[ignore]</levelValue>
+            </fieldNames>
+        </encoder>
+    </appender>
+
+    <!-- ── Logger Settings ───────────────────────────────────────── -->
+    <logger name="com.ryu.room_reservation"         level="INFO"/>
+    <logger name="org.springframework.security"     level="WARN"/>
+    <logger name="org.springframework.web"          level="WARN"/>
+    <logger name="org.hibernate.SQL"                level="WARN"/>
+    <logger name="org.flywaydb"                     level="WARN"/>
+
+    <root level="WARN">
+        <appender-ref ref="JSON_CONSOLE"/>
+    </root>
+
+</configuration>

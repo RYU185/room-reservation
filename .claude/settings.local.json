@@ -5,7 +5,12 @@
       "Bash(./gradlew compileTestJava)",
       "Bash(./gradlew clean:*)",
       "Bash(find build/classes/java/test -name *.class)",
-      "Bash(./gradlew --info test --tests \"com.ryu.room_reservation.auth.jwt.JwtProviderTest\")"
+      "Bash(./gradlew --info test --tests \"com.ryu.room_reservation.auth.jwt.JwtProviderTest\")",
+      "Bash(xargs ls:*)",
+      "Bash(./gradlew compileJava -q)",
+      "Bash(xargs grep:*)",
+      "Skill(bkit:pdca)",
+      "Bash(./gradlew bootRun)"
     ]
   }
 }

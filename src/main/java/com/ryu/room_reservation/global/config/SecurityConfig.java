@@ -2,6 +2,7 @@ package com.ryu.room_reservation.global.config;
 
 import com.ryu.room_reservation.auth.jwt.JwtAuthenticationFilter;
 import com.ryu.room_reservation.auth.oauth2.CustomOAuth2UserService;
+import com.ryu.room_reservation.auth.oauth2.OAuth2AuthenticationFailureHandler;
 import com.ryu.room_reservation.auth.oauth2.OAuth2AuthenticationSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +32,7 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final CustomOAuth2UserService customOAuth2UserService;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+    private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
 
     @Value("${cors.allowed-origins}")
     private String allowedOrigins;
@@ -62,6 +64,7 @@ public class SecurityConfig {
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(ui -> ui.userService(customOAuth2UserService))
                         .successHandler(oAuth2AuthenticationSuccessHandler)
+                        .failureHandler(oAuth2AuthenticationFailureHandler)
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(ex -> ex
