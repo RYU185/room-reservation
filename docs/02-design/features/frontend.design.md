@@ -8,58 +8,68 @@
 
 ---
 
-## 1. 디렉토리 구조
+## 1. 아키텍처 개요
+
+### 1.1 폴더 구조 전략: Feature-based
+
+각 기능 도메인(auth, rooms, reservations, admin)이 자신의 api / components / hooks를 소유한다.
+`pages/`도 도메인별로 분리하며 feature 컴포넌트를 조합만 하는 얇은 레이어로 유지한다.
+`shared/`는 도메인 의존 없는 공통 코드만 포함한다.
 
 ```
 frontend/
 ├── src/
-│   ├── api/
-│   │   ├── client.ts          # Axios 인스턴스 + 인터셉터
-│   │   ├── auth.api.ts        # 인증 API 함수
-│   │   ├── rooms.api.ts       # 회의실 API 함수
-│   │   ├── reservations.api.ts # 예약 API 함수
-│   │   └── admin.api.ts       # 관리자 API 함수
-│   ├── components/
-│   │   ├── common/            # Button, Input, Modal, Pagination, Spinner
-│   │   ├── auth/              # LoginForm, OAuthButton
-│   │   ├── rooms/             # RoomCard, RoomFilter, AvailabilityBadge
-│   │   ├── reservations/      # ReservationForm, ReservationCard, TimeRangePicker
-│   │   ├── calendar/          # CalendarView, CalendarCell
-│   │   └── admin/             # RoomFormModal, ReservationTable, StatsCard
-│   ├── pages/
-│   │   ├── LoginPage.tsx
-│   │   ├── OAuthCallbackPage.tsx
-│   │   ├── RoomListPage.tsx
-│   │   ├── RoomDetailPage.tsx
-│   │   ├── ReservationNewPage.tsx
-│   │   ├── MyReservationsPage.tsx
-│   │   ├── ReservationDetailPage.tsx
-│   │   ├── CalendarPage.tsx
+│   ├── app/                           # 앱 초기화: Provider 조합, QueryClient 설정
+│   ├── layouts/                       # 레이아웃 컴포넌트
+│   │   ├── MainLayout.tsx             # 헤더 + 콘텐츠 (일반 사용자)
+│   │   ├── AdminLayout.tsx            # 헤더 + 사이드바 (관리자)
+│   │   └── AuthLayout.tsx             # 중앙 카드 (로그인/콜백)
+│   ├── pages/                         # 얇은 페이지 (도메인별 분리, 비즈니스 로직 없음)
+│   │   ├── auth/
+│   │   │   ├── LoginPage.tsx
+│   │   │   └── OAuthCallbackPage.tsx
+│   │   ├── rooms/
+│   │   │   ├── RoomListPage.tsx
+│   │   │   └── RoomDetailPage.tsx
+│   │   ├── reservations/
+│   │   │   ├── ReservationNewPage.tsx
+│   │   │   ├── MyReservationsPage.tsx
+│   │   │   ├── ReservationDetailPage.tsx
+│   │   │   └── CalendarPage.tsx
 │   │   ├── admin/
 │   │   │   ├── AdminRoomsPage.tsx
 │   │   │   ├── AdminReservationsPage.tsx
 │   │   │   ├── AdminUsersPage.tsx
 │   │   │   └── AdminStatsPage.tsx
 │   │   └── NotFoundPage.tsx
-│   ├── hooks/
-│   │   ├── useAuth.ts         # AuthContext 소비 훅
-│   │   ├── useRooms.ts        # 회의실 쿼리 훅
-│   │   ├── useReservations.ts # 예약 쿼리/뮤테이션 훅
-│   │   └── useAdmin.ts        # 관리자 쿼리 훅
-│   ├── context/
-│   │   └── AuthContext.tsx    # Access Token + 사용자 정보 메모리 상태
-│   ├── router/
-│   │   ├── index.tsx          # createBrowserRouter 라우트 정의
-│   │   ├── PrivateRoute.tsx   # 인증 필요 라우트 가드
-│   │   └── AdminRoute.tsx     # ADMIN 역할 라우트 가드
-│   ├── types/
-│   │   ├── api.types.ts       # ApiResponse, ErrorResponse, PageMeta
-│   │   ├── auth.types.ts      # User, LoginRequest, TokenResponse
-│   │   ├── room.types.ts      # Room, RoomAvailability
-│   │   └── reservation.types.ts # Reservation, ReservationStatus
-│   └── utils/
-│       ├── date.ts            # ISO 8601 UTC ↔ 로컬 변환 헬퍼
-│       └── errorMessage.ts    # 에러 코드 → 사용자 메시지 매핑
+│   ├── features/                      # 기능 도메인 (자기 완결적)
+│   │   ├── auth/
+│   │   │   ├── api/                   # login, logout, refresh, getMe
+│   │   │   ├── components/            # LoginForm, OAuthButton
+│   │   │   ├── hooks/                 # useAuth, useLogin
+│   │   │   └── context/               # AuthContext, AuthProvider
+│   │   ├── rooms/
+│   │   │   ├── api/                   # getRooms, getRoom, getRoomAvailability
+│   │   │   ├── components/            # RoomCard, RoomFilter, AvailabilityBadge
+│   │   │   └── hooks/                 # useRooms, useRoom, useRoomAvailability
+│   │   ├── reservations/
+│   │   │   ├── api/                   # getMyReservations, createReservation, etc.
+│   │   │   ├── components/            # ReservationForm, ReservationCard, TimeRangePicker, CalendarView
+│   │   │   └── hooks/                 # useReservations, useCreateReservation, useCalendar
+│   │   └── admin/
+│   │       ├── api/                   # getAdminReservations, getAdminUsers, getRoomStats
+│   │       ├── components/            # RoomFormModal, ReservationTable, StatsCard, UserSidePanel
+│   │       └── hooks/                 # useAdminReservations, useAdminUsers, useRoomStats
+│   ├── shared/                        # 기능 간 공유 (도메인 의존 없음)
+│   │   ├── api/                       # Axios 인스턴스 + 인터셉터
+│   │   ├── components/                # Button, Input, Modal, Pagination, Spinner, Skeleton
+│   │   ├── hooks/                     # useDebounce, usePagination
+│   │   ├── types/                     # ApiResponse, PageMeta, ErrorResponse, FieldError
+│   │   └── utils/                     # date.ts, errorMessage.ts
+│   └── router/                        # createBrowserRouter 라우트 정의 + 가드
+│       ├── index.tsx
+│       ├── PrivateRoute.tsx
+│       └── AdminRoute.tsx
 ├── public/
 ├── index.html
 ├── vite.config.ts
@@ -67,23 +77,68 @@ frontend/
 └── package.json
 ```
 
+### 1.2 의존성 방향 규칙
+
+| 레이어 | 참조 가능 | 참조 금지 |
+|--------|-----------|-----------|
+| `pages/` | `features/`, `layouts/`, `shared/`, `router/` | — |
+| `features/[domain]/` | `shared/` | 다른 `features/[domain]/` 직접 참조 |
+| `layouts/` | `shared/` | `features/`, `pages/` |
+| `shared/` | 외부 라이브러리 | `features/`, `pages/`, `layouts/` |
+
+> feature 간 데이터 공유가 필요한 경우, `shared/` 또는 공통 Context를 통해 간접 참조한다.
+
+### 1.3 레이아웃 설계
+
+| 레이아웃 | 적용 라우트 | 구성 요소 |
+|----------|-------------|-----------|
+| `MainLayout` | `/rooms/**`, `/reservations/**`, `/calendar` | 상단 헤더(로고 + 네비 + 로그아웃) + 메인 콘텐츠 |
+| `AdminLayout` | `/admin/**` | 상단 헤더 + 좌측 관리자 사이드바 + 메인 콘텐츠 |
+| `AuthLayout` | `/login`, `/oauth2/callback` | 중앙 정렬 카드, 네비게이션 없음 |
+
+### 1.4 에러 · 로딩 전략
+
+**에러 처리**
+
+| 에러 유형 | 처리 방식 |
+|-----------|-----------|
+| API 에러 (4xx/5xx) | 인터셉터에서 에러 코드 추출 → `errorMessage.ts` 매핑 → Toast 알림 |
+| 401 / 토큰 만료 | 인터셉터에서 자동 갱신 시도 → 실패 시 `/login` 리다이렉트 |
+| 폼 유효성 에러 | React Hook Form `formState.errors` 기반 인라인 표시 |
+| 충돌(409) | 해당 필드 아래 인라인 에러 메시지 |
+| 치명적 에러 | `ErrorBoundary` 컴포넌트로 폴백 UI 표시 |
+
+**로딩 상태**
+
+| 상황 | 처리 방식 |
+|------|-----------|
+| 목록/상세 데이터 페칭 | `isLoading` 시 Skeleton 컴포넌트 표시 |
+| 페이지 전환 | React Router `useNavigation` 상태로 상단 로딩 바 |
+| 뮤테이션(예약 생성 등) | 버튼 로딩 스피너 + disabled 처리 |
+
 ---
 
 ## 2. 인증 설계
 
 ### 2.1 AuthContext 상태 구조
 
-```
-AuthContext
-├── accessToken: string | null    # 메모리에만 저장 (localStorage 금지)
-├── user: User | null             # GET /auth/me 응답 캐시
-├── isAuthenticated: boolean
-├── isAdmin: boolean              # role === 'ROLE_ADMIN'
-├── login(email, password) → void
-├── loginWithOAuth(token) → void  # OAuth2 콜백에서 호출
-├── logout() → void
-└── refreshToken() → Promise<string>
-```
+**상태 (State)**
+
+| 필드 | 타입 | 설명 |
+|------|------|------|
+| `accessToken` | `string \| null` | 메모리에만 저장 (localStorage 금지) |
+| `user` | `User \| null` | GET /auth/me 응답 캐시 |
+| `isAuthenticated` | `boolean` | accessToken 존재 여부 |
+| `isAdmin` | `boolean` | role === 'ROLE_ADMIN' 여부 |
+
+**액션 (Actions)**
+
+| 메서드 | 설명 |
+|--------|------|
+| `login(email, password)` | 이메일 로그인 → accessToken + user 설정 |
+| `loginWithOAuth(token)` | OAuth2 콜백에서 token 수신 시 호출 |
+| `logout()` | POST /auth/logout → accessToken null + user null |
+| `refreshToken()` | POST /auth/refresh → 새 accessToken 반환 |
 
 ### 2.2 Access Token 갱신 흐름
 
@@ -274,49 +329,75 @@ admin.api.ts   → getAdminReservations(), cancelAdminReservation(), getAdminUse
 
 ## 7. 타입 정의
 
-### 7.1 공통 API 타입 (`types/api.types.ts`)
+### 7.1 공통 API 타입 (`shared/types/`)
 
-```
-ApiResponse<T>
-  success: true
-  data: T
-  meta?: PageMeta
+**ApiResponse\<T\>** — 성공 응답 래퍼
 
-PageMeta
-  total, page, size, totalPages
+| 필드 | 설명 |
+|------|------|
+| `success: true` | |
+| `data: T` | 실제 응답 데이터 |
+| `meta?: PageMeta` | 페이지네이션 정보 (목록 응답 시) |
 
-ErrorResponse
-  success: false
-  code: string
-  message: string
-  timestamp: string
-  errors?: FieldError[]
+**PageMeta** — 페이지네이션 메타
 
-FieldError
-  field: string
-  message: string
-```
+| 필드 | 설명 |
+|------|------|
+| `total` | 전체 항목 수 |
+| `page` | 현재 페이지 (1-based) |
+| `size` | 페이지당 항목 수 |
+| `totalPages` | 전체 페이지 수 |
+
+**ErrorResponse** — 에러 응답
+
+| 필드 | 설명 |
+|------|------|
+| `success: false` | |
+| `code` | 에러 코드 문자열 |
+| `message` | 에러 설명 |
+| `timestamp` | ISO 8601 UTC |
+| `errors?: FieldError[]` | 유효성 검증 실패 시 필드별 에러 목록 |
 
 ### 7.2 도메인 타입
 
-```
-User
-  id, email, name, role: 'ROLE_USER' | 'ROLE_ADMIN', createdAt
+**User** (`features/auth/`)
 
-Room
-  id, name, location, capacity, description, amenities: string[], isActive, createdAt
+| 필드 | 설명 |
+|------|------|
+| `id` | 사용자 ID |
+| `email` | 이메일 |
+| `name` | 이름 |
+| `role` | `ROLE_USER` 또는 `ROLE_ADMIN` |
+| `createdAt` | ISO 8601 UTC |
 
-RoomAvailability
-  roomId, available: boolean
-  conflictingReservations?: { id, title, startTime, endTime }[]
+**Room** (`features/rooms/`)
 
-Reservation
-  id, room: { id, name, location }, title, description
-  startTime, endTime: string (ISO 8601)
-  status: 'CONFIRMED' | 'CANCELLED'
-  createdAt
-  user?: { id, name, email }  # ADMIN 응답에만 포함
-```
+| 필드 | 설명 |
+|------|------|
+| `id` | 회의실 ID |
+| `name`, `location`, `capacity` | 기본 정보 |
+| `description` | 설명 |
+| `amenities` | 시설 목록 |
+| `isActive` | 활성 여부 |
+
+**RoomAvailability** (`features/rooms/`)
+
+| 필드 | 설명 |
+|------|------|
+| `roomId` | 회의실 ID |
+| `available` | 가용 여부 |
+| `conflictingReservations?` | 충돌 예약 목록 (id, title, startTime, endTime) |
+
+**Reservation** (`features/reservations/`)
+
+| 필드 | 설명 |
+|------|------|
+| `id` | 예약 ID |
+| `room` | 회의실 요약 (id, name, location) |
+| `title`, `description` | 예약 정보 |
+| `startTime`, `endTime` | ISO 8601 UTC |
+| `status` | `CONFIRMED` 또는 `CANCELLED` |
+| `user?` | 예약자 정보 (ADMIN 응답에만 포함) |
 
 ---
 
