@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-22T14:59:40.002Z",
+  "lastUpdated": "2026-03-22T16:16:41.183Z",
   "activeFeatures": [
     "domain-model",
     "api-spec",
@@ -24,7 +24,8 @@
     "admin",
     "layouts",
     "router",
-    "api"
+    "api",
+    "context"
   ],
   "primaryFeature": "api-spec",
   "features": {
@@ -216,9 +217,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T08:50:17.000Z",
-        "lastUpdated": "2026-03-22T14:47:16.844Z"
+        "lastUpdated": "2026-03-22T16:16:41.183Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\shared\\hooks\\useDelayedValue.ts"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\App.tsx"
     },
     "auth": {
       "phase": "do",
@@ -229,9 +230,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T13:57:17.808Z",
-        "lastUpdated": "2026-03-22T13:57:18.890Z"
+        "lastUpdated": "2026-03-22T16:16:12.831Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\pages\\auth\\OAuthCallbackPage.tsx"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\features\\auth\\types.ts"
     },
     "rooms": {
       "phase": "do",
@@ -307,9 +308,22 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T14:59:29.723Z",
-        "lastUpdated": "2026-03-22T14:59:40.002Z"
+        "lastUpdated": "2026-03-22T16:16:23.960Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\shared\\api\\client.ts"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\features\\auth\\api\\auth.api.ts"
+    },
+    "context": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-22T16:16:34.089Z",
+        "lastUpdated": "2026-03-22T16:16:34.089Z"
+      },
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\features\\auth\\context\\AuthContext.tsx"
     }
   },
   "pipeline": {
@@ -320,7 +334,7 @@
   "session": {
     "startedAt": "2026-03-11T16:11:06.398Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-22T14:59:40.002Z"
+    "lastActivity": "2026-03-22T16:16:41.183Z"
   },
   "history": [
     {
@@ -1346,6 +1360,36 @@
     {
       "timestamp": "2026-03-22T14:59:40.002Z",
       "feature": "api",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T15:47:02.381Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T16:16:12.831Z",
+      "feature": "auth",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T16:16:23.960Z",
+      "feature": "api",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T16:16:34.089Z",
+      "feature": "context",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T16:16:41.183Z",
+      "feature": "room-reservation(frontend)",
       "phase": "do",
       "action": "updated"
     }
