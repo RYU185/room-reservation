@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-22T13:57:48.905Z",
+  "lastUpdated": "2026-03-22T14:59:40.002Z",
   "activeFeatures": [
     "domain-model",
     "api-spec",
@@ -23,7 +23,8 @@
     "reservations",
     "admin",
     "layouts",
-    "router"
+    "router",
+    "api"
   ],
   "primaryFeature": "api-spec",
   "features": {
@@ -215,9 +216,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T08:50:17.000Z",
-        "lastUpdated": "2026-03-22T13:57:48.905Z"
+        "lastUpdated": "2026-03-22T14:47:16.844Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\App.tsx"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\shared\\hooks\\useDelayedValue.ts"
     },
     "auth": {
       "phase": "do",
@@ -296,6 +297,19 @@
         "lastUpdated": "2026-03-22T13:57:43.526Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\router\\index.tsx"
+    },
+    "api": {
+      "phase": "do",
+      "phaseNumber": 3,
+      "matchRate": null,
+      "iterationCount": 0,
+      "requirements": [],
+      "documents": {},
+      "timestamps": {
+        "started": "2026-03-22T14:59:29.723Z",
+        "lastUpdated": "2026-03-22T14:59:40.002Z"
+      },
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\shared\\api\\client.ts"
     }
   },
   "pipeline": {
@@ -306,7 +320,7 @@
   "session": {
     "startedAt": "2026-03-11T16:11:06.398Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-22T13:57:48.905Z"
+    "lastActivity": "2026-03-22T14:59:40.002Z"
   },
   "history": [
     {
@@ -1242,6 +1256,96 @@
     {
       "timestamp": "2026-03-22T13:57:48.905Z",
       "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T14:17:31.109Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T14:17:38.039Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T14:17:46.598Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T14:17:51.121Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T14:17:55.090Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T14:18:00.489Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T14:18:10.718Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T14:18:19.353Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T14:18:25.191Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T14:18:33.340Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T14:27:42.225Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T14:47:11.722Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T14:47:16.844Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T14:59:29.723Z",
+      "feature": "api",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-22T14:59:40.002Z",
+      "feature": "api",
       "phase": "do",
       "action": "updated"
     }
