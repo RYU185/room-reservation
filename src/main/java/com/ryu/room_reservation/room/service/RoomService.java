@@ -88,7 +88,8 @@ public class RoomService {
             List<Predicate> predicates = new ArrayList<>();
             predicates.add(cb.isTrue(root.get("active")));
             if (location != null && !location.isBlank()) {
-                predicates.add(cb.like(root.get("location"), "%" + location + "%"));
+                String escaped = location.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_");
+                predicates.add(cb.like(root.get("location"), "%" + escaped + "%", '\\'));
             }
             if (minCapacity != null) {
                 predicates.add(cb.greaterThanOrEqualTo(root.get("capacity"), minCapacity));

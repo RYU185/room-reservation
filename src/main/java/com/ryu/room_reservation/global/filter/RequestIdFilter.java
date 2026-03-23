@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 
 /**
  * Zero Script QA - Request ID 추적 필터
@@ -33,6 +34,7 @@ public class RequestIdFilter extends OncePerRequestFilter {
 
     private static final String REQUEST_ID_HEADER = "X-Request-ID";
     private static final String MDC_KEY = "request_id";
+    private static final Pattern REQUEST_ID_PATTERN = Pattern.compile("^[a-zA-Z0-9\\-]{1,64}$");
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -41,6 +43,7 @@ public class RequestIdFilter extends OncePerRequestFilter {
 
         String requestId = Optional.ofNullable(request.getHeader(REQUEST_ID_HEADER))
                 .filter(Predicate.not(String::isBlank))
+                .filter(id -> REQUEST_ID_PATTERN.matcher(id).matches())
                 .orElseGet(() -> "req_" + UUID.randomUUID().toString().replace("-", "").substring(0, 8));
 
         MDC.put(MDC_KEY, requestId);

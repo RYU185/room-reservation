@@ -8,8 +8,10 @@ import com.ryu.room_reservation.user.entity.UserRole;
 import com.ryu.room_reservation.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +21,18 @@ import java.util.List;
 @Slf4j
 @Component
 @RequiredArgsConstructor
+@ConditionalOnProperty(name = "app.init.enabled", havingValue = "true", matchIfMissing = true)
 public class DataInitializer implements ApplicationRunner {
 
     private final UserRepository userRepository;
     private final RoomRepository roomRepository;
     private final PasswordEncoder passwordEncoder;
+
+    @Value("${app.init.admin.email}")
+    private String adminEmail;
+
+    @Value("${app.init.admin.password}")
+    private String adminPassword;
 
     @Override
     @Transactional
@@ -33,17 +42,17 @@ public class DataInitializer implements ApplicationRunner {
     }
 
     private void initAdmin() {
-        if (userRepository.existsByEmail("admin@example.com")) {
+        if (userRepository.existsByEmail(adminEmail)) {
             return;
         }
         userRepository.save(User.builder()
-                .email("admin@example.com")
-                .password(passwordEncoder.encode("admin1234!"))
+                .email(adminEmail)
+                .password(passwordEncoder.encode(adminPassword))
                 .name("관리자")
                 .role(UserRole.ROLE_ADMIN)
                 .provider(AuthProvider.LOCAL)
                 .build());
-        log.info("[DataInitializer] 관리자 계정 생성: admin@example.com / admin1234!");
+        log.info("[DataInitializer] 관리자 계정 생성 완료");
     }
 
     private void initRooms() {

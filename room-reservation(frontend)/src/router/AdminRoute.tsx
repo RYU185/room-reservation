@@ -1,8 +1,9 @@
 import { Navigate, Outlet } from 'react-router-dom'
+import { useAuth } from '@/features/auth/context/AuthContext'
 
 export default function AdminRoute() {
-  // TODO: AuthContext에서 isAdmin 읽기
-  const isAdmin = false
+  const { isAdmin, isLoading } = useAuth()
 
+  if (isLoading) return null
   return isAdmin ? <Outlet /> : <Navigate to="/" replace />
 }

@@ -24,6 +24,7 @@ public record ReservationCreateRequest(
 
         @Schema(description = "상세 설명 (최대 1000자)")
         @Size(max = 1000, message = "설명은 1000자 이하이어야 합니다.")
+        @NoSqlInjection
         String description,
 
         @Schema(description = "시작 시각 (현재 이후, ISO 8601)", example = "2026-04-01T10:00:00")

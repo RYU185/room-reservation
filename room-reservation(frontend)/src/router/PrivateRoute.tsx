@@ -1,8 +1,9 @@
 import { Navigate, Outlet } from 'react-router-dom'
+import { useAuth } from '@/features/auth/context/AuthContext'
 
 export default function PrivateRoute() {
-  // TODO: AuthContext에서 isAuthenticated 읽기
-  const isAuthenticated = false
+  const { isAuthenticated, isLoading } = useAuth()
 
+  if (isLoading) return null
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />
 }

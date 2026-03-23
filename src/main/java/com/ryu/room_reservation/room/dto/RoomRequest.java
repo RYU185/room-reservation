@@ -31,6 +31,7 @@ public record RoomRequest(
 
         @Schema(description = "부가 설명 (최대 1000자)", example = "빔프로젝터, 화이트보드 구비")
         @Size(max = 1000, message = "설명은 1000자 이하이어야 합니다.")
+        @NoSqlInjection
         String description,
 
         @Schema(description = "시설 목록 (항목당 최대 50자)", example = "[\"빔프로젝터\", \"화이트보드\"]")
