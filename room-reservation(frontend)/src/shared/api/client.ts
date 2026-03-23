@@ -39,8 +39,13 @@ client.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config as RetryableRequestConfig
 
-    // 401이 아니거나 이미 재시도한 요청이면 그냥 에러 반환
-    if (error.response?.status !== 401 || originalRequest._retry) {
+    // 401이 아니거나, 이미 재시도했거나, refresh 엔드포인트 자체가 실패한 경우 그냥 에러 반환
+    // (refresh 401 → 재시도 → refresh 또 401 → window.location 루프 방지)
+    if (
+      error.response?.status !== 401 ||
+      originalRequest._retry ||
+      originalRequest.url?.includes('/auth/refresh')
+    ) {
       return Promise.reject(error)
     }
 
