@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-23T07:00:44.044Z",
+  "lastUpdated": "2026-03-23T08:28:19.261Z",
   "activeFeatures": [
     "domain-model",
     "api-spec",
@@ -113,7 +113,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T08:05:07.654Z",
-        "lastUpdated": "2026-03-14T08:09:24.260Z"
+        "lastUpdated": "2026-03-23T08:28:19.261Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\validation\\NoSqlInjectionValidator.java"
     },
@@ -334,7 +334,7 @@
   "session": {
     "startedAt": "2026-03-11T16:11:06.398Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-23T07:00:44.044Z"
+    "lastActivity": "2026-03-23T08:28:19.261Z"
   },
   "history": [
     {
@@ -1486,6 +1486,24 @@
     {
       "timestamp": "2026-03-23T07:00:44.044Z",
       "feature": "auth",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-23T08:25:38.061Z",
+      "feature": "validation",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-23T08:27:15.602Z",
+      "feature": "validation",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-23T08:28:19.261Z",
+      "feature": "validation",
       "phase": "do",
       "action": "updated"
     }
