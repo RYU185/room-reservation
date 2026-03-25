@@ -5,6 +5,7 @@ import AuthLayout from '@/layouts/AuthLayout'
 import PrivateRoute from './PrivateRoute'
 import AdminRoute from './AdminRoute'
 import LoginPage from '@/pages/auth/LoginPage'
+import SignUpPage from '@/pages/auth/SignUpPage'
 import OAuthCallbackPage from '@/pages/auth/OAuthCallbackPage'
 import RoomListPage from '@/pages/rooms/RoomListPage'
 import RoomDetailPage from '@/pages/rooms/RoomDetailPage'
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       { path: '/login', element: <LoginPage /> },
+      { path: '/signup', element: <SignUpPage /> },
       { path: '/oauth2/callback', element: <OAuthCallbackPage /> },
     ],
   },

@@ -20,6 +20,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -99,7 +100,7 @@ class OAuth2AuthenticationSuccessHandlerTest {
 
     // ── helper ───────────────────────────────────────────────
 
-    private void givenOAuth2UserAndTokens() {
+    private void givenOAuth2UserAndTokens() throws Exception {
         CustomOAuth2User oAuth2User = new CustomOAuth2User(
                 USER_ID, UserRole.ROLE_USER, Map.of("sub", "google-id-123"), "sub");
         given(authentication.getPrincipal()).willReturn(oAuth2User);
@@ -107,5 +108,7 @@ class OAuth2AuthenticationSuccessHandlerTest {
         TokenResponse tokenResponse = new TokenResponse(ACCESS_TOKEN, "Bearer", 3600L);
         AuthTokens tokens = new AuthTokens(tokenResponse, REFRESH_TOKEN, 604800L);
         given(authService.issueTokensForOAuth2(USER_ID)).willReturn(tokens);
+
+        given(response.encodeRedirectURL(anyString())).willAnswer(i -> i.getArgument(0));
     }
 }

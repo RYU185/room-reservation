@@ -17,7 +17,13 @@
       "Bash(ls \"/c/Users/fence/OneDrive/문서/GitHub/room-reservation/room-reservation\\(frontend\\)/\")",
       "Bash(BASE=\"/c/Users/fence/OneDrive/문서/GitHub/room-reservation/room-reservation\\(frontend\\)/src\")",
       "Bash(__NEW_LINE_d43a64dc2cfe1f7a__ mkdir:*)",
-      "Bash(__NEW_LINE_d43a64dc2cfe1f7a__ echo:*)"
+      "Bash(__NEW_LINE_d43a64dc2cfe1f7a__ echo:*)",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); features=d.get\\(''''features'''',{}\\); [print\\(k, json.dumps\\(v, ensure_ascii=False, indent=2\\)\\) for k,v in features.items\\(\\)]\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(open\\(''''docs/.pdca-status.json'''', encoding=''''utf-8''''\\)\\); [print\\(k, '''':'''', json.dumps\\(v.get\\(''''currentPhase''''\\), ensure_ascii=False\\), ''''| matchRate:'''', v.get\\(''''lastAnalysis'''',{}\\).get\\(''''matchRate''''\\)\\) for k,v in d.get\\(''''features'''',{}\\).items\\(\\)]\")",
+      "Bash(npx tsc:*)",
+      "Bash(curl -s -X GET \"http://localhost:8080/api/v1/rooms\" -H \"Accept: application/json\")",
+      "Bash(cat \"C:\\\\Users\\\\fence\\\\OneDrive\\\\문서\\\\GitHub\\\\room-reservation\\\\room-reservation\\(frontend\\)\\\\vite.config.ts\")",
+      "Bash(cat \"C:\\\\Users\\\\fence\\\\OneDrive\\\\문서\\\\GitHub\\\\room-reservation\\\\room-reservation\\(frontend\\)\\\\vite.config.js\")"
     ]
   }
 }

@@ -70,6 +70,14 @@ public class GlobalExceptionHandler {
                             ErrorCode.RESERVATION_CONFLICT.getMessage()
                     ));
         }
+        if (cause != null && cause.toLowerCase().contains("email")) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(ErrorResponse.of(
+                            ErrorCode.EMAIL_DUPLICATE.name(),
+                            ErrorCode.EMAIL_DUPLICATE.getMessage()
+                    ));
+        }
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .body(ErrorResponse.of(

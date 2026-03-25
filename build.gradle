@@ -47,6 +47,8 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
+layout.buildDirectory.set(file("C:/tmp/room-reservation-build"))
+
 tasks.named('test') {
 	useJUnitPlatform()
 }

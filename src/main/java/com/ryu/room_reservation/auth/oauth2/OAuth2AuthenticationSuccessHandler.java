@@ -59,7 +59,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                 .secure(cookieSecure)
                 .path("/api/v1/auth")
                 .maxAge(Duration.ofSeconds(tokens.refreshTokenExpiry()))
-                .sameSite("Strict")
+                .sameSite("Lax")
                 .build();
     }
 }

@@ -2,6 +2,7 @@ package com.ryu.room_reservation.auth.service;
 
 import com.ryu.room_reservation.auth.dto.AuthTokens;
 import com.ryu.room_reservation.auth.dto.LoginRequest;
+import com.ryu.room_reservation.auth.dto.SignUpRequest;
 import com.ryu.room_reservation.auth.dto.TokenResponse;
 import com.ryu.room_reservation.auth.entity.RefreshToken;
 import com.ryu.room_reservation.auth.repository.RefreshTokenRepository;
@@ -9,6 +10,7 @@ import com.ryu.room_reservation.auth.jwt.JwtProvider;
 import com.ryu.room_reservation.global.exception.BusinessException;
 import com.ryu.room_reservation.global.exception.ErrorCode;
 import com.ryu.room_reservation.user.dto.UserResponse;
+import com.ryu.room_reservation.user.entity.AuthProvider;
 import com.ryu.room_reservation.user.entity.User;
 import com.ryu.room_reservation.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,22 @@ public class AuthService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final JwtProvider jwtProvider;
     private final PasswordEncoder passwordEncoder;
+
+    public AuthTokens register(SignUpRequest request) {
+        if (userRepository.existsByEmail(request.email())) {
+            throw new BusinessException(ErrorCode.EMAIL_DUPLICATE);
+        }
+
+        User user = User.builder()
+                .email(request.email())
+                .password(passwordEncoder.encode(request.password()))
+                .name(request.name())
+                .provider(AuthProvider.LOCAL)
+                .build();
+
+        userRepository.save(user);
+        return issueTokens(user);
+    }
 
     public AuthTokens login(LoginRequest request) {
         User user = userRepository.findByEmail(request.email())

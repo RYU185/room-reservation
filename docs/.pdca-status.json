@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-23T11:03:20.529Z",
+  "lastUpdated": "2026-03-25T16:34:44.848Z",
   "activeFeatures": [
     "domain-model",
     "api-spec",
@@ -48,7 +48,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T08:02:10.934Z",
-        "lastUpdated": "2026-03-23T07:00:11.512Z"
+        "lastUpdated": "2026-03-25T04:37:38.965Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\config\\SecurityConfig.java"
     },
@@ -87,7 +87,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T08:04:34.772Z",
-        "lastUpdated": "2026-03-16T10:28:25.439Z"
+        "lastUpdated": "2026-03-25T08:41:08.376Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\exception\\GlobalExceptionHandler.java"
     },
@@ -152,9 +152,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T09:10:30.521Z",
-        "lastUpdated": "2026-03-23T06:59:45.843Z"
+        "lastUpdated": "2026-03-25T04:37:01.906Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\room\\dto\\RoomRequest.java"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\auth\\dto\\SignUpRequest.java"
     },
     "service": {
       "phase": "do",
@@ -165,9 +165,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T09:11:46.079Z",
-        "lastUpdated": "2026-03-23T06:59:14.220Z"
+        "lastUpdated": "2026-03-25T04:37:16.345Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\room\\service\\RoomService.java"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\auth\\service\\AuthService.java"
     },
     "controller": {
       "phase": "do",
@@ -178,9 +178,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T09:13:04.125Z",
-        "lastUpdated": "2026-03-17T05:59:10.772Z"
+        "lastUpdated": "2026-03-25T04:37:33.617Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\admin\\controller\\AdminController.java"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\auth\\controller\\AuthController.java"
     },
     "oauth2": {
       "phase": "do",
@@ -191,9 +191,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-17T08:41:03.683Z",
-        "lastUpdated": "2026-03-23T06:59:09.330Z"
+        "lastUpdated": "2026-03-25T08:44:58.782Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\auth\\oauth2\\OAuth2AuthenticationSuccessHandler.java"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\test\\java\\com\\ryu\\room_reservation\\auth\\oauth2\\OAuth2AuthenticationSuccessHandlerTest.java"
     },
     "filter": {
       "phase": "do",
@@ -230,7 +230,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T13:57:17.808Z",
-        "lastUpdated": "2026-03-23T09:34:43.191Z"
+        "lastUpdated": "2026-03-25T04:38:52.575Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\pages\\auth\\LoginPage.tsx"
     },
@@ -243,7 +243,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T13:57:19.293Z",
-        "lastUpdated": "2026-03-22T13:57:20.085Z"
+        "lastUpdated": "2026-03-25T16:34:44.848Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\pages\\rooms\\RoomDetailPage.tsx"
     },
@@ -256,9 +256,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T13:57:21.161Z",
-        "lastUpdated": "2026-03-22T13:57:23.484Z"
+        "lastUpdated": "2026-03-25T11:53:06.310Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\pages\\reservations\\CalendarPage.tsx"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\features\\reservations\\types.ts"
     },
     "admin": {
       "phase": "do",
@@ -282,9 +282,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T13:57:31.574Z",
-        "lastUpdated": "2026-03-23T09:34:06.417Z"
+        "lastUpdated": "2026-03-25T11:53:28.330Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\layouts\\AuthLayout.tsx"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\layouts\\MainLayout.tsx"
     },
     "router": {
       "phase": "do",
@@ -295,9 +295,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T13:57:36.996Z",
-        "lastUpdated": "2026-03-23T09:34:11.377Z"
+        "lastUpdated": "2026-03-25T04:38:36.381Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\router\\PrivateRoute.tsx"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\router\\index.tsx"
     },
     "api": {
       "phase": "do",
@@ -308,9 +308,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T14:59:29.723Z",
-        "lastUpdated": "2026-03-23T11:03:20.529Z"
+        "lastUpdated": "2026-03-25T16:21:06.569Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\shared\\api\\client.ts"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\features\\reservations\\api\\reservations.api.ts"
     },
     "context": {
       "phase": "do",
@@ -321,7 +321,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T16:16:34.089Z",
-        "lastUpdated": "2026-03-22T16:16:34.089Z"
+        "lastUpdated": "2026-03-25T04:38:27.659Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\features\\auth\\context\\AuthContext.tsx"
     }
@@ -334,7 +334,7 @@
   "session": {
     "startedAt": "2026-03-11T16:11:06.398Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-23T11:03:20.529Z"
+    "lastActivity": "2026-03-25T16:34:44.848Z"
   },
   "history": [
     {
@@ -1528,6 +1528,204 @@
     {
       "timestamp": "2026-03-23T11:03:20.529Z",
       "feature": "api",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T01:26:33.447Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:37:01.906Z",
+      "feature": "dto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:37:07.551Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:37:11.989Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:37:16.345Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:37:22.190Z",
+      "feature": "controller",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:37:26.537Z",
+      "feature": "controller",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:37:33.617Z",
+      "feature": "controller",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:37:38.965Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:37:45.357Z",
+      "feature": "api",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:38:06.985Z",
+      "feature": "auth",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:38:16.882Z",
+      "feature": "context",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:38:20.543Z",
+      "feature": "context",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:38:23.981Z",
+      "feature": "context",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:38:27.659Z",
+      "feature": "context",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:38:31.764Z",
+      "feature": "router",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:38:36.381Z",
+      "feature": "router",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:38:40.793Z",
+      "feature": "auth",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:38:47.854Z",
+      "feature": "auth",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T04:38:52.575Z",
+      "feature": "auth",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T08:41:08.376Z",
+      "feature": "exception",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T08:44:45.177Z",
+      "feature": "oauth2",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T08:44:51.151Z",
+      "feature": "oauth2",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T08:44:58.782Z",
+      "feature": "oauth2",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T11:53:03.436Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T11:53:06.310Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T11:53:13.163Z",
+      "feature": "api",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T11:53:16.701Z",
+      "feature": "api",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T11:53:28.330Z",
+      "feature": "layouts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T15:30:52.667Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T16:21:01.619Z",
+      "feature": "api",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T16:21:06.569Z",
+      "feature": "api",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-25T16:34:44.848Z",
+      "feature": "rooms",
       "phase": "do",
       "action": "updated"
     }

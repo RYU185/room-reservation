@@ -2,6 +2,7 @@ package com.ryu.room_reservation.auth.controller;
 
 import com.ryu.room_reservation.auth.dto.AuthTokens;
 import com.ryu.room_reservation.auth.dto.LoginRequest;
+import com.ryu.room_reservation.auth.dto.SignUpRequest;
 import com.ryu.room_reservation.auth.dto.TokenResponse;
 import com.ryu.room_reservation.auth.service.AuthService;
 import com.ryu.room_reservation.global.exception.BusinessException;
@@ -17,6 +18,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -34,6 +36,21 @@ public class AuthController {
 
     @Value("${cookie.secure}")
     private boolean cookieSecure;
+
+    @PostMapping("/register")
+    @Operation(summary = "이메일/비밀번호 회원가입")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "회원가입 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "입력값 오류"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "이미 사용 중인 이메일")
+    })
+    public ResponseEntity<ApiResponse<TokenResponse>> register(
+            @Valid @RequestBody SignUpRequest request) {
+        AuthTokens tokens = authService.register(request);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .header(HttpHeaders.SET_COOKIE, buildRefreshTokenCookie(tokens).toString())
+                .body(ApiResponse.ok(tokens.tokenResponse()));
+    }
 
     @PostMapping("/login")
     @Operation(summary = "이메일/비밀번호 로그인")

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { tokenStore } from '@/shared/api/tokenStore'
-import { login as loginApi, logout as logoutApi, refresh, getMe } from '../api/auth.api'
+import { login as loginApi, logout as logoutApi, register as registerApi, refresh, getMe } from '../api/auth.api'
 import type { User } from '../types'
 
 interface AuthState {
@@ -14,6 +14,7 @@ interface AuthActions {
   login: (email: string, password: string) => Promise<void>
   loginWithOAuth: (token: string) => Promise<void>
   logout: () => Promise<void>
+  signUp: (email: string, password: string, name: string) => Promise<void>
 }
 
 const AuthContext = createContext<(AuthState & AuthActions) | null>(null)
@@ -43,6 +44,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(me)
   }
 
+  async function signUp(email: string, password: string, name: string) {
+    const { accessToken } = await registerApi(email, password, name)
+    tokenStore.set(accessToken)
+    const me = await getMe()
+    setUser(me)
+  }
+
   async function loginWithOAuth(token: string) {
     tokenStore.set(token)
     const me = await getMe()
@@ -59,7 +67,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const isAdmin = user?.role === 'ROLE_ADMIN'
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, isAdmin, isLoading, login, loginWithOAuth, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, isAdmin, isLoading, login, loginWithOAuth, logout, signUp }}>
       {children}
     </AuthContext.Provider>
   )
