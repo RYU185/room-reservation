@@ -23,7 +23,14 @@
       "Bash(npx tsc:*)",
       "Bash(curl -s -X GET \"http://localhost:8080/api/v1/rooms\" -H \"Accept: application/json\")",
       "Bash(cat \"C:\\\\Users\\\\fence\\\\OneDrive\\\\문서\\\\GitHub\\\\room-reservation\\\\room-reservation\\(frontend\\)\\\\vite.config.ts\")",
-      "Bash(cat \"C:\\\\Users\\\\fence\\\\OneDrive\\\\문서\\\\GitHub\\\\room-reservation\\\\room-reservation\\(frontend\\)\\\\vite.config.js\")"
+      "Bash(cat \"C:\\\\Users\\\\fence\\\\OneDrive\\\\문서\\\\GitHub\\\\room-reservation\\\\room-reservation\\(frontend\\)\\\\vite.config.js\")",
+      "Bash(find \"C:/Users/fence/OneDrive/문서/GitHub/room-reservation/room-reservation\\(frontend\\)/src\" -name \"*.tsx\")",
+      "Bash(find \"C:/Users/fence/OneDrive/문서/GitHub/room-reservation/room-reservation\\(frontend\\)/src\" -name \"*.ts\")",
+      "Bash(head -5 \"C:/Users/fence/OneDrive/문서/GitHub/room-reservation/room-reservation\\(frontend\\)/src/pages/rooms/RoomListPage.tsx\")",
+      "Bash(head -5 \"C:/Users/fence/OneDrive/문서/GitHub/room-reservation/room-reservation\\(frontend\\)/src/pages/rooms/RoomDetailPage.tsx\")",
+      "Bash(head -5 \"C:/Users/fence/OneDrive/문서/GitHub/room-reservation/room-reservation\\(frontend\\)/src/pages/reservations/ReservationNewPage.tsx\")",
+      "Bash(head -5 \"C:/Users/fence/OneDrive/문서/GitHub/room-reservation/room-reservation\\(frontend\\)/src/pages/reservations/MyReservationsPage.tsx\")",
+      "Bash(find \"C:/Users/fence/OneDrive/문서/GitHub/room-reservation/room-reservation\\(frontend\\)/src/features\" -name \"*.ts\" -o -name \"*.tsx\")"
     ]
   }
 }
