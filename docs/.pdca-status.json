@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-25T16:34:44.848Z",
+  "lastUpdated": "2026-03-30T15:22:07.452Z",
   "activeFeatures": [
     "domain-model",
     "api-spec",
@@ -256,9 +256,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T13:57:21.161Z",
-        "lastUpdated": "2026-03-25T11:53:06.310Z"
+        "lastUpdated": "2026-03-30T15:22:07.452Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\features\\reservations\\types.ts"
+      "lastFile": "C:/Users/fence/OneDrive/문서/GitHub/room-reservation/room-reservation(frontend)/src/pages/reservations/CalendarPage.tsx"
     },
     "admin": {
       "phase": "do",
@@ -334,7 +334,7 @@
   "session": {
     "startedAt": "2026-03-11T16:11:06.398Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-25T16:34:44.848Z"
+    "lastActivity": "2026-03-30T15:22:07.452Z"
   },
   "history": [
     {
@@ -1726,6 +1726,72 @@
     {
       "timestamp": "2026-03-25T16:34:44.848Z",
       "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-30T15:18:55.985Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-30T15:18:59.223Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-30T15:19:01.626Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-30T15:19:13.832Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-30T15:19:20.793Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-30T15:19:40.639Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-30T15:19:58.630Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-30T15:21:07.765Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-30T15:21:21.694Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-30T15:21:55.997Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-30T15:22:07.452Z",
+      "feature": "reservations",
       "phase": "do",
       "action": "updated"
     }
