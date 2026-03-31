@@ -131,35 +131,38 @@ export default function RoomDetailPage() {
 
             {availabilityError && <InlineError>{availabilityError}</InlineError>}
 
-            {availability && (
-              <AvailabilityResult $available={availability.available}>
-                {availability.available ? (
-                  <>
-                    <ResultIcon>✓</ResultIcon>
-                    <span>해당 시간에 예약 가능합니다.</span>
-                    <ReserveButton type="button" onClick={handleReserve}>
-                      예약하기
-                    </ReserveButton>
-                  </>
-                ) : (
-                  <>
-                    <ResultIcon>✕</ResultIcon>
-                    <div>
-                      <span>해당 시간에 이미 예약이 있습니다.</span>
-                      {availability.conflictingReservations.length > 0 && (
-                        <ConflictList>
-                          {availability.conflictingReservations.map((r) => (
-                            <ConflictItem key={r.id}>
-                              {r.title} ({r.startTime.slice(11, 16)} ~ {r.endTime.slice(11, 16)})
-                            </ConflictItem>
-                          ))}
-                        </ConflictList>
-                      )}
-                    </div>
-                  </>
-                )}
+            {availability && !availability.available && (
+              <AvailabilityResult $available={false}>
+                <ResultIcon>✕</ResultIcon>
+                <div>
+                  <span>해당 시간에 이미 예약이 있습니다.</span>
+                  {availability.conflictingReservations.length > 0 && (
+                    <ConflictList>
+                      {availability.conflictingReservations.map((r) => (
+                        <ConflictItem key={r.id}>
+                          {r.title} ({r.startTime.slice(11, 16)} ~ {r.endTime.slice(11, 16)})
+                        </ConflictItem>
+                      ))}
+                    </ConflictList>
+                  )}
+                </div>
               </AvailabilityResult>
             )}
+
+            {availability?.available && (
+              <AvailabilityResult $available={true}>
+                <ResultIcon>✓</ResultIcon>
+                <span>해당 시간에 예약 가능합니다.</span>
+              </AvailabilityResult>
+            )}
+
+            <ReserveButton
+              type="button"
+              disabled={!availability?.available}
+              onClick={handleReserve}
+            >
+              예약하기
+            </ReserveButton>
           </Section>
         )}
       </Card>
@@ -344,8 +347,8 @@ const ResultIcon = styled.span`
 `
 
 const ReserveButton = styled.button`
-  margin-left: auto;
-  padding: 8px 20px;
+  align-self: flex-end;
+  padding: 10px 24px;
   background: #2563eb;
   color: #fff;
   border: none;
@@ -354,8 +357,15 @@ const ReserveButton = styled.button`
   font-weight: 500;
   cursor: pointer;
   white-space: nowrap;
+  transition: background 0.15s, opacity 0.15s;
 
-  &:hover { background: #1d4ed8; }
+  &:hover:not(:disabled) { background: #1d4ed8; }
+
+  &:disabled {
+    background: #e2e8f0;
+    color: #94a3b8;
+    cursor: not-allowed;
+  }
 `
 
 const ConflictList = styled.ul`

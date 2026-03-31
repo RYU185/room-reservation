@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-30T15:22:07.452Z",
+  "lastUpdated": "2026-03-31T07:22:52.662Z",
   "activeFeatures": [
     "domain-model",
     "api-spec",
@@ -243,7 +243,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T13:57:19.293Z",
-        "lastUpdated": "2026-03-25T16:34:44.848Z"
+        "lastUpdated": "2026-03-31T07:22:52.662Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\pages\\rooms\\RoomDetailPage.tsx"
     },
@@ -334,7 +334,7 @@
   "session": {
     "startedAt": "2026-03-11T16:11:06.398Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-30T15:22:07.452Z"
+    "lastActivity": "2026-03-31T07:22:52.662Z"
   },
   "history": [
     {
@@ -1792,6 +1792,18 @@
     {
       "timestamp": "2026-03-30T15:22:07.452Z",
       "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T07:22:14.002Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T07:22:52.662Z",
+      "feature": "rooms",
       "phase": "do",
       "action": "updated"
     }
