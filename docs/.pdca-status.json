@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-31T07:22:52.662Z",
+  "lastUpdated": "2026-03-31T16:58:59.325Z",
   "activeFeatures": [
     "domain-model",
     "api-spec",
@@ -243,7 +243,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T13:57:19.293Z",
-        "lastUpdated": "2026-03-31T07:22:52.662Z"
+        "lastUpdated": "2026-03-31T16:58:59.325Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\pages\\rooms\\RoomDetailPage.tsx"
     },
@@ -256,9 +256,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T13:57:21.161Z",
-        "lastUpdated": "2026-03-30T15:22:07.452Z"
+        "lastUpdated": "2026-03-31T16:47:24.562Z"
       },
-      "lastFile": "C:/Users/fence/OneDrive/문서/GitHub/room-reservation/room-reservation(frontend)/src/pages/reservations/CalendarPage.tsx"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\features\\reservations\\components\\TimeRangePicker.tsx"
     },
     "admin": {
       "phase": "do",
@@ -334,7 +334,7 @@
   "session": {
     "startedAt": "2026-03-11T16:11:06.398Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-31T07:22:52.662Z"
+    "lastActivity": "2026-03-31T16:58:59.325Z"
   },
   "history": [
     {
@@ -1803,6 +1803,48 @@
     },
     {
       "timestamp": "2026-03-31T07:22:52.662Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T16:26:24.678Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T16:29:04.153Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T16:29:14.063Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T16:47:24.562Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T16:58:46.510Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T16:58:53.415Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-03-31T16:58:59.325Z",
       "feature": "rooms",
       "phase": "do",
       "action": "updated"

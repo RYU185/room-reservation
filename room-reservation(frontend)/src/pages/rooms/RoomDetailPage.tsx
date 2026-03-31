@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { getRoom, checkAvailability } from '@/features/rooms/api/rooms.api'
 import type { Room, RoomAvailabilityResponse } from '@/features/rooms/types'
 import Skeleton from '@/shared/components/Skeleton'
+import TimeRangePicker from '@/features/reservations/components/TimeRangePicker'
 
 export default function RoomDetailPage() {
   const { id } = useParams<{ id: string }>()
@@ -105,25 +106,12 @@ export default function RoomDetailPage() {
           <Section>
             <SectionTitle>가용성 확인</SectionTitle>
             <AvailabilityForm onSubmit={handleCheckAvailability}>
-              <TimeField>
-                <label>시작 시간</label>
-                <input
-                  type="datetime-local"
-                  value={startTime}
-                  onChange={(e) => { setStartTime(e.target.value); setAvailability(null) }}
-                  required
-                />
-              </TimeField>
-              <TimeField>
-                <label>종료 시간</label>
-                <input
-                  type="datetime-local"
-                  value={endTime}
-                  min={startTime}
-                  onChange={(e) => { setEndTime(e.target.value); setAvailability(null) }}
-                  required
-                />
-              </TimeField>
+              <TimeRangePicker
+                startTime={startTime}
+                endTime={endTime}
+                onStartChange={(v) => { setStartTime(v); setAvailability(null) }}
+                onEndChange={(v) => { setEndTime(v); setAvailability(null) }}
+              />
               <CheckButton type="submit" disabled={checkingAvailability}>
                 {checkingAvailability ? '확인 중...' : '가용성 확인'}
               </CheckButton>
@@ -285,32 +273,8 @@ const AmenityTag = styled.span`
 
 const AvailabilityForm = styled.form`
   display: flex;
-  gap: 12px;
-  align-items: flex-end;
-  flex-wrap: wrap;
-`
-
-const TimeField = styled.div`
-  display: flex;
   flex-direction: column;
-  gap: 4px;
-
-  label {
-    font-size: 12px;
-    color: #64748b;
-    font-weight: 500;
-  }
-
-  input {
-    padding: 8px 10px;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 13px;
-    color: #334155;
-    outline: none;
-
-    &:focus { border-color: #2563eb; }
-  }
+  gap: 12px;
 `
 
 const CheckButton = styled.button`
