@@ -157,7 +157,6 @@ export default function TimeRangePicker({
         </InputRow>
         {errors?.start && <FieldError>{errors.start}</FieldError>}
       </Field>
-      <Separator>~</Separator>
       <Field>
         <Label>종료 시간</Label>
         <InputRow>
@@ -193,29 +192,25 @@ const Row = styled.div`
 const Field = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 4px;
   flex: 1;
   min-width: 280px;
-`
-
-const Separator = styled.span`
-  font-size: 14px;
-  color: #64748b;
-  flex-shrink: 0;
-  align-self: center;
-  padding-top: 22px;
 `
 
 const Label = styled.label`
   font-size: 13px;
   font-weight: 500;
   color: #374151;
+  width: 57%;
 `
 
 const InputRow = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 6px;
+  width: 100%;
 `
 
 const FieldError = styled.span`
@@ -260,7 +255,7 @@ const TimeDisplay = styled.div<{ $error?: boolean }>`
   border-radius: 8px;
   background: #f8fafc;
   cursor: pointer;
-  width: 100%;
+  width: 180px;
   box-sizing: border-box;
   user-select: none;
 
