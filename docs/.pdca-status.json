@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-03-31T16:58:59.325Z",
+  "lastUpdated": "2026-04-01T07:06:15.488Z",
   "activeFeatures": [
     "domain-model",
     "api-spec",
@@ -256,7 +256,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T13:57:21.161Z",
-        "lastUpdated": "2026-03-31T16:47:24.562Z"
+        "lastUpdated": "2026-04-01T07:06:15.488Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\features\\reservations\\components\\TimeRangePicker.tsx"
     },
@@ -334,7 +334,7 @@
   "session": {
     "startedAt": "2026-03-11T16:11:06.398Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-03-31T16:58:59.325Z"
+    "lastActivity": "2026-04-01T07:06:15.488Z"
   },
   "history": [
     {
@@ -1846,6 +1846,36 @@
     {
       "timestamp": "2026-03-31T16:58:59.325Z",
       "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T07:05:53.654Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T07:05:59.081Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T07:06:03.290Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T07:06:11.054Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-01T07:06:15.488Z",
+      "feature": "reservations",
       "phase": "do",
       "action": "updated"
     }

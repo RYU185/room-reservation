@@ -201,7 +201,9 @@ const Field = styled.div`
 const Separator = styled.span`
   font-size: 14px;
   color: #64748b;
-  padding-top: 30px;
+  flex-shrink: 0;
+  align-self: center;
+  padding-top: 22px;
 `
 
 const Label = styled.label`
@@ -212,7 +214,7 @@ const Label = styled.label`
 
 const InputRow = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 6px;
 `
 
@@ -224,14 +226,13 @@ const FieldError = styled.span`
 // ─── DateGroup ────────────────────────────────────────────────────────────────
 
 const DateGroup = styled.div<{ $error?: boolean }>`
-  flex: 1;
   border: 1.5px solid ${({ $error }) => ($error ? '#ef4444' : '#e2e8f0')};
   border-radius: 8px;
   overflow: hidden;
-
   &:focus-within {
     border-color: ${({ $error }) => ($error ? '#ef4444' : '#2563eb')};
   }
+  width:180px;
 `
 
 const DateInput = styled.input`
@@ -241,14 +242,13 @@ const DateInput = styled.input`
   border: none;
   outline: none;
   background: transparent;
-  width: 100%;
+  width: 90%;
 `
 
 // ─── CustomTimePicker ─────────────────────────────────────────────────────────
 
 const TimePickerRoot = styled.div`
   position: relative;
-  flex-shrink: 0;
 `
 
 const TimeDisplay = styled.div<{ $error?: boolean }>`
@@ -260,7 +260,8 @@ const TimeDisplay = styled.div<{ $error?: boolean }>`
   border-radius: 8px;
   background: #f8fafc;
   cursor: pointer;
-  min-width: 120px;
+  width: 100%;
+  box-sizing: border-box;
   user-select: none;
 
   &:hover {
