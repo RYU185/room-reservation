@@ -52,8 +52,8 @@ export default function RoomDetailPage() {
     try {
       const result = await checkAvailability(
         Number(id),
-        new Date(startTime).toISOString(),
-        new Date(endTime).toISOString(),
+        startTime + ':00',
+        endTime + ':00',
       )
       setAvailability(result)
     } catch {

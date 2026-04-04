@@ -34,8 +34,8 @@ export default function ReservationDetailPage() {
       const updated = await updateReservation(reservation.id, {
         title: values.title,
         description: values.description,
-        startTime: new Date(values.startTime).toISOString(),
-        endTime: new Date(values.endTime).toISOString(),
+        startTime: values.startTime + ':00',
+        endTime: values.endTime + ':00',
       })
       setReservation(updated)
       setIsEditing(false)

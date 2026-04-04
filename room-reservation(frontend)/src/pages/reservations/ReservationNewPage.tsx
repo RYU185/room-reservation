@@ -43,7 +43,7 @@ export default function ReservationNewPage() {
     }
   }, [roomId])
 
-  async function handleSubmit(values: ReservationFormValues) {
+  async function  (values: ReservationFormValues) {
     if (!roomId) return
     setSubmitLoading(true)
     setServerError(null)
@@ -52,8 +52,8 @@ export default function ReservationNewPage() {
         roomId,
         title: values.title,
         description: values.description,
-        startTime: new Date(values.startTime).toISOString(),
-        endTime: new Date(values.endTime).toISOString(),
+        startTime: values.startTime + ':00',
+        endTime: values.endTime + ':00',
       })
       navigate(`/reservations/${reservation.id}`, { replace: true })
     } catch (err) {
