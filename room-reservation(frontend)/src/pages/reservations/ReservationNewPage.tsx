@@ -43,7 +43,7 @@ export default function ReservationNewPage() {
     }
   }, [roomId])
 
-  async function  (values: ReservationFormValues) {
+  async function handleSubmit(values: ReservationFormValues) {
     if (!roomId) return
     setSubmitLoading(true)
     setServerError(null)
