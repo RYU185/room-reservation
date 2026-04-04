@@ -12,6 +12,9 @@ const ERROR_MESSAGES: Record<string, string> = {
   RESERVATION_CONFLICT: '해당 시간대에 이미 예약이 있습니다.',
   EMAIL_DUPLICATE: '이미 사용 중인 이메일입니다.',
   ROOM_INACTIVE: '사용할 수 없는 회의실입니다.',
+  USER_NOT_FOUND: '사용자를 찾을 수 없습니다.',
+  RESERVATION_NOT_FOUND: '예약을 찾을 수 없습니다.',
+  ALREADY_CANCELLED: '이미 취소된 예약입니다.',
   DB_ERROR: '서버 오류가 발생했습니다. 잠시 후 재시도해 주세요.',
   INTERNAL_ERROR: '서버 오류가 발생했습니다. 잠시 후 재시도해 주세요.',
 }

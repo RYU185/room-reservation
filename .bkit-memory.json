@@ -1,0 +1,8 @@
+{
+  "feature": "api-spec",
+  "phase": "do",
+  "matchRate": 98,
+  "iterationCount": 0,
+  "updatedAt": "2026-04-05T00:00:00Z",
+  "notes": "백엔드 98% 완료. Do 단계: Admin 프론트엔드 페이지 4개 구현 중 (AdminRooms/Reservations/Users/Stats)"
+}
