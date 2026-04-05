@@ -1,12 +1,8 @@
 import type { RoomSummary } from '@/features/rooms/types'
-import type { ReservationStatus } from '@/features/reservations/types'
+import type { ReservationStatus, UserSummary } from '@/features/reservations/types'
 import type { PageMeta } from '@/shared/types'
 
-export interface UserSummary {
-  id: number
-  name: string
-  email: string
-}
+export type { UserSummary }
 
 export interface AdminReservation {
   id: number

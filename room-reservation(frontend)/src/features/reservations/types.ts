@@ -2,9 +2,16 @@ import type { RoomSummary } from '@/features/rooms/types'
 
 export type ReservationStatus = 'CONFIRMED' | 'CANCELLED'
 
+export interface UserSummary {
+  id: number
+  name: string
+  email: string
+}
+
 export interface Reservation {
   id: number
   room: RoomSummary
+  user?: UserSummary
   title: string
   description: string
   startTime: string
