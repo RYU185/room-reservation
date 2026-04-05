@@ -66,7 +66,7 @@ public class ReservationService {
             throw new BusinessException(ErrorCode.FORBIDDEN);
         }
 
-        return ReservationResponse.from(reservation, isAdmin);
+        return ReservationResponse.from(reservation, true);
     }
 
     public List<ReservationResponse> getCalendar(int year, int month, Long roomId) {
@@ -120,7 +120,7 @@ public class ReservationService {
                 .endTime(request.endTime())
                 .build();
 
-        return ReservationResponse.from(reservationRepository.save(reservation), false);
+        return ReservationResponse.from(reservationRepository.save(reservation), true);
     }
 
     @Transactional
@@ -144,7 +144,7 @@ public class ReservationService {
         }
 
         reservation.update(request.title(), request.description(), request.startTime(), request.endTime());
-        return ReservationResponse.from(reservation, isAdmin);
+        return ReservationResponse.from(reservation, true);
     }
 
     @Transactional

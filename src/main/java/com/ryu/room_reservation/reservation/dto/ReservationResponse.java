@@ -15,7 +15,7 @@ public record ReservationResponse(
         @Schema(description = "회의실 요약")
         RoomSummary room,
 
-        @Schema(description = "예약자 요약 (ADMIN 응답에만 포함)")
+        @Schema(description = "예약자 요약 (단건 조회/생성/수정 시 포함)")
         @JsonInclude(JsonInclude.Include.NON_NULL)
         UserSummary user,
 
@@ -48,13 +48,17 @@ public record ReservationResponse(
     @Schema(description = "예약자 요약 정보")
     public record UserSummary(
             @Schema(description = "사용자 ID") Long id,
-            @Schema(description = "이름") String name
+            @Schema(description = "이름") String name,
+            @Schema(description = "이메일") String email
     ) {
     }
 
     public static ReservationResponse from(Reservation reservation, boolean includeUser) {
         UserSummary userSummary = includeUser
-                ? new UserSummary(reservation.getUser().getId(), reservation.getUser().getName())
+                ? new UserSummary(
+                        reservation.getUser().getId(),
+                        reservation.getUser().getName(),
+                        reservation.getUser().getEmail())
                 : null;
 
         return new ReservationResponse(

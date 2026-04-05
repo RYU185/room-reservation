@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-04-05T15:47:34.166Z",
+  "lastUpdated": "2026-04-05T16:23:46.072Z",
   "activeFeatures": [
     "domain-model",
     "api-spec",
@@ -152,9 +152,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T09:10:30.521Z",
-        "lastUpdated": "2026-03-25T04:37:01.906Z"
+        "lastUpdated": "2026-04-05T16:07:24.892Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\auth\\dto\\SignUpRequest.java"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\admin\\dto\\AdminReservationResponse.java"
     },
     "service": {
       "phase": "do",
@@ -165,9 +165,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T09:11:46.079Z",
-        "lastUpdated": "2026-03-25T04:37:16.345Z"
+        "lastUpdated": "2026-04-05T16:07:11.721Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\auth\\service\\AuthService.java"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\reservation\\service\\ReservationService.java"
     },
     "controller": {
       "phase": "do",
@@ -256,7 +256,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T13:57:21.161Z",
-        "lastUpdated": "2026-04-05T15:47:34.166Z"
+        "lastUpdated": "2026-04-05T16:23:46.072Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\pages\\reservations\\ReservationDetailPage.tsx"
     },
@@ -334,7 +334,7 @@
   "session": {
     "startedAt": "2026-03-11T16:11:06.398Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-04-05T15:47:34.166Z"
+    "lastActivity": "2026-04-05T16:23:46.072Z"
   },
   "history": [
     {
@@ -2085,6 +2085,60 @@
     },
     {
       "timestamp": "2026-04-05T15:47:34.166Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-05T16:06:50.007Z",
+      "feature": "dto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-05T16:06:59.000Z",
+      "feature": "dto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-05T16:07:03.041Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-05T16:07:07.051Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-05T16:07:11.721Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-05T16:07:16.971Z",
+      "feature": "dto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-05T16:07:24.892Z",
+      "feature": "dto",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-05T16:23:42.277Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-05T16:23:46.072Z",
       "feature": "reservations",
       "phase": "do",
       "action": "updated"

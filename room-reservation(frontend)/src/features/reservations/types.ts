@@ -11,7 +11,7 @@ export interface UserSummary {
 export interface Reservation {
   id: number
   room: RoomSummary
-  user?: UserSummary
+  user: UserSummary
   title: string
   description: string
   startTime: string

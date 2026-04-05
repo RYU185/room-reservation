@@ -101,12 +101,10 @@ export default function ReservationDetailPage() {
         </CardHeader>
 
         <InfoSection>
-          {reservation.user && (
-            <InfoRow>
-              <InfoLabel>예약자</InfoLabel>
-              <InfoValue>{reservation.user.name} ({reservation.user.email})</InfoValue>
-            </InfoRow>
-          )}
+          <InfoRow>
+            <InfoLabel>예약자</InfoLabel>
+            <InfoValue>{reservation.user.name} ({reservation.user.email})</InfoValue>
+          </InfoRow>
           <InfoRow>
             <InfoLabel>회의실</InfoLabel>
             <InfoValue>{reservation.room.name} · {reservation.room.location}</InfoValue>

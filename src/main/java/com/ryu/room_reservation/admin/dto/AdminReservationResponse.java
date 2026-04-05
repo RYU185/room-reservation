@@ -15,8 +15,8 @@ public record AdminReservationResponse(
         @Schema(description = "회의실 요약")
         ReservationResponse.RoomSummary room,
 
-        @Schema(description = "예약자 요약 (이메일 포함)")
-        UserSummary user,
+        @Schema(description = "예약자 요약")
+        ReservationResponse.UserSummary user,
 
         @Schema(description = "예약 제목")
         String title,
@@ -36,14 +36,6 @@ public record AdminReservationResponse(
         @Schema(description = "생성 시각")
         LocalDateTime createdAt
 ) {
-    @Schema(description = "예약자 요약 (관리자용)")
-    public record UserSummary(
-            @Schema(description = "사용자 ID") Long id,
-            @Schema(description = "이름") String name,
-            @Schema(description = "이메일") String email
-    ) {
-    }
-
     public static AdminReservationResponse from(Reservation reservation) {
         return new AdminReservationResponse(
                 reservation.getId(),
@@ -52,7 +44,7 @@ public record AdminReservationResponse(
                         reservation.getRoom().getName(),
                         reservation.getRoom().getLocation()
                 ),
-                new UserSummary(
+                new ReservationResponse.UserSummary(
                         reservation.getUser().getId(),
                         reservation.getUser().getName(),
                         reservation.getUser().getEmail()
