@@ -31,7 +31,9 @@
       "Bash(head -5 \"C:/Users/fence/OneDrive/문서/GitHub/room-reservation/room-reservation\\(frontend\\)/src/pages/reservations/ReservationNewPage.tsx\")",
       "Bash(head -5 \"C:/Users/fence/OneDrive/문서/GitHub/room-reservation/room-reservation\\(frontend\\)/src/pages/reservations/MyReservationsPage.tsx\")",
       "Bash(find \"C:/Users/fence/OneDrive/문서/GitHub/room-reservation/room-reservation\\(frontend\\)/src/features\" -name \"*.ts\" -o -name \"*.tsx\")",
-      "Bash(./gradlew compileJava)"
+      "Bash(./gradlew compileJava)",
+      "Bash(./gradlew dependencies:*)",
+      "Bash(jar tf:*)"
     ]
   }
 }

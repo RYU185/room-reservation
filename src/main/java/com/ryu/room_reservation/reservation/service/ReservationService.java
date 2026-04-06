@@ -2,6 +2,7 @@ package com.ryu.room_reservation.reservation.service;
 
 import com.ryu.room_reservation.global.exception.BusinessException;
 import com.ryu.room_reservation.global.exception.ErrorCode;
+import com.ryu.room_reservation.reservation.dto.CalendarItemDto;
 import com.ryu.room_reservation.reservation.dto.ReservationCreateRequest;
 import com.ryu.room_reservation.reservation.dto.ReservationResponse;
 import com.ryu.room_reservation.reservation.dto.ReservationUpdateRequest;
@@ -73,19 +74,10 @@ public class ReservationService {
         LocalDateTime start = LocalDateTime.of(year, month, 1, 0, 0);
         LocalDateTime end = start.plusMonths(1);
 
-        Specification<Reservation> spec = (root, query, cb) -> {
-            List<Predicate> predicates = new ArrayList<>();
-            predicates.add(cb.greaterThanOrEqualTo(root.get("startTime"), start));
-            predicates.add(cb.lessThan(root.get("startTime"), end));
-            predicates.add(cb.equal(root.get("status"), ReservationStatus.CONFIRMED));
-            if (roomId != null) {
-                predicates.add(cb.equal(root.get("room").get("id"), roomId));
-            }
-            return cb.and(predicates.toArray(new Predicate[0]));
-        };
-
-        return reservationRepository.findAll(spec).stream()
-                .map(r -> ReservationResponse.from(r, false))
+        return reservationRepository
+                .findCalendarItems(start, end, ReservationStatus.CONFIRMED, roomId)
+                .stream()
+                .map(CalendarItemDto::toResponse)
                 .toList();
     }
 

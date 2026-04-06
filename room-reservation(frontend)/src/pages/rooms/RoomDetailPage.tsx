@@ -21,6 +21,26 @@ export default function RoomDetailPage() {
   const [availabilityError, setAvailabilityError] = useState<string | null>(null)
 
   useEffect(() => {
+    if (!id || !startTime || !endTime) {
+      setAvailability(null)
+      setAvailabilityError(null)
+      return
+    }
+
+    let cancelled = false
+    setCheckingAvailability(true)
+    setAvailability(null)
+    setAvailabilityError(null)
+
+    checkAvailability(Number(id), startTime + ':00', endTime + ':00')
+      .then((result) => { if (!cancelled) setAvailability(result) })
+      .catch(() => { if (!cancelled) setAvailabilityError('가용성 확인에 실패했습니다.') })
+      .finally(() => { if (!cancelled) setCheckingAvailability(false) })
+
+    return () => { cancelled = true }
+  }, [id, startTime, endTime])
+
+  useEffect(() => {
     if (!id) return
     let cancelled = false
 
@@ -40,28 +60,6 @@ export default function RoomDetailPage() {
     fetchRoom()
     return () => { cancelled = true }
   }, [id])
-
-  async function handleCheckAvailability(e: React.FormEvent) {
-    e.preventDefault()
-    if (!id || !startTime || !endTime) return
-
-    setCheckingAvailability(true)
-    setAvailability(null)
-    setAvailabilityError(null)
-
-    try {
-      const result = await checkAvailability(
-        Number(id),
-        startTime + ':00',
-        endTime + ':00',
-      )
-      setAvailability(result)
-    } catch {
-      setAvailabilityError('가용성 확인에 실패했습니다.')
-    } finally {
-      setCheckingAvailability(false)
-    }
-  }
 
   function handleReserve() {
     navigate(`/reservations/new?roomId=${id}&startTime=${encodeURIComponent(startTime)}&endTime=${encodeURIComponent(endTime)}`)
@@ -104,18 +102,14 @@ export default function RoomDetailPage() {
 
         {room.isActive && (
           <Section>
-            <SectionTitle>가용성 확인</SectionTitle>
-            <AvailabilityForm onSubmit={handleCheckAvailability}>
-              <TimeRangePicker
-                startTime={startTime}
-                endTime={endTime}
-                onStartChange={(v) => { setStartTime(v); setAvailability(null) }}
-                onEndChange={(v) => { setEndTime(v); setAvailability(null) }}
-              />
-              <CheckButton type="submit" disabled={checkingAvailability}>
-                {checkingAvailability ? '확인 중...' : '가용성 확인'}
-              </CheckButton>
-            </AvailabilityForm>
+            <SectionTitle>예약 시간 선택</SectionTitle>
+            <TimeRangePicker
+              startTime={startTime}
+              endTime={endTime}
+              onStartChange={setStartTime}
+              onEndChange={setEndTime}
+            />
+            {checkingAvailability && <CheckingText>가용성 확인 중...</CheckingText>}
 
             {availabilityError && <InlineError>{availabilityError}</InlineError>}
 
@@ -271,25 +265,10 @@ const AmenityTag = styled.span`
   border-radius: 6px;
 `
 
-const AvailabilityForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`
-
-const CheckButton = styled.button`
-  padding: 8px 16px;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+const CheckingText = styled.p`
+  margin: 0;
   font-size: 13px;
-  font-weight: 500;
-  color: #334155;
-  cursor: pointer;
-  height: 36px;
-
-  &:hover:not(:disabled) { background: #e2e8f0; }
-  &:disabled { opacity: 0.5; cursor: not-allowed; }
+  color: #64748b;
 `
 
 const AvailabilityResult = styled.div<{ $available: boolean }>`

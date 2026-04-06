@@ -1,5 +1,6 @@
 package com.ryu.room_reservation.reservation.repository;
 
+import com.ryu.room_reservation.reservation.dto.CalendarItemDto;
 import com.ryu.room_reservation.reservation.entity.Reservation;
 import com.ryu.room_reservation.reservation.entity.ReservationStatus;
 import org.springframework.data.domain.Page;
@@ -34,6 +35,29 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long>,
     List<Reservation> findAllByRangeWithRoom(
             @Param("start") LocalDateTime start,
             @Param("end") LocalDateTime end
+    );
+
+    /**
+     * 캘린더용: DTO Projection으로 엔티티 로딩 없이 필요한 컬럼만 조회 (N+1 방지)
+     * roomId가 null이면 전체 회의실 조회
+     */
+    @Query("""
+            SELECT new com.ryu.room_reservation.reservation.dto.CalendarItemDto(
+                r.id, room.id, room.name, room.location,
+                r.title, r.description, r.startTime, r.endTime, r.status, r.createdAt
+            )
+            FROM Reservation r
+            JOIN r.room room
+            WHERE r.startTime >= :start
+            AND r.startTime < :end
+            AND r.status = :status
+            AND (:roomId IS NULL OR room.id = :roomId)
+            """)
+    List<CalendarItemDto> findCalendarItems(
+            @Param("start") LocalDateTime start,
+            @Param("end") LocalDateTime end,
+            @Param("status") ReservationStatus status,
+            @Param("roomId") Long roomId
     );
 
     @Query("""
