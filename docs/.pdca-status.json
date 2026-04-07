@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-04-06T08:07:18.987Z",
+  "lastUpdated": "2026-04-07T17:54:30.987Z",
   "activeFeatures": [
     "domain-model",
     "api-spec",
@@ -48,9 +48,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T08:02:10.934Z",
-        "lastUpdated": "2026-03-25T04:37:38.965Z"
+        "lastUpdated": "2026-04-07T17:53:42.487Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\config\\SecurityConfig.java"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\config\\CacheConfig.java"
     },
     "entity": {
       "phase": "do",
@@ -165,9 +165,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T09:11:46.079Z",
-        "lastUpdated": "2026-04-06T06:48:42.426Z"
+        "lastUpdated": "2026-04-07T17:54:30.986Z"
       },
-      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\test\\java\\com\\ryu\\room_reservation\\reservation\\service\\ReservationServiceCalendarTest.java"
+      "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\admin\\service\\AdminService.java"
     },
     "controller": {
       "phase": "do",
@@ -334,7 +334,7 @@
   "session": {
     "startedAt": "2026-03-11T16:11:06.398Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-04-06T08:07:18.987Z"
+    "lastActivity": "2026-04-07T17:54:30.987Z"
   },
   "history": [
     {
@@ -2266,6 +2266,78 @@
     {
       "timestamp": "2026-04-06T08:07:18.987Z",
       "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-07T17:53:42.487Z",
+      "feature": "config",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-07T17:53:47.566Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-07T17:53:52.135Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-07T17:53:58.481Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-07T17:54:02.771Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-07T17:54:06.275Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-07T17:54:10.031Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-07T17:54:14.419Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-07T17:54:18.176Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-07T17:54:23.244Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-07T17:54:27.508Z",
+      "feature": "service",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-07T17:54:30.986Z",
+      "feature": "service",
       "phase": "do",
       "action": "updated"
     }

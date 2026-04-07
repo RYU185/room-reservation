@@ -14,6 +14,9 @@ import com.ryu.room_reservation.user.dto.UserResponse;
 import com.ryu.room_reservation.user.repository.UserRepository;
 import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -45,6 +48,10 @@ public class AdminService {
     }
 
     @Transactional
+    @Caching(evict = {
+            @CacheEvict(value = "calendar", allEntries = true),
+            @CacheEvict(value = "roomStats", allEntries = true)
+    })
     public void cancelReservation(Long id) {
         Reservation reservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new BusinessException(ErrorCode.RESERVATION_NOT_FOUND));
@@ -63,6 +70,7 @@ public class AdminService {
                 .map(r -> ReservationResponse.from(r, true));
     }
 
+    @Cacheable(value = "roomStats", key = "#year + ':' + #month")
     public List<RoomStatsResponse> getRoomStats(Integer year, Integer month) {
         LocalDateTime start = LocalDateTime.of(year, month, 1, 0, 0);
         LocalDateTime end = start.plusMonths(1);

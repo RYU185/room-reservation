@@ -33,7 +33,8 @@
       "Bash(find \"C:/Users/fence/OneDrive/문서/GitHub/room-reservation/room-reservation\\(frontend\\)/src/features\" -name \"*.ts\" -o -name \"*.tsx\")",
       "Bash(./gradlew compileJava)",
       "Bash(./gradlew dependencies:*)",
-      "Bash(jar tf:*)"
+      "Bash(jar tf:*)",
+      "Bash(npm list:*)"
     ]
   }
 }

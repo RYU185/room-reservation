@@ -15,6 +15,9 @@ import com.ryu.room_reservation.user.entity.User;
 import com.ryu.room_reservation.user.repository.UserRepository;
 import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -70,6 +73,7 @@ public class ReservationService {
         return ReservationResponse.from(reservation, true);
     }
 
+    @Cacheable(value = "calendar", key = "#year + ':' + #month + ':' + #roomId")
     public List<ReservationResponse> getCalendar(int year, int month, Long roomId) {
         LocalDateTime start = LocalDateTime.of(year, month, 1, 0, 0);
         LocalDateTime end = start.plusMonths(1);
@@ -82,6 +86,10 @@ public class ReservationService {
     }
 
     @Transactional
+    @Caching(evict = {
+            @CacheEvict(value = "calendar", allEntries = true),
+            @CacheEvict(value = "roomStats", allEntries = true)
+    })
     public ReservationResponse createReservation(Long userId, ReservationCreateRequest request) {
         if (!request.startTime().isBefore(request.endTime())) {
             throw new BusinessException(ErrorCode.VALIDATION_FAILED, "시작 시각은 종료 시각보다 이전이어야 합니다.");
@@ -116,6 +124,10 @@ public class ReservationService {
     }
 
     @Transactional
+    @Caching(evict = {
+            @CacheEvict(value = "calendar", allEntries = true),
+            @CacheEvict(value = "roomStats", allEntries = true)
+    })
     public ReservationResponse updateReservation(
             Long id, Long userId, boolean isAdmin, ReservationUpdateRequest request) {
         Reservation reservation = reservationRepository.findById(id)
@@ -140,6 +152,10 @@ public class ReservationService {
     }
 
     @Transactional
+    @Caching(evict = {
+            @CacheEvict(value = "calendar", allEntries = true),
+            @CacheEvict(value = "roomStats", allEntries = true)
+    })
     public void cancelReservation(Long id, Long userId, boolean isAdmin) {
         Reservation reservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new BusinessException(ErrorCode.RESERVATION_NOT_FOUND));

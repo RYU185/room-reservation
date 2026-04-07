@@ -12,6 +12,8 @@ import com.ryu.room_reservation.room.entity.Room;
 import com.ryu.room_reservation.room.repository.RoomRepository;
 import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -35,6 +37,7 @@ public class RoomService {
         return roomRepository.findAll(spec, pageable).map(RoomResponse::from);
     }
 
+    @Cacheable(value = "room", key = "#id")
     public RoomResponse getRoom(Long id) {
         Room room = roomRepository.findById(id)
                 .orElseThrow(() -> new BusinessException(ErrorCode.ROOM_NOT_FOUND));
@@ -68,6 +71,7 @@ public class RoomService {
     }
 
     @Transactional
+    @CacheEvict(value = "room", key = "#id")
     public RoomResponse updateRoom(Long id, RoomRequest request) {
         Room room = roomRepository.findById(id)
                 .orElseThrow(() -> new BusinessException(ErrorCode.ROOM_NOT_FOUND));
@@ -77,6 +81,7 @@ public class RoomService {
     }
 
     @Transactional
+    @CacheEvict(value = "room", key = "#id")
     public void deactivateRoom(Long id) {
         Room room = roomRepository.findById(id)
                 .orElseThrow(() -> new BusinessException(ErrorCode.ROOM_NOT_FOUND));
