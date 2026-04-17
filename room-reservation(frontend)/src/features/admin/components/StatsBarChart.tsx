@@ -37,9 +37,9 @@ const Row = styled.div`
 `
 
 const RoomLabel = styled.span`
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
-  color: #334155;
+  color: #333333;
   width: 140px;
   flex-shrink: 0;
   overflow: hidden;
@@ -55,23 +55,23 @@ const BarArea = styled.div`
 `
 
 const Bar = styled.div<{ $rate: number }>`
-  height: 18px;
-  border-radius: 4px;
-  background: ${({ $rate }) => ($rate >= 70 ? '#2563eb' : $rate >= 40 ? '#60a5fa' : '#bfdbfe')};
+  height: 16px;
+  border-radius: 3px;
+  background: ${({ $rate }) => ($rate >= 70 ? '#111111' : $rate >= 40 ? '#555555' : '#cccccc')};
   width: ${({ $rate }) => Math.max($rate, 1)}%;
   transition: width 0.3s ease;
 `
 
 const RateLabel = styled.span`
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  color: #475569;
+  color: #555555;
   white-space: nowrap;
 `
 
 const CountLabel = styled.span`
-  font-size: 12px;
-  color: #94a3b8;
+  font-size: 14px;
+  color: #aaaaaa;
   width: 40px;
   text-align: right;
   flex-shrink: 0;

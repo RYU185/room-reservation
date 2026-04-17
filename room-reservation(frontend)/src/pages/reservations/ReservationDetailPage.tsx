@@ -67,9 +67,9 @@ export default function ReservationDetailPage() {
     return (
       <Wrapper>
         <Card>
-          <Skeleton height="22px" width="40%" />
-          <Skeleton height="16px" width="60%" />
-          <Skeleton height="16px" width="50%" />
+          <Skeleton height="20px" width="40%" />
+          <Skeleton height="14px" width="60%" />
+          <Skeleton height="14px" width="50%" />
           <Skeleton height="80px" />
         </Card>
       </Wrapper>
@@ -198,21 +198,21 @@ const Wrapper = styled.div`
 const BackButton = styled.button`
   background: none;
   border: none;
-  color: #64748b;
-  font-size: 14px;
+  color: #777777;
+  font-size: 16px;
   cursor: pointer;
   padding: 0;
   width: fit-content;
 
   &:hover {
-    color: #334155;
+    color: #333333;
   }
 `
 
 const Card = styled.div`
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
   padding: 28px;
   display: flex;
   flex-direction: column;
@@ -230,27 +230,29 @@ const TitleArea = styled.div`
 
 const ReservationTitle = styled.h1`
   margin: 0;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 700;
-  color: #1e293b;
+  color: #111111;
+  letter-spacing: -0.3px;
 `
 
 const StatusBadge = styled.span<{ $confirmed: boolean }>`
-  font-size: 12px;
-  font-weight: 600;
-  padding: 3px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 3px 9px;
   border-radius: 99px;
-  background: ${({ $confirmed }) => ($confirmed ? '#dcfce7' : '#f1f5f9')};
-  color: ${({ $confirmed }) => ($confirmed ? '#166534' : '#64748b')};
+  background: ${({ $confirmed }) => ($confirmed ? '#f0fdf4' : '#f5f5f5')};
+  color: ${({ $confirmed }) => ($confirmed ? '#15803d' : '#888888')};
 `
 
 const InfoSection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 16px;
-  background: #f8fafc;
-  border-radius: 8px;
+  gap: 10px;
+  padding: 14px 16px;
+  background: #fafafa;
+  border-radius: 6px;
+  border: 1px solid #f0f0f0;
 `
 
 const InfoRow = styled.div`
@@ -259,15 +261,15 @@ const InfoRow = styled.div`
 `
 
 const InfoLabel = styled.span`
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
-  color: #64748b;
-  min-width: 60px;
+  color: #888888;
+  min-width: 56px;
 `
 
 const InfoValue = styled.span`
-  font-size: 13px;
-  color: #334155;
+  font-size: 15px;
+  color: #333333;
 `
 
 const ActionArea = styled.div`
@@ -275,7 +277,7 @@ const ActionArea = styled.div`
   flex-direction: column;
   gap: 10px;
   padding-top: 4px;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid #f0f0f0;
 `
 
 const Buttons = styled.div`
@@ -285,7 +287,7 @@ const Buttons = styled.div`
 
 const ActionError = styled.p`
   margin: 0;
-  font-size: 13px;
+  font-size: 15px;
   color: #dc2626;
 `
 
@@ -293,14 +295,14 @@ const CancelConfirm = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 14px;
+  padding: 11px 13px;
   background: #fef2f2;
   border: 1px solid #fecaca;
-  border-radius: 8px;
+  border-radius: 6px;
 `
 
 const CancelMessage = styled.span`
-  font-size: 13px;
+  font-size: 15px;
   color: #991b1b;
   flex: 1;
 `
@@ -315,31 +317,31 @@ const EditSection = styled.div`
   flex-direction: column;
   gap: 16px;
   padding-top: 4px;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid #f0f0f0;
 `
 
 const EditTitle = styled.h3`
   margin: 0;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
-  color: #334155;
+  color: #333333;
 `
 
 const CancelEditButton = styled.button`
   background: none;
   border: none;
-  font-size: 13px;
-  color: #64748b;
+  font-size: 15px;
+  color: #777777;
   cursor: pointer;
   padding: 0;
   width: fit-content;
 
   &:hover {
-    color: #334155;
+    color: #333333;
   }
 `
 
 const ErrorMessage = styled.p`
   color: #dc2626;
-  font-size: 14px;
+  font-size: 16px;
 `

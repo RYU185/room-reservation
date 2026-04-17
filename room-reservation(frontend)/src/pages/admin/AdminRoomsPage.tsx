@@ -73,7 +73,7 @@ export default function AdminRoomsPage() {
     <Wrapper>
       <PageHeader>
         <PageTitle>회의실 관리</PageTitle>
-        <AddButton onClick={() => setModalMode('create')}>+ 회의실 추가</AddButton>
+        <AddButton onClick={() => setModalMode('create')}>회의실 추가</AddButton>
       </PageHeader>
 
       {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -124,7 +124,7 @@ export default function AdminRoomsPage() {
                         )}
                       </AmenityList>
                     ) : (
-                      <NoneText>-</NoneText>
+                      <NoneText>—</NoneText>
                     )}
                   </Td>
                   <Td>
@@ -228,28 +228,29 @@ const PageTitle = styled.h1`
   margin: 0;
   font-size: 22px;
   font-weight: 700;
-  color: #1e293b;
+  color: #111111;
+  letter-spacing: -0.3px;
 `
 
 const AddButton = styled.button`
-  padding: 8px 18px;
-  background: #2563eb;
+  padding: 7px 16px;
+  background: #111111;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
 
   &:hover {
-    background: #1d4ed8;
+    background: #000000;
   }
 `
 
 const TableCard = styled.div`
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
   overflow: hidden;
 `
 
@@ -259,34 +260,36 @@ const Table = styled.table`
 `
 
 const Th = styled.th`
-  padding: 12px 16px;
+  padding: 11px 16px;
   text-align: left;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  color: #64748b;
-  background: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
+  color: #888888;
+  background: #fafafa;
+  border-bottom: 1px solid #e5e5e5;
   white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 `
 
 const Td = styled.td`
   padding: 12px 16px;
-  font-size: 14px;
-  color: #334155;
-  border-bottom: 1px solid #f1f5f9;
+  font-size: 16px;
+  color: #333333;
+  border-bottom: 1px solid #f0f0f0;
   vertical-align: middle;
 `
 
 const EmptyTd = styled.td`
   padding: 48px 16px;
   text-align: center;
-  font-size: 14px;
-  color: #94a3b8;
+  font-size: 16px;
+  color: #aaaaaa;
 `
 
 const RoomName = styled.span`
   font-weight: 500;
-  color: #1e293b;
+  color: #111111;
 `
 
 const AmenityList = styled.div`
@@ -296,24 +299,24 @@ const AmenityList = styled.div`
 `
 
 const AmenityTag = styled.span`
-  font-size: 11px;
+  font-size: 13px;
   padding: 2px 6px;
-  background: #eff6ff;
-  color: #3b82f6;
+  background: #f5f5f5;
+  color: #555555;
   border-radius: 4px;
 `
 
 const NoneText = styled.span`
-  color: #cbd5e1;
+  color: #cccccc;
 `
 
 const StatusBadge = styled.span<{ $active: boolean }>`
-  font-size: 12px;
-  font-weight: 600;
-  padding: 2px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 2px 7px;
   border-radius: 99px;
-  background: ${({ $active }) => ($active ? '#dcfce7' : '#f1f5f9')};
-  color: ${({ $active }) => ($active ? '#166534' : '#94a3b8')};
+  background: ${({ $active }) => ($active ? '#f0fdf4' : '#f5f5f5')};
+  color: ${({ $active }) => ($active ? '#15803d' : '#aaaaaa')};
 `
 
 const Actions = styled.div`
@@ -323,22 +326,22 @@ const Actions = styled.div`
 
 const ActionBtn = styled.button<{ $danger?: boolean }>`
   padding: 4px 10px;
-  font-size: 12px;
-  border-radius: 6px;
+  font-size: 14px;
+  border-radius: 5px;
   cursor: pointer;
-  border: 1px solid ${({ $danger }) => ($danger ? '#fecaca' : '#e2e8f0')};
+  border: 1px solid ${({ $danger }) => ($danger ? '#fecaca' : '#e5e5e5')};
   background: ${({ $danger }) => ($danger ? '#fef2f2' : '#fff')};
-  color: ${({ $danger }) => ($danger ? '#dc2626' : '#475569')};
-  transition: background 0.15s;
+  color: ${({ $danger }) => ($danger ? '#dc2626' : '#555555')};
+  transition: background 0.1s;
 
   &:hover {
-    background: ${({ $danger }) => ($danger ? '#fee2e2' : '#f1f5f9')};
+    background: ${({ $danger }) => ($danger ? '#fee2e2' : '#f5f5f5')};
   }
 `
 
 const ErrorMessage = styled.p`
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   color: #dc2626;
 `
 
@@ -349,7 +352,7 @@ const PaginationWrapper = styled.div`
 const ConfirmOverlay = styled.div`
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -358,31 +361,31 @@ const ConfirmOverlay = styled.div`
 
 const ConfirmBox = styled.div`
   background: #fff;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 24px;
   width: 360px;
   max-width: 90vw;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 `
 
 const ConfirmText = styled.p`
   margin: 0;
-  font-size: 14px;
-  color: #334155;
+  font-size: 16px;
+  color: #333333;
   line-height: 1.6;
 `
 
 const SubText = styled.span`
-  font-size: 13px;
-  color: #94a3b8;
+  font-size: 15px;
+  color: #aaaaaa;
 `
 
 const ConfirmError = styled.p`
   margin: 0;
-  font-size: 13px;
+  font-size: 15px;
   color: #dc2626;
 `
 
@@ -393,12 +396,12 @@ const ConfirmActions = styled.div`
 `
 
 const DangerButton = styled.button`
-  padding: 7px 16px;
+  padding: 7px 14px;
   background: #dc2626;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 13px;
+  border-radius: 6px;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
 
@@ -413,15 +416,15 @@ const DangerButton = styled.button`
 `
 
 const CancelConfirmButton = styled.button`
-  padding: 7px 16px;
+  padding: 7px 14px;
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 13px;
-  color: #64748b;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #777777;
   cursor: pointer;
 
   &:hover {
-    background: #f1f5f9;
+    background: #f5f5f5;
   }
 `

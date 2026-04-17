@@ -118,7 +118,6 @@ function CustomDatePicker({ value, onChange, minDate, error }: DatePickerProps) 
   const daysInMonth = getDaysInMonth(view.year, view.month)
   const firstDow = getFirstDayOfWeek(view.year, view.month)
 
-  // empty leading cells + day cells
   const emptyCells = Array.from({ length: firstDow }, (_, i) => i)
   const dayCells = Array.from({ length: daysInMonth }, (_, i) => {
     const day = i + 1
@@ -143,7 +142,7 @@ function CustomDatePicker({ value, onChange, minDate, error }: DatePickerProps) 
 
           <WeekRow>
             {WEEKDAYS.map((d) => (
-              <WeekCell key={d} $sun={d === '일'} $sat={d === '토'}>
+              <WeekCell key={d}>
                 {d}
               </WeekCell>
             ))}
@@ -164,8 +163,6 @@ function CustomDatePicker({ value, onChange, minDate, error }: DatePickerProps) 
                   $selected={selected}
                   $today={isToday}
                   $disabled={disabled}
-                  $sun={(day + firstDow - 1) % 7 === 0}
-                  $sat={(day + firstDow) % 7 === 0}
                   disabled={disabled}
                   onClick={() => {
                     onChange(dateStr)
@@ -279,7 +276,6 @@ export default function TimeRangePicker({
     setLocalStart(next)
     onStartChange(next.date && next.time ? `${next.date}T${next.time}` : '')
 
-    // 같은 날짜일 때 종료 시간이 새 시작 시간 이하가 되면 초기화
     if (
       localEnd.date &&
       next.date === localEnd.date &&
@@ -295,7 +291,6 @@ export default function TimeRangePicker({
   function handleEnd(patch: { date?: string; time?: string }) {
     const next = { ...localEnd, ...patch }
 
-    // 날짜를 시작일과 동일하게 변경할 때 이미 선택된 종료 시간이 무효하면 초기화
     if (
       patch.date !== undefined &&
       next.date === localStart.date &&
@@ -378,9 +373,9 @@ const RangeField = styled.div`
 `
 
 const FieldLabel = styled.span`
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  color: #64748b;
+  color: #888888;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 `
@@ -393,14 +388,14 @@ const PickerStack = styled.div`
 
 const Separator = styled.span`
   font-size: 18px;
-  color: #94a3b8;
+  color: #cccccc;
   margin-top: 28px;
   flex-shrink: 0;
 `
 
 const FieldError = styled.span`
-  font-size: 12px;
-  color: #ef4444;
+  font-size: 14px;
+  color: #e53e3e;
 `
 
 // ─── Shared Picker Trigger ────────────────────────────────────────────────────
@@ -415,30 +410,29 @@ const PickerTrigger = styled.button<{ $error?: boolean }>`
   justify-content: space-between;
   gap: 8px;
   width: 100%;
-  padding: 9px 12px;
-  background: #f8fafc;
-  border: 1.5px solid ${({ $error }) => ($error ? '#ef4444' : '#e2e8f0')};
-  border-radius: 8px;
+  padding: 8px 11px;
+  background: #fff;
+  border: 1px solid ${({ $error }) => ($error ? '#ef4444' : '#e5e5e5')};
+  border-radius: 6px;
   cursor: pointer;
   user-select: none;
   box-sizing: border-box;
-  transition: border-color 0.15s, background 0.15s;
+  transition: border-color 0.1s;
 
   &:hover {
-    border-color: ${({ $error }) => ($error ? '#ef4444' : '#94a3b8')};
-    background: #f1f5f9;
+    border-color: ${({ $error }) => ($error ? '#ef4444' : '#999999')};
   }
 `
 
 const PickerText = styled.span<{ $empty?: boolean }>`
-  font-size: 13px;
-  color: ${({ $empty }) => ($empty ? '#94a3b8' : '#1e293b')};
+  font-size: 15px;
+  color: ${({ $empty }) => ($empty ? '#aaaaaa' : '#111111')};
   white-space: nowrap;
 `
 
 const ChevronIcon = styled.span<{ $open: boolean }>`
-  font-size: 14px;
-  color: #94a3b8;
+  font-size: 16px;
+  color: #aaaaaa;
   display: inline-block;
   transform: ${({ $open }) => ($open ? 'rotate(180deg)' : 'rotate(0)')};
   transition: transform 0.15s;
@@ -454,9 +448,9 @@ const CalendarPanel = styled.div`
   left: 0;
   z-index: 300;
   background: #fff;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   padding: 14px;
   min-width: 240px;
 `
@@ -472,10 +466,10 @@ const NavArrow = styled.button`
   width: 28px;
   height: 28px;
   border: none;
-  border-radius: 6px;
+  border-radius: 5px;
   background: transparent;
-  color: #64748b;
-  font-size: 18px;
+  color: #888888;
+  font-size: 20px;
   line-height: 1;
   cursor: pointer;
   display: flex;
@@ -484,15 +478,15 @@ const NavArrow = styled.button`
   transition: background 0.1s;
 
   &:hover {
-    background: #f1f5f9;
-    color: #0f172a;
+    background: #f5f5f5;
+    color: #111111;
   }
 `
 
 const MonthLabel = styled.span`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
-  color: #0f172a;
+  color: #111111;
 `
 
 const WeekRow = styled.div`
@@ -501,11 +495,11 @@ const WeekRow = styled.div`
   margin-bottom: 4px;
 `
 
-const WeekCell = styled.span<{ $sun?: boolean; $sat?: boolean }>`
+const WeekCell = styled.span`
   text-align: center;
-  font-size: 11px;
-  font-weight: 600;
-  color: ${({ $sun, $sat }) => ($sun ? '#ef4444' : $sat ? '#2563eb' : '#94a3b8')};
+  font-size: 13px;
+  font-weight: 500;
+  color: #aaaaaa;
   padding: 4px 0;
 `
 
@@ -519,29 +513,29 @@ const DayCell = styled.button<{
   $selected?: boolean
   $today?: boolean
   $disabled?: boolean
-  $sun?: boolean
-  $sat?: boolean
   $empty?: boolean
 }>`
   width: 30px;
   height: 30px;
   border: none;
   border-radius: 50%;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: ${({ $today, $selected }) => ($today || $selected ? '700' : '400')};
   cursor: ${({ $disabled, $empty }) => ($disabled || $empty ? 'default' : 'pointer')};
   visibility: ${({ $empty }) => ($empty ? 'hidden' : 'visible')};
-  background: ${({ $selected }) => ($selected ? '#2563eb' : 'transparent')};
-  color: ${({ $selected, $disabled, $sun, $sat }) => {
-    if ($selected) return '#fff'
-    if ($disabled) return '#cbd5e1'
-    if ($sun) return '#ef4444'
-    if ($sat) return '#2563eb'
-    return '#1e293b'
+  background: ${({ $selected, $today }) => {
+    if ($selected) return '#111111'
+    if ($today) return '#f5f5f5'
+    return 'transparent'
   }};
-  opacity: ${({ $disabled }) => ($disabled ? 0.45 : 1)};
+  color: ${({ $selected, $disabled }) => {
+    if ($selected) return '#fff'
+    if ($disabled) return '#cccccc'
+    return '#333333'
+  }};
+  opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
   outline: ${({ $today, $selected }) =>
-    $today && !$selected ? '1.5px solid #2563eb' : 'none'};
+    $today && !$selected ? '1.5px solid #333333' : 'none'};
   transition: background 0.1s;
   display: flex;
   align-items: center;
@@ -550,7 +544,7 @@ const DayCell = styled.button<{
 
   &:hover {
     background: ${({ $selected, $disabled }) =>
-      $selected ? '#1d4ed8' : $disabled ? 'transparent' : '#f1f5f9'};
+      $selected ? '#000000' : $disabled ? 'transparent' : '#f0f0f0'};
   }
 `
 
@@ -562,18 +556,17 @@ const TimePanel = styled.div`
   left: 0;
   z-index: 300;
   background: #fff;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   padding: 12px;
   min-width: 220px;
 `
 
-
 const PeriodLabel = styled.span`
-  font-size: 11px;
-  font-weight: 700;
-  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+  color: #aaaaaa;
   letter-spacing: 0.05em;
   padding: 4px 0 2px;
   display: block;
@@ -588,11 +581,11 @@ const SlotGrid = styled.div`
 const SlotItem = styled.button<{ $selected: boolean; $disabled?: boolean }>`
   padding: 7px 2px;
   border: none;
-  border-radius: 6px;
-  background: ${({ $selected }) => ($selected ? '#eff6ff' : 'transparent')};
+  border-radius: 5px;
+  background: ${({ $selected }) => ($selected ? '#111111' : 'transparent')};
   color: ${({ $selected, $disabled }) =>
-    $disabled ? '#cbd5e1' : $selected ? '#2563eb' : '#334155'};
-  font-size: 12px;
+    $disabled ? '#cccccc' : $selected ? '#ffffff' : '#333333'};
+  font-size: 14px;
   font-weight: ${({ $selected }) => ($selected ? '600' : '400')};
   cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
   text-align: center;
@@ -601,6 +594,6 @@ const SlotItem = styled.button<{ $selected: boolean; $disabled?: boolean }>`
 
   &:hover {
     background: ${({ $selected, $disabled }) =>
-      $disabled ? 'transparent' : $selected ? '#dbeafe' : '#f1f5f9'};
+      $disabled ? 'transparent' : $selected ? '#000000' : '#f0f0f0'};
   }
 `

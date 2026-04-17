@@ -115,21 +115,22 @@ const Card = styled.div`
   width: 100%;
   max-width: 400px;
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
   padding: 40px 36px;
 `
 
 const Title = styled.h1`
   font-size: 22px;
   font-weight: 700;
-  color: #0f172a;
+  color: #111111;
   margin: 0 0 4px;
+  letter-spacing: -0.3px;
 `
 
 const Subtitle = styled.p`
-  font-size: 14px;
-  color: #64748b;
+  font-size: 16px;
+  color: #777777;
   margin: 0 0 28px;
 `
 
@@ -146,39 +147,38 @@ const Field = styled.div`
 `
 
 const Label = styled.label`
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
-  color: #374151;
+  color: #444444;
 `
 
 const Input = styled.input<{ $error?: boolean }>`
-  padding: 10px 12px;
-  border: 1.5px solid ${({ $error }) => ($error ? '#ef4444' : '#e2e8f0')};
-  border-radius: 8px;
-  font-size: 14px;
-  color: #0f172a;
+  padding: 9px 12px;
+  border: 1px solid ${({ $error }) => ($error ? '#ef4444' : '#e5e5e5')};
+  border-radius: 6px;
+  font-size: 16px;
+  color: #111111;
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color 0.1s;
 
-  &::placeholder { color: #94a3b8; }
+  &::placeholder { color: #aaaaaa; }
 
   &:focus {
-    border-color: ${({ $error }) => ($error ? '#ef4444' : '#2563eb')};
-    box-shadow: 0 0 0 3px ${({ $error }) => ($error ? 'rgba(239,68,68,0.12)' : 'rgba(37,99,235,0.12)')};
+    border-color: ${({ $error }) => ($error ? '#ef4444' : '#111111')};
   }
 `
 
 const FieldError = styled.span`
-  font-size: 12px;
-  color: #ef4444;
+  font-size: 14px;
+  color: #e53e3e;
 `
 
 const AlertBox = styled.div`
   padding: 10px 14px;
   background: #fef2f2;
   border: 1px solid #fecaca;
-  border-radius: 8px;
-  font-size: 13px;
+  border-radius: 6px;
+  font-size: 15px;
   color: #dc2626;
 `
 
@@ -187,15 +187,15 @@ const Divider = styled.div`
   align-items: center;
   gap: 12px;
   margin: 24px 0;
-  color: #94a3b8;
-  font-size: 13px;
+  color: #aaaaaa;
+  font-size: 15px;
 
   &::before,
   &::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: #e2e8f0;
+    background: #e5e5e5;
   }
 `
 
@@ -205,30 +205,30 @@ const GoogleButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 10px 16px;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 8px;
+  padding: 9px 16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
   background: #fff;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  color: #374151;
+  color: #444444;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background 0.1s, border-color 0.1s;
 
   &:hover {
-    background: #f8fafc;
-    border-color: #cbd5e1;
+    background: #fafafa;
+    border-color: #cccccc;
   }
 `
 
 const SignUpLink = styled.p`
   margin: 20px 0 0;
   text-align: center;
-  font-size: 13px;
-  color: #64748b;
+  font-size: 15px;
+  color: #777777;
 
   a {
-    color: #2563eb;
+    color: #111111;
     font-weight: 500;
     text-decoration: none;
 

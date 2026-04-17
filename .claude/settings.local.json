@@ -34,7 +34,12 @@
       "Bash(./gradlew compileJava)",
       "Bash(./gradlew dependencies:*)",
       "Bash(jar tf:*)",
-      "Bash(npm list:*)"
+      "Bash(npm list:*)",
+      "Bash(netstat -ano)",
+      "Bash(findstr :6379)",
+      "Bash(powershell.exe -Command 'Get-Process | Where-Object { $_.Name -like '\\\\''*redis*'\\\\'' }')",
+      "Bash(powershell.exe -Command \"netstat -ano | Select-String ':6379'\")",
+      "Bash(powershell.exe -Command \"netsh int ipv4 show excludedportrange protocol=tcp\")"
     ]
   }
 }

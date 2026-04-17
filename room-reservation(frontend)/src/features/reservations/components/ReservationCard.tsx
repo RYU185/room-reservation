@@ -31,18 +31,17 @@ export default function ReservationCard({ reservation, onClick }: Props) {
 
 const Card = styled.div`
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 16px 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 7px;
+  padding: 15px 18px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  transition: box-shadow 0.15s, border-color 0.15s;
+  gap: 5px;
+  transition: border-color 0.1s;
 
   &:hover {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
-    border-color: #bfdbfe;
+    border-color: #aaaaaa;
   }
 `
 
@@ -54,27 +53,27 @@ const CardTop = styled.div`
 `
 
 const Title = styled.span`
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
-  color: #1e293b;
+  color: #111111;
 `
 
 const StatusBadge = styled.span<{ $confirmed: boolean }>`
   flex-shrink: 0;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 2px 7px;
   border-radius: 99px;
-  background: ${({ $confirmed }) => ($confirmed ? '#dcfce7' : '#f1f5f9')};
-  color: ${({ $confirmed }) => ($confirmed ? '#166534' : '#64748b')};
+  background: ${({ $confirmed }) => ($confirmed ? '#f0fdf4' : '#f5f5f5')};
+  color: ${({ $confirmed }) => ($confirmed ? '#15803d' : '#888888')};
 `
 
 const RoomInfo = styled.span`
-  font-size: 13px;
-  color: #64748b;
+  font-size: 15px;
+  color: #777777;
 `
 
 const TimeInfo = styled.span`
-  font-size: 13px;
-  color: #94a3b8;
+  font-size: 15px;
+  color: #aaaaaa;
 `

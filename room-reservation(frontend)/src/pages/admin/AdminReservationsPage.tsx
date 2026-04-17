@@ -109,7 +109,7 @@ export default function AdminReservationsPage() {
             value={from}
             onChange={(e) => { setFrom(e.target.value); setPage(1) }}
           />
-          <DateSep>~</DateSep>
+          <DateSep>–</DateSep>
           <DateInput
             type="date"
             value={to}
@@ -240,7 +240,8 @@ const PageTitle = styled.h1`
   margin: 0;
   font-size: 22px;
   font-weight: 700;
-  color: #1e293b;
+  color: #111111;
+  letter-spacing: -0.3px;
 `
 
 const FilterArea = styled.div`
@@ -255,18 +256,19 @@ const TabGroup = styled.div`
 `
 
 const TabButton = styled.button<{ $active: boolean }>`
-  padding: 6px 14px;
-  border-radius: 99px;
-  border: 1.5px solid ${({ $active }) => ($active ? '#2563eb' : '#e2e8f0')};
-  background: ${({ $active }) => ($active ? '#eff6ff' : '#fff')};
-  color: ${({ $active }) => ($active ? '#2563eb' : '#64748b')};
-  font-size: 13px;
-  font-weight: ${({ $active }) => ($active ? '600' : '400')};
+  padding: 5px 12px;
+  border-radius: 5px;
+  border: 1px solid ${({ $active }) => ($active ? '#111111' : '#e5e5e5')};
+  background: ${({ $active }) => ($active ? '#111111' : '#fff')};
+  color: ${({ $active }) => ($active ? '#fff' : '#777777')};
+  font-size: 15px;
+  font-weight: ${({ $active }) => ($active ? '500' : '400')};
   cursor: pointer;
+  transition: all 0.1s;
 
   &:hover {
-    border-color: #2563eb;
-    color: #2563eb;
+    border-color: #333333;
+    color: ${({ $active }) => ($active ? '#fff' : '#333333')};
   }
 `
 
@@ -278,41 +280,41 @@ const FilterRow = styled.div`
 `
 
 const DateInput = styled.input`
-  padding: 6px 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 13px;
-  color: #334155;
+  padding: 5px 9px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #333333;
   outline: none;
 
   &:focus {
-    border-color: #2563eb;
+    border-color: #111111;
   }
 `
 
 const DateSep = styled.span`
-  font-size: 13px;
-  color: #94a3b8;
+  font-size: 15px;
+  color: #aaaaaa;
 `
 
 const NumberInput = styled.input`
-  padding: 6px 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 13px;
-  color: #334155;
+  padding: 5px 9px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #333333;
   width: 110px;
   outline: none;
 
   &:focus {
-    border-color: #2563eb;
+    border-color: #111111;
   }
 `
 
 const TableCard = styled.div`
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
   overflow: hidden;
 `
 
@@ -322,69 +324,73 @@ const Table = styled.table`
 `
 
 const Th = styled.th`
-  padding: 12px 16px;
+  padding: 11px 16px;
   text-align: left;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  color: #64748b;
-  background: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
+  color: #888888;
+  background: #fafafa;
+  border-bottom: 1px solid #e5e5e5;
   white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 `
 
 const Td = styled.td`
   padding: 12px 16px;
-  font-size: 14px;
-  color: #334155;
-  border-bottom: 1px solid #f1f5f9;
+  font-size: 16px;
+  color: #333333;
+  border-bottom: 1px solid #f0f0f0;
   vertical-align: middle;
 `
 
 const EmptyTd = styled.td`
   padding: 48px 16px;
   text-align: center;
-  font-size: 14px;
-  color: #94a3b8;
+  font-size: 16px;
+  color: #aaaaaa;
 `
 
 const TitleText = styled.span`
   font-weight: 500;
-  color: #1e293b;
+  color: #111111;
 `
 
 const RoomText = styled.div`
   font-weight: 500;
+  color: #111111;
 `
 
 const UserText = styled.div`
   font-weight: 500;
+  color: #111111;
 `
 
 const SubInfo = styled.div`
-  font-size: 12px;
-  color: #94a3b8;
+  font-size: 14px;
+  color: #aaaaaa;
   margin-top: 2px;
 `
 
 const TimeText = styled.span`
-  font-size: 13px;
+  font-size: 15px;
   white-space: nowrap;
 `
 
 const StatusBadge = styled.span<{ $confirmed: boolean }>`
-  font-size: 12px;
-  font-weight: 600;
-  padding: 2px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 2px 7px;
   border-radius: 99px;
-  background: ${({ $confirmed }) => ($confirmed ? '#dcfce7' : '#f1f5f9')};
-  color: ${({ $confirmed }) => ($confirmed ? '#166534' : '#94a3b8')};
+  background: ${({ $confirmed }) => ($confirmed ? '#f0fdf4' : '#f5f5f5')};
+  color: ${({ $confirmed }) => ($confirmed ? '#15803d' : '#aaaaaa')};
   white-space: nowrap;
 `
 
 const CancelBtn = styled.button`
   padding: 4px 10px;
-  font-size: 12px;
-  border-radius: 6px;
+  font-size: 14px;
+  border-radius: 5px;
   cursor: pointer;
   border: 1px solid #fecaca;
   background: #fef2f2;
@@ -397,7 +403,7 @@ const CancelBtn = styled.button`
 
 const ErrorMessage = styled.p`
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   color: #dc2626;
 `
 
@@ -408,7 +414,7 @@ const PaginationWrapper = styled.div`
 const ConfirmOverlay = styled.div`
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -417,31 +423,31 @@ const ConfirmOverlay = styled.div`
 
 const ConfirmBox = styled.div`
   background: #fff;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 24px;
   width: 380px;
   max-width: 90vw;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 `
 
 const ConfirmText = styled.p`
   margin: 0;
-  font-size: 14px;
-  color: #334155;
+  font-size: 16px;
+  color: #333333;
   line-height: 1.6;
 `
 
 const SubText = styled.span`
-  font-size: 13px;
-  color: #94a3b8;
+  font-size: 15px;
+  color: #aaaaaa;
 `
 
 const ConfirmError = styled.p`
   margin: 0;
-  font-size: 13px;
+  font-size: 15px;
   color: #dc2626;
 `
 
@@ -452,12 +458,12 @@ const ConfirmActions = styled.div`
 `
 
 const DangerButton = styled.button`
-  padding: 7px 16px;
+  padding: 7px 14px;
   background: #dc2626;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 13px;
+  border-radius: 6px;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
 
@@ -472,15 +478,15 @@ const DangerButton = styled.button`
 `
 
 const CancelConfirmButton = styled.button`
-  padding: 7px 16px;
+  padding: 7px 14px;
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 13px;
-  color: #64748b;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #777777;
   cursor: pointer;
 
   &:hover {
-    background: #f1f5f9;
+    background: #f5f5f5;
   }
 `

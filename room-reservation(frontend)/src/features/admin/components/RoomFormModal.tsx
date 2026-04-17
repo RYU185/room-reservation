@@ -140,40 +140,41 @@ const Overlay = styled.div`
 
 const Modal = styled.div`
   background: #fff;
-  border-radius: 12px;
+  border-radius: 8px;
   width: 480px;
   max-width: 90vw;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 `
 
 const ModalHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 24px 16px;
-  border-bottom: 1px solid #f1f5f9;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid #f0f0f0;
 `
 
 const ModalTitle = styled.h2`
   margin: 0;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
-  color: #1e293b;
+  color: #111111;
+  letter-spacing: -0.2px;
 `
 
 const CloseButton = styled.button`
   background: none;
   border: none;
-  font-size: 16px;
-  color: #94a3b8;
+  font-size: 17px;
+  color: #aaaaaa;
   cursor: pointer;
   padding: 4px;
   line-height: 1;
 
   &:hover {
-    color: #334155;
+    color: #333333;
   }
 `
 
@@ -181,61 +182,61 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 20px 24px 24px;
+  padding: 18px 22px 22px;
 `
 
 const Field = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 `
 
 const Label = styled.label`
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
-  color: #334155;
+  color: #444444;
 `
 
 const Input = styled.input`
-  padding: 8px 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #334155;
+  padding: 8px 11px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #333333;
   outline: none;
 
   &:focus {
-    border-color: #2563eb;
+    border-color: #111111;
   }
 `
 
 const Textarea = styled.textarea`
-  padding: 8px 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #334155;
+  padding: 8px 11px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #333333;
   outline: none;
   resize: vertical;
   font-family: inherit;
 
   &:focus {
-    border-color: #2563eb;
+    border-color: #111111;
   }
 `
 
 const FieldError = styled.span`
-  font-size: 12px;
-  color: #dc2626;
+  font-size: 14px;
+  color: #e53e3e;
 `
 
 const ServerError = styled.p`
   margin: 0;
-  font-size: 13px;
+  font-size: 15px;
   color: #dc2626;
   padding: 10px 12px;
   background: #fef2f2;
-  border-radius: 6px;
+  border-radius: 5px;
 `
 
 const ModalActions = styled.div`
@@ -246,35 +247,35 @@ const ModalActions = styled.div`
 `
 
 const CancelButton = styled.button`
-  padding: 8px 16px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  padding: 7px 14px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
   background: #fff;
-  font-size: 14px;
-  color: #64748b;
+  font-size: 15px;
+  color: #777777;
   cursor: pointer;
 
   &:hover {
-    background: #f1f5f9;
+    background: #f5f5f5;
   }
 `
 
 const SubmitButton = styled.button`
-  padding: 8px 20px;
+  padding: 7px 18px;
   border: none;
-  border-radius: 8px;
-  background: #2563eb;
-  font-size: 14px;
+  border-radius: 6px;
+  background: #111111;
+  font-size: 15px;
   font-weight: 500;
   color: #fff;
   cursor: pointer;
 
   &:hover:not(:disabled) {
-    background: #1d4ed8;
+    background: #000000;
   }
 
   &:disabled {
-    opacity: 0.6;
+    opacity: 0.5;
     cursor: not-allowed;
   }
 `

@@ -72,7 +72,7 @@ export default function MyReservationsPage() {
             value={from}
             onChange={(e) => handleFromChange(e.target.value)}
           />
-          <DateSep>~</DateSep>
+          <DateSep>–</DateSep>
           <DateInput
             type="date"
             value={to}
@@ -88,7 +88,7 @@ export default function MyReservationsPage() {
         <List>
           {Array.from({ length: 3 }).map((_, i) => (
             <SkeletonCard key={i}>
-              <Skeleton height="18px" width="50%" />
+              <Skeleton height="17px" width="50%" />
               <Skeleton height="13px" width="40%" />
               <Skeleton height="13px" width="60%" />
             </SkeletonCard>
@@ -129,7 +129,8 @@ const Title = styled.h1`
   margin: 0;
   font-size: 22px;
   font-weight: 700;
-  color: #1e293b;
+  color: #111111;
+  letter-spacing: -0.3px;
 `
 
 const FilterRow = styled.div`
@@ -145,19 +146,19 @@ const TabGroup = styled.div`
 `
 
 const TabButton = styled.button<{ $active: boolean }>`
-  padding: 6px 14px;
-  border-radius: 99px;
-  border: 1.5px solid ${({ $active }) => ($active ? '#2563eb' : '#e2e8f0')};
-  background: ${({ $active }) => ($active ? '#eff6ff' : '#fff')};
-  color: ${({ $active }) => ($active ? '#2563eb' : '#64748b')};
-  font-size: 13px;
-  font-weight: ${({ $active }) => ($active ? '600' : '400')};
+  padding: 5px 12px;
+  border-radius: 5px;
+  border: 1px solid ${({ $active }) => ($active ? '#111111' : '#e5e5e5')};
+  background: ${({ $active }) => ($active ? '#111111' : '#fff')};
+  color: ${({ $active }) => ($active ? '#fff' : '#777777')};
+  font-size: 15px;
+  font-weight: ${({ $active }) => ($active ? '500' : '400')};
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.1s;
 
   &:hover {
-    border-color: #2563eb;
-    color: #2563eb;
+    border-color: #333333;
+    color: ${({ $active }) => ($active ? '#fff' : '#333333')};
   }
 `
 
@@ -168,34 +169,34 @@ const DateRange = styled.div`
 `
 
 const DateInput = styled.input`
-  padding: 6px 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 13px;
-  color: #334155;
+  padding: 5px 9px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #333333;
   outline: none;
 
   &:focus {
-    border-color: #2563eb;
+    border-color: #111111;
   }
 `
 
 const DateSep = styled.span`
-  font-size: 13px;
-  color: #94a3b8;
+  font-size: 15px;
+  color: #aaaaaa;
 `
 
 const List = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 `
 
 const SkeletonCard = styled.div`
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  padding: 16px 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 7px;
+  padding: 15px 18px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -203,14 +204,14 @@ const SkeletonCard = styled.div`
 
 const Empty = styled.p`
   text-align: center;
-  color: #94a3b8;
-  font-size: 14px;
+  color: #aaaaaa;
+  font-size: 16px;
   padding: 60px 0;
 `
 
 const ErrorMessage = styled.p`
   color: #dc2626;
-  font-size: 14px;
+  font-size: 16px;
 `
 
 const PaginationWrapper = styled.div`

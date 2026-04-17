@@ -53,11 +53,11 @@ export default function CalendarPage() {
 
       <CalendarCard>
         <MonthNav>
-          <NavButton onClick={prevMonth}>◀</NavButton>
+          <NavButton onClick={prevMonth}>‹</NavButton>
           <MonthLabel>
             {format(new Date(year, month - 1), 'yyyy년 M월', { locale: ko })}
           </MonthLabel>
-          <NavButton onClick={nextMonth}>▶</NavButton>
+          <NavButton onClick={nextMonth}>›</NavButton>
         </MonthNav>
 
         {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -107,13 +107,14 @@ const Title = styled.h1`
   margin: 0;
   font-size: 22px;
   font-weight: 700;
-  color: #1e293b;
+  color: #111111;
+  letter-spacing: -0.3px;
 `
 
 const CalendarCard = styled.div`
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
   overflow: hidden;
 `
 
@@ -121,43 +122,44 @@ const MonthNav = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
-  border-bottom: 1px solid #f1f5f9;
+  padding: 14px 18px;
+  border-bottom: 1px solid #f0f0f0;
 `
 
 const NavButton = styled.button`
   background: none;
   border: none;
-  font-size: 14px;
-  color: #64748b;
+  font-size: 20px;
+  color: #888888;
   cursor: pointer;
   padding: 4px 8px;
-  border-radius: 6px;
+  border-radius: 5px;
+  line-height: 1;
 
   &:hover {
-    background: #f1f5f9;
-    color: #334155;
+    background: #f5f5f5;
+    color: #333333;
   }
 `
 
 const MonthLabel = styled.span`
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
-  color: #1e293b;
+  color: #111111;
 `
 
 const ErrorMessage = styled.p`
-  padding: 12px 20px;
+  padding: 12px 18px;
   color: #dc2626;
-  font-size: 14px;
+  font-size: 16px;
   margin: 0;
 `
 
 const DayPanel = styled.div`
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -165,15 +167,15 @@ const DayPanel = styled.div`
 
 const DayTitle = styled.h3`
   margin: 0;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
-  color: #334155;
+  color: #333333;
 `
 
 const EmptyDay = styled.p`
   margin: 0;
-  font-size: 13px;
-  color: #94a3b8;
+  font-size: 15px;
+  color: #aaaaaa;
 `
 
 const DayList = styled.div`

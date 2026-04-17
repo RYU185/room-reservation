@@ -18,6 +18,7 @@ import AdminReservationsPage from '@/pages/admin/AdminReservationsPage'
 import AdminUsersPage from '@/pages/admin/AdminUsersPage'
 import AdminStatsPage from '@/pages/admin/AdminStatsPage'
 import NotFoundPage from '@/pages/NotFoundPage'
+import HomePage from '@/pages/HomePage'
 
 export const router = createBrowserRouter([
   {
@@ -34,7 +35,7 @@ export const router = createBrowserRouter([
       {
         element: <MainLayout />,
         children: [
-          { path: '/', element: <RoomListPage /> },
+          { path: '/', element: <HomePage /> },
           { path: '/rooms', element: <RoomListPage /> },
           { path: '/rooms/:id', element: <RoomDetailPage /> },
           { path: '/reservations/new', element: <ReservationNewPage /> },

@@ -22,7 +22,7 @@ export default function AdminLayout() {
     <Wrapper>
       <Sidebar>
         <SidebarTop>
-          <Brand to="/admin/rooms">관리자</Brand>
+          <Brand to="/admin/rooms">회의실 예약</Brand>
           <AdminBadge>ADMIN</AdminBadge>
         </SidebarTop>
 
@@ -56,13 +56,13 @@ export default function AdminLayout() {
 const Wrapper = styled.div`
   display: flex;
   min-height: 100vh;
-  background: #f8fafc;
+  background: #fafafa;
 `
 
 const Sidebar = styled.aside`
-  width: 220px;
+  width: 216px;
   flex-shrink: 0;
-  background: #1e293b;
+  background: #111111;
   display: flex;
   flex-direction: column;
   padding: 20px 0;
@@ -72,62 +72,64 @@ const SidebarTop = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0 20px 20px;
-  border-bottom: 1px solid #334155;
+  padding: 0 16px 18px;
+  border-bottom: 1px solid #222222;
 `
 
 const Brand = styled(NavLink)`
   font-size: 16px;
-  font-weight: 700;
-  color: #f1f5f9;
+  font-weight: 600;
+  color: #eeeeee;
   text-decoration: none;
+  letter-spacing: -0.2px;
 `
 
 const AdminBadge = styled.span`
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: #2563eb;
-  color: #fff;
+  padding: 2px 5px;
+  border-radius: 3px;
+  background: #333333;
+  color: #aaaaaa;
   letter-spacing: 0.5px;
 `
 
 const SideNav = styled.nav`
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 16px 12px;
+  gap: 1px;
+  padding: 12px 8px;
   flex: 1;
 `
 
 const SideNavLink = styled(NavLink)`
   display: block;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #94a3b8;
+  padding: 7px 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #888888;
   text-decoration: none;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.1s, color 0.1s;
 
   &:hover {
-    background: #334155;
-    color: #f1f5f9;
+    background: #1e1e1e;
+    color: #dddddd;
   }
 
   &.active {
-    background: #2563eb;
-    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    color: #eeeeee;
+    font-weight: 500;
   }
 `
 
 const SidebarBottom = styled.div`
-  padding: 16px 20px 0;
-  border-top: 1px solid #334155;
+  padding: 14px 16px 0;
+  border-top: 1px solid #222222;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 `
 
 const UserSection = styled.div`
@@ -137,14 +139,14 @@ const UserSection = styled.div`
 `
 
 const UserName = styled.span`
-  font-size: 13px;
-  font-weight: 600;
-  color: #f1f5f9;
+  font-size: 15px;
+  font-weight: 500;
+  color: #dddddd;
 `
 
 const UserEmail = styled.span`
-  font-size: 11px;
-  color: #64748b;
+  font-size: 13px;
+  color: #666666;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -153,34 +155,34 @@ const UserEmail = styled.span`
 const SidebarActions = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 `
 
 const ActionLink = styled(NavLink)`
   display: block;
-  padding: 6px 0;
-  font-size: 13px;
-  color: #64748b;
+  padding: 5px 0;
+  font-size: 14px;
+  color: #666666;
   text-decoration: none;
-  transition: color 0.15s;
+  transition: color 0.1s;
 
   &:hover {
-    color: #94a3b8;
+    color: #aaaaaa;
   }
 `
 
 const LogoutButton = styled.button`
   background: none;
   border: none;
-  padding: 6px 0;
-  font-size: 13px;
-  color: #64748b;
+  padding: 5px 0;
+  font-size: 14px;
+  color: #666666;
   cursor: pointer;
   text-align: left;
-  transition: color 0.15s;
+  transition: color 0.1s;
 
   &:hover {
-    color: #94a3b8;
+    color: #aaaaaa;
   }
 `
 

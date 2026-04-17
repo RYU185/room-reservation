@@ -25,14 +25,14 @@ export default function Button({
 }
 
 const sizeStyles = {
-  sm: css`padding: 4px 12px; font-size: 13px;`,
-  md: css`padding: 8px 16px; font-size: 14px;`,
-  lg: css`padding: 12px 24px; font-size: 16px;`,
+  sm: css`padding: 4px 12px; font-size: 15px;`,
+  md: css`padding: 8px 16px; font-size: 16px;`,
+  lg: css`padding: 12px 24px; font-size: 18px;`,
 }
 
 const variantStyles = {
-  primary: css`background: #2563eb; color: #fff; &:hover:not(:disabled) { background: #1d4ed8; }`,
-  secondary: css`background: #f1f5f9; color: #334155; &:hover:not(:disabled) { background: #e2e8f0; }`,
+  primary: css`background: #111111; color: #fff; &:hover:not(:disabled) { background: #000000; }`,
+  secondary: css`background: #f5f5f5; color: #333333; &:hover:not(:disabled) { background: #ebebeb; }`,
   danger: css`background: #dc2626; color: #fff; &:hover:not(:disabled) { background: #b91c1c; }`,
 }
 

@@ -121,59 +121,59 @@ const Field = styled.div`
 `
 
 const Label = styled.label`
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
-  color: #374151;
+  color: #444444;
 `
 
 const Input = styled.input<{ $error?: boolean }>`
-  padding: 10px 12px;
-  border: 1.5px solid ${({ $error }) => ($error ? '#ef4444' : '#e2e8f0')};
-  border-radius: 8px;
-  font-size: 14px;
-  color: #0f172a;
+  padding: 9px 12px;
+  border: 1px solid ${({ $error }) => ($error ? '#ef4444' : '#e5e5e5')};
+  border-radius: 6px;
+  font-size: 16px;
+  color: #111111;
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color 0.1s;
 
   &::placeholder {
-    color: #94a3b8;
+    color: #aaaaaa;
   }
 
   &:focus {
-    border-color: ${({ $error }) => ($error ? '#ef4444' : '#2563eb')};
+    border-color: ${({ $error }) => ($error ? '#ef4444' : '#111111')};
   }
 `
 
 const Textarea = styled.textarea`
-  padding: 10px 12px;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #0f172a;
+  padding: 9px 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #111111;
   outline: none;
   resize: vertical;
   font-family: inherit;
-  transition: border-color 0.15s;
+  transition: border-color 0.1s;
 
   &::placeholder {
-    color: #94a3b8;
+    color: #aaaaaa;
   }
 
   &:focus {
-    border-color: #2563eb;
+    border-color: #111111;
   }
 `
 
 const FieldError = styled.span`
-  font-size: 12px;
-  color: #ef4444;
+  font-size: 14px;
+  color: #e53e3e;
 `
 
 const AlertBox = styled.div`
   padding: 10px 14px;
   background: #fef2f2;
   border: 1px solid #fecaca;
-  border-radius: 8px;
-  font-size: 13px;
+  border-radius: 6px;
+  font-size: 15px;
   color: #dc2626;
 `

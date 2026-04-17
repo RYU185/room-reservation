@@ -78,8 +78,9 @@ export default function RoomDetailPage() {
           <div>
             <RoomName>{room.name}</RoomName>
             <MetaRow>
-              <MetaItem>📍 {room.location}</MetaItem>
-              <MetaItem>👥 최대 {room.capacity}명</MetaItem>
+              <MetaItem>{room.location}</MetaItem>
+              <MetaDot />
+              <MetaItem>최대 {room.capacity}명</MetaItem>
             </MetaRow>
           </div>
           <StatusBadge $active={room.isActive}>
@@ -156,9 +157,9 @@ function LoadingSkeleton() {
   return (
     <Wrapper>
       <Card>
-        <Skeleton height="28px" width="40%" />
-        <Skeleton height="16px" width="60%" />
-        <Skeleton height="16px" width="50%" />
+        <Skeleton height="26px" width="40%" />
+        <Skeleton height="14px" width="60%" />
+        <Skeleton height="14px" width="50%" />
         <Skeleton height="100px" />
       </Card>
     </Wrapper>
@@ -175,19 +176,19 @@ const Wrapper = styled.div`
 const BackButton = styled.button`
   background: none;
   border: none;
-  color: #64748b;
-  font-size: 14px;
+  color: #777777;
+  font-size: 16px;
   cursor: pointer;
   padding: 0;
   width: fit-content;
 
-  &:hover { color: #334155; }
+  &:hover { color: #333333; }
 `
 
 const Card = styled.div`
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
   padding: 28px;
   display: flex;
   flex-direction: column;
@@ -205,34 +206,44 @@ const RoomName = styled.h1`
   margin: 0 0 8px;
   font-size: 22px;
   font-weight: 700;
-  color: #1e293b;
+  color: #111111;
+  letter-spacing: -0.3px;
 `
 
 const MetaRow = styled.div`
   display: flex;
-  gap: 16px;
+  align-items: center;
+  gap: 8px;
   flex-wrap: wrap;
 `
 
 const MetaItem = styled.span`
-  font-size: 14px;
-  color: #64748b;
+  font-size: 16px;
+  color: #777777;
+`
+
+const MetaDot = styled.span`
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #cccccc;
+  flex-shrink: 0;
 `
 
 const StatusBadge = styled.span<{ $active: boolean }>`
   flex-shrink: 0;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 3px 9px;
   border-radius: 99px;
-  background: ${({ $active }) => ($active ? '#dcfce7' : '#f1f5f9')};
-  color: ${({ $active }) => ($active ? '#166534' : '#64748b')};
+  background: ${({ $active }) => ($active ? '#f0fdf4' : '#f5f5f5')};
+  color: ${({ $active }) => ($active ? '#15803d' : '#888888')};
 `
 
 const Description = styled.p`
   margin: 0;
-  font-size: 14px;
-  color: #475569;
+  font-size: 16px;
+  color: #555555;
   line-height: 1.6;
 `
 
@@ -241,72 +252,74 @@ const Section = styled.div`
   flex-direction: column;
   gap: 12px;
   padding-top: 20px;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid #f0f0f0;
 `
 
 const SectionTitle = styled.h3`
   margin: 0;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
-  color: #334155;
+  color: #333333;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 `
 
 const Amenities = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
 `
 
 const AmenityTag = styled.span`
-  font-size: 13px;
-  padding: 4px 10px;
-  background: #eff6ff;
-  color: #3b82f6;
-  border-radius: 6px;
+  font-size: 15px;
+  padding: 3px 9px;
+  background: #f5f5f5;
+  color: #555555;
+  border-radius: 5px;
 `
 
 const CheckingText = styled.p`
   margin: 0;
-  font-size: 13px;
-  color: #64748b;
+  font-size: 15px;
+  color: #777777;
 `
 
 const AvailabilityResult = styled.div<{ $available: boolean }>`
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  padding: 14px 16px;
-  border-radius: 8px;
+  padding: 13px 15px;
+  border-radius: 6px;
   background: ${({ $available }) => ($available ? '#f0fdf4' : '#fef2f2')};
   border: 1px solid ${({ $available }) => ($available ? '#bbf7d0' : '#fecaca')};
-  color: ${({ $available }) => ($available ? '#166534' : '#991b1b')};
-  font-size: 14px;
+  color: ${({ $available }) => ($available ? '#15803d' : '#991b1b')};
+  font-size: 16px;
 `
 
 const ResultIcon = styled.span`
   font-weight: 700;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.4;
 `
 
 const ReserveButton = styled.button`
   align-self: flex-end;
-  padding: 10px 24px;
-  background: #2563eb;
+  padding: 9px 22px;
+  background: #111111;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 16px;
   font-weight: 500;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.15s, opacity 0.15s;
+  transition: background 0.1s;
 
-  &:hover:not(:disabled) { background: #1d4ed8; }
+  &:hover:not(:disabled) { background: #000000; }
 
   &:disabled {
-    background: #e2e8f0;
-    color: #94a3b8;
+    background: #e5e5e5;
+    color: #aaaaaa;
     cursor: not-allowed;
   }
 `
@@ -317,17 +330,17 @@ const ConflictList = styled.ul`
 `
 
 const ConflictItem = styled.li`
-  font-size: 13px;
+  font-size: 15px;
   margin-top: 2px;
 `
 
 const InlineError = styled.p`
   margin: 0;
-  font-size: 13px;
+  font-size: 15px;
   color: #dc2626;
 `
 
 const ErrorMessage = styled.p`
   color: #dc2626;
-  font-size: 14px;
+  font-size: 16px;
 `

@@ -15,8 +15,8 @@ const spin = keyframes`
 const StyledSpinner = styled.div<{ size: number }>`
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
-  border: 2px solid #e2e8f0;
-  border-top-color: #2563eb;
+  border: 2px solid #e5e5e5;
+  border-top-color: #111111;
   border-radius: 50%;
   animation: ${spin} 0.6s linear infinite;
 `

@@ -74,13 +74,13 @@ export default function ReservationNewPage() {
         <RoomInfoBox>
           {roomLoading ? (
             <>
-              <Skeleton height="16px" width="40%" />
-              <Skeleton height="14px" width="60%" />
+              <Skeleton height="15px" width="40%" />
+              <Skeleton height="13px" width="60%" />
             </>
           ) : room ? (
             <>
               <RoomName>{room.name}</RoomName>
-              <RoomMeta>📍 {room.location} · 👥 최대 {room.capacity}명</RoomMeta>
+              <RoomMeta>{room.location} · 최대 {room.capacity}명</RoomMeta>
             </>
           ) : (
             <RoomError>회의실 정보를 불러올 수 없습니다.</RoomError>
@@ -112,21 +112,21 @@ const Wrapper = styled.div`
 const BackButton = styled.button`
   background: none;
   border: none;
-  color: #64748b;
-  font-size: 14px;
+  color: #777777;
+  font-size: 16px;
   cursor: pointer;
   padding: 0;
   width: fit-content;
 
   &:hover {
-    color: #334155;
+    color: #333333;
   }
 `
 
 const Card = styled.div`
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
   padding: 28px;
   display: flex;
   flex-direction: column;
@@ -135,33 +135,34 @@ const Card = styled.div`
 
 const PageTitle = styled.h1`
   margin: 0;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 700;
-  color: #1e293b;
+  color: #111111;
+  letter-spacing: -0.3px;
 `
 
 const RoomInfoBox = styled.div`
-  padding: 14px 16px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  padding: 13px 15px;
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
   gap: 4px;
 `
 
 const RoomName = styled.span`
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
-  color: #1e293b;
+  color: #111111;
 `
 
 const RoomMeta = styled.span`
-  font-size: 13px;
-  color: #64748b;
+  font-size: 15px;
+  color: #777777;
 `
 
 const RoomError = styled.span`
-  font-size: 13px;
+  font-size: 15px;
   color: #dc2626;
 `

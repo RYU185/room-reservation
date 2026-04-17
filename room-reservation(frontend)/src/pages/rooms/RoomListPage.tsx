@@ -96,10 +96,10 @@ export default function RoomListPage() {
         <Grid>
           {Array.from({ length: 6 }).map((_, i) => (
             <SkeletonCard key={i}>
-              <Skeleton height="20px" width="60%" />
-              <Skeleton height="14px" width="40%" />
-              <Skeleton height="14px" width="30%" />
-              <Skeleton height="14px" width="80%" />
+              <Skeleton height="18px" width="60%" />
+              <Skeleton height="13px" width="40%" />
+              <Skeleton height="13px" width="30%" />
+              <Skeleton height="13px" width="80%" />
             </SkeletonCard>
           ))}
         </Grid>
@@ -116,8 +116,9 @@ export default function RoomListPage() {
                 </StatusBadge>
               </CardTop>
               <CardMeta>
-                <MetaItem>📍 {room.location}</MetaItem>
-                <MetaItem>👥 최대 {room.capacity}명</MetaItem>
+                <MetaItem>{room.location}</MetaItem>
+                <MetaDot />
+                <MetaItem>최대 {room.capacity}명</MetaItem>
               </CardMeta>
               {room.description && <Description>{room.description}</Description>}
               {room.amenities.length > 0 && (
@@ -158,8 +159,9 @@ const Header = styled.div`
 const Title = styled.h1`
   font-size: 22px;
   font-weight: 700;
-  color: #1e293b;
+  color: #111111;
   margin: 0;
+  letter-spacing: -0.3px;
 `
 
 const FilterForm = styled.form`
@@ -169,16 +171,16 @@ const FilterForm = styled.form`
 `
 
 const FilterInput = styled.input`
-  padding: 8px 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #334155;
+  padding: 7px 11px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #333333;
   background: #fff;
   outline: none;
 
   &:focus {
-    border-color: #2563eb;
+    border-color: #111111;
   }
 
   &[type='number'] {
@@ -187,31 +189,31 @@ const FilterInput = styled.input`
 `
 
 const SearchButton = styled.button`
-  padding: 8px 20px;
-  background: #2563eb;
+  padding: 7px 18px;
+  background: #111111;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 16px;
   font-weight: 500;
   cursor: pointer;
 
   &:hover {
-    background: #1d4ed8;
+    background: #000000;
   }
 `
 
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
+  gap: 14px;
 `
 
 const SkeletonCard = styled.div`
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -219,18 +221,17 @@ const SkeletonCard = styled.div`
 
 const RoomCard = styled.div`
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 18px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  transition: box-shadow 0.15s, border-color 0.15s;
+  transition: border-color 0.1s;
 
   &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border-color: #bfdbfe;
+    border-color: #aaaaaa;
   }
 `
 
@@ -243,36 +244,44 @@ const CardTop = styled.div`
 
 const RoomName = styled.h3`
   margin: 0;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
-  color: #1e293b;
+  color: #111111;
 `
 
 const StatusBadge = styled.span<{ $active: boolean }>`
   flex-shrink: 0;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 2px 7px;
   border-radius: 99px;
-  background: ${({ $active }) => ($active ? '#dcfce7' : '#f1f5f9')};
-  color: ${({ $active }) => ($active ? '#166534' : '#64748b')};
+  background: ${({ $active }) => ($active ? '#f0fdf4' : '#f5f5f5')};
+  color: ${({ $active }) => ($active ? '#15803d' : '#888888')};
 `
 
 const CardMeta = styled.div`
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
 `
 
 const MetaItem = styled.span`
-  font-size: 13px;
-  color: #64748b;
+  font-size: 15px;
+  color: #777777;
+`
+
+const MetaDot = styled.span`
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #cccccc;
+  flex-shrink: 0;
 `
 
 const Description = styled.p`
   margin: 0;
-  font-size: 13px;
-  color: #94a3b8;
+  font-size: 15px;
+  color: #aaaaaa;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -282,26 +291,26 @@ const Description = styled.p`
 const Amenities = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
   margin-top: 2px;
 `
 
 const AmenityTag = styled.span`
-  font-size: 11px;
-  padding: 2px 8px;
-  background: #eff6ff;
-  color: #3b82f6;
+  font-size: 13px;
+  padding: 2px 7px;
+  background: #f5f5f5;
+  color: #555555;
   border-radius: 4px;
 `
 
 const ErrorMessage = styled.p`
   color: #dc2626;
-  font-size: 14px;
+  font-size: 16px;
 `
 
 const Empty = styled.p`
-  color: #94a3b8;
-  font-size: 14px;
+  color: #aaaaaa;
+  font-size: 16px;
   text-align: center;
   padding: 60px 0;
 `

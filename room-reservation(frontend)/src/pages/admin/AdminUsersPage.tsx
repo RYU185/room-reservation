@@ -123,13 +123,14 @@ const PageTitle = styled.h1`
   margin: 0;
   font-size: 22px;
   font-weight: 700;
-  color: #1e293b;
+  color: #111111;
+  letter-spacing: -0.3px;
 `
 
 const TableCard = styled.div`
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
   overflow: hidden;
 `
 
@@ -139,63 +140,65 @@ const Table = styled.table`
 `
 
 const Th = styled.th`
-  padding: 12px 16px;
+  padding: 11px 16px;
   text-align: left;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  color: #64748b;
-  background: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
+  color: #888888;
+  background: #fafafa;
+  border-bottom: 1px solid #e5e5e5;
   white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 `
 
 const Td = styled.td`
   padding: 12px 16px;
-  font-size: 14px;
-  color: #334155;
-  border-bottom: 1px solid #f1f5f9;
+  font-size: 16px;
+  color: #333333;
+  border-bottom: 1px solid #f0f0f0;
   vertical-align: middle;
 `
 
 const EmptyTd = styled.td`
   padding: 48px 16px;
   text-align: center;
-  font-size: 14px;
-  color: #94a3b8;
+  font-size: 16px;
+  color: #aaaaaa;
 `
 
 const UserName = styled.span`
   font-weight: 500;
-  color: #1e293b;
+  color: #111111;
 `
 
 const RoleBadge = styled.span<{ $admin: boolean }>`
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 2px 7px;
   border-radius: 99px;
-  background: ${({ $admin }) => ($admin ? '#eff6ff' : '#f8fafc')};
-  color: ${({ $admin }) => ($admin ? '#2563eb' : '#64748b')};
+  background: ${({ $admin }) => ($admin ? '#111111' : '#f5f5f5')};
+  color: ${({ $admin }) => ($admin ? '#ffffff' : '#777777')};
 `
 
 const HistoryButton = styled.button`
   padding: 4px 10px;
-  font-size: 12px;
-  border-radius: 6px;
+  font-size: 14px;
+  border-radius: 5px;
   cursor: pointer;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e5e5e5;
   background: #fff;
-  color: #475569;
-  transition: background 0.15s;
+  color: #555555;
+  transition: background 0.1s;
 
   &:hover {
-    background: #f1f5f9;
+    background: #f5f5f5;
   }
 `
 
 const ErrorMessage = styled.p`
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   color: #dc2626;
 `
 

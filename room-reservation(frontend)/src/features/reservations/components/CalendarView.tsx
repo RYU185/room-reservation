@@ -91,60 +91,60 @@ const Wrapper = styled.div`
 const WeekdayRow = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e5e5e5;
 `
 
 const Weekday = styled.div`
   padding: 8px 0;
   text-align: center;
-  font-size: 12px;
-  font-weight: 600;
-  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  color: #aaaaaa;
 `
 
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  border-left: 1px solid #e2e8f0;
-  border-top: 1px solid #e2e8f0;
+  border-left: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
 `
 
 const Cell = styled.div<{ $hasItems: boolean }>`
   min-height: 80px;
   padding: 6px 8px;
-  border-right: 1px solid #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 3px;
-  background: ${({ $hasItems }) => ($hasItems ? '#fafbff' : '#fff')};
+  background: #fff;
   transition: background 0.1s;
 
   &:hover {
-    background: #eff6ff;
+    background: #f5f5f5;
   }
 `
 
 const EmptyCell = styled.div`
   min-height: 80px;
-  border-right: 1px solid #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
-  background: #f8fafc;
+  border-right: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  background: #fafafa;
 `
 
 const CellSkeleton = styled.div`
   min-height: 80px;
   padding: 8px;
-  border-right: 1px solid #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
 `
 
 const DayNumber = styled.span<{ $today: boolean }>`
-  font-size: 13px;
+  font-size: 15px;
   font-weight: ${({ $today }) => ($today ? '700' : '400')};
-  color: ${({ $today }) => ($today ? '#fff' : '#334155')};
-  background: ${({ $today }) => ($today ? '#2563eb' : 'transparent')};
+  color: ${({ $today }) => ($today ? '#fff' : '#333333')};
+  background: ${({ $today }) => ($today ? '#111111' : 'transparent')};
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -154,18 +154,18 @@ const DayNumber = styled.span<{ $today: boolean }>`
 `
 
 const EventBadge = styled.span<{ $cancelled: boolean }>`
-  font-size: 11px;
+  font-size: 13px;
   padding: 1px 5px;
   border-radius: 3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background: ${({ $cancelled }) => ($cancelled ? '#f1f5f9' : '#dbeafe')};
-  color: ${({ $cancelled }) => ($cancelled ? '#94a3b8' : '#1d4ed8')};
+  background: ${({ $cancelled }) => ($cancelled ? '#f0f0f0' : '#111111')};
+  color: ${({ $cancelled }) => ($cancelled ? '#aaaaaa' : '#ffffff')};
 `
 
 const MoreBadge = styled.span`
-  font-size: 10px;
-  color: #94a3b8;
+  font-size: 12px;
+  color: #aaaaaa;
   padding-left: 2px;
 `

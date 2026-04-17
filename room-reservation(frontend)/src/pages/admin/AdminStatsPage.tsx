@@ -66,7 +66,7 @@ export default function AdminStatsPage() {
           <SummaryRow>
             {Array.from({ length: 3 }).map((_, i) => (
               <SummaryCard key={i}>
-                <Skeleton height="14px" width="50%" />
+                <Skeleton height="13px" width="50%" />
                 <Skeleton height="28px" width="40%" />
               </SummaryCard>
             ))}
@@ -74,7 +74,7 @@ export default function AdminStatsPage() {
           <ChartCard>
             {Array.from({ length: 5 }).map((_, i) => (
               <SkeletonRow key={i}>
-                <Skeleton height="14px" width="130px" />
+                <Skeleton height="13px" width="130px" />
                 <Skeleton height="18px" />
               </SkeletonRow>
             ))}
@@ -102,9 +102,9 @@ export default function AdminStatsPage() {
           <ChartCard>
             <ChartTitle>회의실별 가동률</ChartTitle>
             <ChartLegend>
-              <LegendItem $color="#2563eb">70% 이상</LegendItem>
-              <LegendItem $color="#60a5fa">40~70%</LegendItem>
-              <LegendItem $color="#bfdbfe">40% 미만</LegendItem>
+              <LegendItem $shade="dark">70% 이상</LegendItem>
+              <LegendItem $shade="mid">40~70%</LegendItem>
+              <LegendItem $shade="light">40% 미만</LegendItem>
             </ChartLegend>
             <StatsBarChart stats={stats} />
           </ChartCard>
@@ -162,7 +162,8 @@ const PageTitle = styled.h1`
   margin: 0;
   font-size: 22px;
   font-weight: 700;
-  color: #1e293b;
+  color: #111111;
+  letter-spacing: -0.3px;
 `
 
 const FilterRow = styled.div`
@@ -171,62 +172,66 @@ const FilterRow = styled.div`
 `
 
 const Select = styled.select`
-  padding: 6px 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #334155;
+  padding: 5px 9px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #333333;
   background: #fff;
   outline: none;
   cursor: pointer;
 
   &:focus {
-    border-color: #2563eb;
+    border-color: #111111;
   }
 `
 
 const SummaryRow = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 14px;
 `
 
 const SummaryCard = styled.div`
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 20px 24px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 20px 22px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 `
 
 const SummaryLabel = styled.span`
-  font-size: 13px;
-  color: #64748b;
+  font-size: 14px;
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 500;
 `
 
 const SummaryValue = styled.span`
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
-  color: #1e293b;
+  color: #111111;
+  letter-spacing: -0.5px;
 `
 
 const ChartCard = styled.div`
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 20px 24px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 20px 22px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 `
 
 const ChartTitle = styled.h3`
   margin: 0;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
-  color: #334155;
+  color: #333333;
 `
 
 const ChartLegend = styled.div`
@@ -234,9 +239,9 @@ const ChartLegend = styled.div`
   gap: 16px;
 `
 
-const LegendItem = styled.span<{ $color: string }>`
-  font-size: 12px;
-  color: #64748b;
+const LegendItem = styled.span<{ $shade: 'dark' | 'mid' | 'light' }>`
+  font-size: 14px;
+  color: #777777;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -244,10 +249,11 @@ const LegendItem = styled.span<{ $color: string }>`
   &::before {
     content: '';
     display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 3px;
-    background: ${({ $color }) => $color};
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: ${({ $shade }) =>
+      $shade === 'dark' ? '#111111' : $shade === 'mid' ? '#555555' : '#cccccc'};
   }
 `
 
@@ -259,8 +265,8 @@ const SkeletonRow = styled.div`
 
 const DetailCard = styled.div`
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
   overflow: hidden;
 `
 
@@ -270,37 +276,39 @@ const Table = styled.table`
 `
 
 const Th = styled.th`
-  padding: 12px 20px;
+  padding: 11px 20px;
   text-align: left;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  color: #64748b;
-  background: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
+  color: #888888;
+  background: #fafafa;
+  border-bottom: 1px solid #e5e5e5;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 `
 
 const Td = styled.td`
   padding: 12px 20px;
-  font-size: 14px;
-  color: #334155;
-  border-bottom: 1px solid #f1f5f9;
+  font-size: 16px;
+  color: #333333;
+  border-bottom: 1px solid #f0f0f0;
 `
 
 const RateCell = styled.span<{ $rate: number }>`
   font-weight: 600;
-  color: ${({ $rate }) => ($rate >= 70 ? '#2563eb' : $rate >= 40 ? '#0284c7' : '#94a3b8')};
+  color: ${({ $rate }) => ($rate >= 70 ? '#111111' : $rate >= 40 ? '#555555' : '#aaaaaa')};
 `
 
 const Empty = styled.p`
   text-align: center;
-  color: #94a3b8;
-  font-size: 14px;
+  color: #aaaaaa;
+  font-size: 16px;
   padding: 60px 0;
   margin: 0;
 `
 
 const ErrorMessage = styled.p`
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   color: #dc2626;
 `

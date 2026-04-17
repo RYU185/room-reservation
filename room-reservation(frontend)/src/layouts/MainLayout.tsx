@@ -13,107 +13,157 @@ export default function MainLayout() {
 
   return (
     <Wrapper>
-      <Nav>
-        <Brand to="/">회의실 예약</Brand>
-        <NavLinks>
-          <StyledNavLink to="/rooms">회의실</StyledNavLink>
-          <StyledNavLink to="/reservations/my">내 예약</StyledNavLink>
-          <StyledNavLink to="/calendar">캘린더</StyledNavLink>
-          {isAdmin && <StyledNavLink to="/admin/rooms">관리자</StyledNavLink>}
-        </NavLinks>
-        <UserArea>
-          <UserName>{user?.name}</UserName>
+      <Sidebar>
+        <SidebarTop>
+          <Brand>회의실 예약</Brand>
+        </SidebarTop>
+
+        <SidebarNav>
+          <NavGroup>
+            <SideNavLink to="/" end>홈</SideNavLink>
+            <SideNavLink to="/rooms">회의실</SideNavLink>
+            <SideNavLink to="/reservations/my">내 예약</SideNavLink>
+            <SideNavLink to="/calendar">캘린더</SideNavLink>
+          </NavGroup>
+
+          {isAdmin && (
+            <NavGroup>
+              <NavGroupLabel>관리자</NavGroupLabel>
+              <SideNavLink to="/admin/rooms">관리자 페이지</SideNavLink>
+            </NavGroup>
+          )}
+        </SidebarNav>
+
+        <SidebarBottom>
+          <UserInfo>
+            <UserName>{user?.name}</UserName>
+            <UserEmail>{user?.email}</UserEmail>
+          </UserInfo>
           <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
-        </UserArea>
-      </Nav>
-      <Content>
-        <Outlet />
-      </Content>
+        </SidebarBottom>
+      </Sidebar>
+
+      <ContentArea>
+        <ContentInner>
+          <Outlet />
+        </ContentInner>
+      </ContentArea>
     </Wrapper>
   )
 }
 
 const Wrapper = styled.div`
+  display: flex;
   min-height: 100vh;
+`
+
+const Sidebar = styled.aside`
+  width: 290px;
+  flex-shrink: 0;
+  background: #111111;
   display: flex;
   flex-direction: column;
-  background: #f8fafc;
+  position: sticky;
+  top: 0;
+  height: 100vh;
 `
 
-const Nav = styled.nav`
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  height: 56px;
-  padding: 0 24px;
-  background: #fff;
-  border-bottom: 1px solid #e2e8f0;
+const SidebarTop = styled.div`
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 `
 
-const Brand = styled(NavLink)`
-  font-size: 16px;
+const Brand = styled.div`
+  font-size: 32px;
   font-weight: 700;
-  color: #2563eb;
-  text-decoration: none;
-  margin-right: 8px;
+  color: #ffffff;
+  letter-spacing: -0.2px;
 `
 
-const NavLinks = styled.div`
-  display: flex;
-  gap: 4px;
+const SidebarNav = styled.nav`
   flex: 1;
+  overflow-y: auto;
+  padding: 6px 0;
 `
 
-const StyledNavLink = styled(NavLink)`
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #64748b;
+const NavGroup = styled.div`
+  padding: 8px 10px 0 6px;
+`
+
+const SideNavLink = styled(NavLink)`
+  display: block;
+  padding: 7px 29px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
-  transition: background 0.15s, color 0.15s;
+  transition: color 0.5s, background 0.5s;
 
   &:hover {
-    background: #f1f5f9;
-    color: #334155;
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.06);
   }
 
   &.active {
-    background: #eff6ff;
-    color: #2563eb;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    font-weight: 500;
   }
 `
 
-const UserArea = styled.div`
+const SidebarBottom = styled.div`
+  padding: 14px 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  gap: 10px;
+`
+
+const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 `
 
 const UserName = styled.span`
-  font-size: 14px;
-  color: #334155;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+`
+
+const UserEmail = styled.span`
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `
 
 const LogoutButton = styled.button`
-  padding: 6px 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  background: #fff;
-  font-size: 13px;
-  color: #64748b;
+  width: 100%;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
   cursor: pointer;
-  transition: background 0.15s;
+  text-align: left;
+  transition: background 0.1s, color 0.1s;
 
   &:hover {
-    background: #f1f5f9;
+    background: rgba(255, 255, 255, 0.11);
+    color: rgba(255, 255, 255, 0.75);
   }
 `
 
-const Content = styled.main`
+const ContentArea = styled.main`
   flex: 1;
-  padding: 24px;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
+  background: #f5f5f5;
+  min-height: 100vh;
+  overflow-y: auto;
+`
+
+const ContentInner = styled.div`
+  padding: 32px 36px;
+  max-width: 1100px;
 `

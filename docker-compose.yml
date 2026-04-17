@@ -20,7 +20,7 @@ services:
     image: redis:7-alpine
     container_name: room-reservation-redis
     ports:
-      - "6379:6379"
+      - "16379:6379"
     command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]

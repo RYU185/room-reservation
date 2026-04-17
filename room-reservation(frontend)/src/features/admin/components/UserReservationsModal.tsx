@@ -60,7 +60,7 @@ export default function UserReservationsModal({ user, onClose }: Props) {
             <SkeletonList>
               {Array.from({ length: 4 }).map((_, i) => (
                 <SkeletonRow key={i}>
-                  <Skeleton height="14px" width="40%" />
+                  <Skeleton height="13px" width="40%" />
                   <Skeleton height="12px" width="60%" />
                 </SkeletonRow>
               ))}
@@ -111,53 +111,54 @@ const Overlay = styled.div`
 
 const Modal = styled.div`
   background: #fff;
-  border-radius: 12px;
+  border-radius: 8px;
   width: 560px;
   max-width: 90vw;
   max-height: 85vh;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 `
 
 const ModalHeader = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 20px 24px 16px;
-  border-bottom: 1px solid #f1f5f9;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid #f0f0f0;
   flex-shrink: 0;
 `
 
 const ModalTitle = styled.h2`
   margin: 0 0 2px;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
-  color: #1e293b;
+  color: #111111;
+  letter-spacing: -0.2px;
 `
 
 const ModalSub = styled.p`
   margin: 0;
-  font-size: 12px;
-  color: #94a3b8;
+  font-size: 14px;
+  color: #aaaaaa;
 `
 
 const CloseButton = styled.button`
   background: none;
   border: none;
-  font-size: 16px;
-  color: #94a3b8;
+  font-size: 17px;
+  color: #aaaaaa;
   cursor: pointer;
   padding: 4px;
   line-height: 1;
 
   &:hover {
-    color: #334155;
+    color: #333333;
   }
 `
 
 const ModalBody = styled.div`
-  padding: 16px 24px 20px;
+  padding: 14px 22px 18px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -174,15 +175,15 @@ const SkeletonRow = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 12px;
-  border: 1px solid #f1f5f9;
-  border-radius: 8px;
+  padding: 11px;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
 `
 
 const Empty = styled.p`
   text-align: center;
-  color: #94a3b8;
-  font-size: 14px;
+  color: #aaaaaa;
+  font-size: 16px;
   padding: 32px 0;
   margin: 0;
 `
@@ -190,7 +191,7 @@ const Empty = styled.p`
 const ReservationList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
 `
 
 const ReservationRow = styled.div`
@@ -198,9 +199,14 @@ const ReservationRow = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  padding: 12px 14px;
-  border: 1px solid #f1f5f9;
-  border-radius: 8px;
+  padding: 11px 13px;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  transition: border-color 0.1s;
+
+  &:hover {
+    border-color: #e5e5e5;
+  }
 `
 
 const RowLeft = styled.div`
@@ -210,29 +216,29 @@ const RowLeft = styled.div`
 `
 
 const ResTitle = styled.span`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  color: #1e293b;
+  color: #111111;
 `
 
 const ResMeta = styled.span`
-  font-size: 12px;
-  color: #94a3b8;
+  font-size: 14px;
+  color: #aaaaaa;
 `
 
 const StatusBadge = styled.span<{ $confirmed: boolean }>`
   flex-shrink: 0;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 2px 7px;
   border-radius: 99px;
-  background: ${({ $confirmed }) => ($confirmed ? '#dcfce7' : '#f1f5f9')};
-  color: ${({ $confirmed }) => ($confirmed ? '#166534' : '#94a3b8')};
+  background: ${({ $confirmed }) => ($confirmed ? '#f0fdf4' : '#f5f5f5')};
+  color: ${({ $confirmed }) => ($confirmed ? '#15803d' : '#aaaaaa')};
 `
 
 const ErrorMessage = styled.p`
   margin: 0;
-  font-size: 13px;
+  font-size: 15px;
   color: #dc2626;
 `
 
