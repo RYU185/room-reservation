@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-04-17T18:50:08.416Z",
+  "lastUpdated": "2026-04-17T19:09:06.808Z",
   "activeFeatures": [
     "domain-model",
     "api-spec",
@@ -49,7 +49,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-14T08:02:10.934Z",
-        "lastUpdated": "2026-04-07T17:53:42.487Z"
+        "lastUpdated": "2026-04-17T19:09:06.808Z"
       },
       "lastFile": "C:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\src\\main\\java\\com\\ryu\\room_reservation\\global\\config\\CacheConfig.java"
     },
@@ -349,7 +349,7 @@
   "session": {
     "startedAt": "2026-03-11T16:11:06.398Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-04-17T18:50:08.416Z"
+    "lastActivity": "2026-04-17T19:09:06.808Z"
   },
   "history": [
     {
@@ -2569,6 +2569,12 @@
     {
       "timestamp": "2026-04-17T18:50:08.415Z",
       "feature": "layouts",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-17T19:09:06.808Z",
+      "feature": "config",
       "phase": "do",
       "action": "updated"
     }

@@ -29,7 +29,7 @@ public class CacheConfig {
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .activateDefaultTyping(
                         new LaissezFaireSubTypeValidator(),
-                        ObjectMapper.DefaultTyping.NON_FINAL,
+                        ObjectMapper.DefaultTyping.EVERYTHING,
                         JsonTypeInfo.As.PROPERTY
                 );
 
