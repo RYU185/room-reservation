@@ -28,7 +28,6 @@ export default function MainLayout() {
 
           {isAdmin && (
             <NavGroup>
-              <NavGroupLabel>관리자</NavGroupLabel>
               <SideNavLink to="/admin/rooms">관리자 페이지</SideNavLink>
             </NavGroup>
           )}
