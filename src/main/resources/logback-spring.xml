@@ -3,12 +3,17 @@
 
     <springProperty scope="context" name="APP_NAME"
                     source="spring.application.name" defaultValue="room-reservation"/>
+    <springProperty scope="context" name="ACTIVE_PROFILE"
+                    source="spring.profiles.active" defaultValue="production"/>
+    <springProperty scope="context" name="LOG_LEVEL"
+                    source="logging.level.root" defaultValue="INFO"/>
 
-    <!-- ── JSON Console Appender ─────────────────────────────────── -->
+    <!-- ── JSON Console Appender (Zero Script QA Format) ─────────────────────────────────── -->
     <appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
             <customFields>{"service":"${APP_NAME}"}</customFields>
             <timeZone>UTC</timeZone>
+            <includeMdcData>true</includeMdcData>
             <fieldNames>
                 <timestamp>timestamp</timestamp>
                 <message>message</message>
@@ -17,19 +22,34 @@
                 <thread>[ignore]</thread>
                 <version>[ignore]</version>
                 <levelValue>[ignore]</levelValue>
+                <mdc>request_id</mdc>
             </fieldNames>
         </encoder>
     </appender>
 
-    <!-- ── Logger Settings ───────────────────────────────────────── -->
-    <logger name="com.ryu.room_reservation"         level="INFO"/>
-    <logger name="org.springframework.security"     level="WARN"/>
-    <logger name="org.springframework.web"          level="WARN"/>
-    <logger name="org.hibernate.SQL"                level="WARN"/>
-    <logger name="org.flywaydb"                     level="WARN"/>
+    <!-- ── Spring Profiles ───────────────────────────────────────── -->
+    <!-- Development/QA Profile: DEBUG logging, detailed request/response -->
+    <springProfile name="dev,test,qa">
+        <logger name="com.ryu.room_reservation"         level="DEBUG"/>
+        <logger name="org.springframework.security"     level="INFO"/>
+        <logger name="org.springframework.web"          level="DEBUG"/>
+        <logger name="org.hibernate.SQL"                level="DEBUG"/>
+        <logger name="org.springframework.data"         level="DEBUG"/>
+        <root level="DEBUG">
+            <appender-ref ref="JSON_CONSOLE"/>
+        </root>
+    </springProfile>
 
-    <root level="WARN">
-        <appender-ref ref="JSON_CONSOLE"/>
-    </root>
+    <!-- Production Profile: INFO logging, minimal overhead -->
+    <springProfile name="production,default">
+        <logger name="com.ryu.room_reservation"         level="INFO"/>
+        <logger name="org.springframework.security"     level="WARN"/>
+        <logger name="org.springframework.web"          level="WARN"/>
+        <logger name="org.hibernate.SQL"                level="WARN"/>
+        <logger name="org.flywaydb"                     level="WARN"/>
+        <root level="INFO">
+            <appender-ref ref="JSON_CONSOLE"/>
+        </root>
+    </springProfile>
 
 </configuration>
