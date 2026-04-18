@@ -21,7 +21,7 @@ import java.util.List;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-@ConditionalOnProperty(name = "app.init.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = "app.init.enabled", havingValue = "true", matchIfMissing = false)
 public class DataInitializer implements ApplicationRunner {
 
     private final UserRepository userRepository;

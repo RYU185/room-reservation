@@ -39,7 +39,11 @@
       "Bash(findstr :6379)",
       "Bash(powershell.exe -Command 'Get-Process | Where-Object { $_.Name -like '\\\\''*redis*'\\\\'' }')",
       "Bash(powershell.exe -Command \"netstat -ano | Select-String ':6379'\")",
-      "Bash(powershell.exe -Command \"netsh int ipv4 show excludedportrange protocol=tcp\")"
+      "Bash(powershell.exe -Command \"netsh int ipv4 show excludedportrange protocol=tcp\")",
+      "Bash(javap -classpath \"C:/Users/fence/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-redis/4.0.3/484485bf5c0ee4cb8466fb0c95885eb481fb645c/spring-data-redis-4.0.3.jar\" \"org.springframework.data.redis.serializer.GenericJacksonJsonRedisSerializer\")",
+      "Bash(javap -classpath \"C:/Users/fence/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-redis/4.0.3/484485bf5c0ee4cb8466fb0c95885eb481fb645c/spring-data-redis-4.0.3.jar\" \"org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer\")",
+      "Bash(javap -classpath C:/Users/fence/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-redis/4.0.3/484485bf5c0ee4cb8466fb0c95885eb481fb645c/spring-data-redis-4.0.3.jar 'org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer$GenericJackson2JsonRedisSerializerBuilder')",
+      "Bash(docker exec *)"
     ]
   }
 }

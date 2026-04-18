@@ -18,6 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.time.LocalDateTime;
 
 @Service
@@ -62,7 +64,7 @@ public class AuthService {
     }
 
     public AuthTokens refresh(String refreshTokenStr) {
-        RefreshToken stored = refreshTokenRepository.findByToken(refreshTokenStr)
+        RefreshToken stored = refreshTokenRepository.findByToken(hashToken(refreshTokenStr))
                 .orElseThrow(() -> new BusinessException(ErrorCode.INVALID_TOKEN));
 
         if (stored.isExpired(LocalDateTime.now())) {
@@ -90,18 +92,30 @@ public class AuthService {
         return UserResponse.from(user);
     }
 
+    private String hashToken(String token) {
+        try {
+            byte[] digest = MessageDigest.getInstance("SHA-256").digest(token.getBytes(StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder(64);
+            for (byte b : digest) sb.append(String.format("%02x", b));
+            return sb.toString();
+        } catch (Exception e) {
+            throw new IllegalStateException("SHA-256 unavailable", e);
+        }
+    }
+
     private AuthTokens issueTokens(User user) {
         String accessToken = jwtProvider.generateAccessToken(user.getId(), user.getRole());
         String newRefreshToken = jwtProvider.generateRefreshToken(user.getId());
         long refreshExpirySeconds = jwtProvider.getRefreshTokenExpiry() / 1000;
         LocalDateTime refreshExpiry = LocalDateTime.now().plusSeconds(refreshExpirySeconds);
 
+        String tokenHash = hashToken(newRefreshToken);
         refreshTokenRepository.findByUserId(user.getId()).ifPresentOrElse(
-                rt -> rt.rotate(newRefreshToken, refreshExpiry),
+                rt -> rt.rotate(tokenHash, refreshExpiry),
                 () -> refreshTokenRepository.save(
                         RefreshToken.builder()
                                 .user(user)
-                                .token(newRefreshToken)
+                                .token(tokenHash)
                                 .expiresAt(refreshExpiry)
                                 .build()
                 )
