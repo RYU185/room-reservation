@@ -5,7 +5,7 @@ WORKDIR /app
 COPY . .
 
 # Build the application
-RUN ./gradlew clean bootJar -x test --no-daemon
+RUN DOCKER_BUILD=true ./gradlew clean bootJar -x test --no-daemon
 
 # Runtime stage
 FROM eclipse-temurin:21-jdk-alpine

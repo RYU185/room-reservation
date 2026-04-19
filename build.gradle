@@ -51,7 +51,9 @@ dependencies {
 	testRuntimeOnly 'com.h2database:h2'
 }
 
-layout.buildDirectory.set(file("C:/tmp/room-reservation-build"))
+if (System.getenv("DOCKER_BUILD") != "true") {
+	layout.buildDirectory.set(file("C:/tmp/room-reservation-build"))
+}
 
 tasks.named('test') {
 	useJUnitPlatform()
