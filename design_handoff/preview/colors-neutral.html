@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+@font-face {
+  font-family: 'WantedSans';
+  src: url('../fonts/WantedSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+  body { margin: 0; padding: 20px; background: #fff; font-family: var(--font-sans); }
+  .row { display: flex; gap: 0; }
+  .swatch { flex: 1; height: 64px; display: flex; flex-direction: column; justify-content: flex-end; padding: 6px 8px; }
+  .swatch span { font-size: 11px; font-weight: 500; }
+  .swatch .name { opacity: 0.75; }
+  .swatch .hex  { opacity: 0.55; font-size: 10px; }
+  .label { font-size: 11px; font-weight: 600; color: var(--color-gray-600); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<div class="label">Neutral Scale</div>
+<div class="row">
+  <div class="swatch" style="background:#1A202C"><span class="name" style="color:#fff">900</span><span class="hex" style="color:#fff">#1A202C</span></div>
+  <div class="swatch" style="background:#2D3748"><span class="name" style="color:#fff">800</span><span class="hex" style="color:#fff">#2D3748</span></div>
+  <div class="swatch" style="background:#4A5568"><span class="name" style="color:#fff">700</span><span class="hex" style="color:#fff">#4A5568</span></div>
+  <div class="swatch" style="background:#718096"><span class="name" style="color:#fff">600</span><span class="hex" style="color:#fff">#718096</span></div>
+  <div class="swatch" style="background:#A0AEC0"><span class="name" style="color:#2D3748">500</span><span class="hex" style="color:#2D3748">#A0AEC0</span></div>
+  <div class="swatch" style="background:#CBD5E0"><span class="name" style="color:#2D3748">400</span><span class="hex" style="color:#2D3748">#CBD5E0</span></div>
+  <div class="swatch" style="background:#E2E8F0; border:1px solid #CBD5E0"><span class="name" style="color:#2D3748">300</span><span class="hex" style="color:#2D3748">#E2E8F0</span></div>
+  <div class="swatch" style="background:#EDF2F7; border:1px solid #CBD5E0"><span class="name" style="color:#2D3748">200</span><span class="hex" style="color:#2D3748">#EDF2F7</span></div>
+  <div class="swatch" style="background:#F7FAFC; border:1px solid #CBD5E0"><span class="name" style="color:#2D3748">100</span><span class="hex" style="color:#2D3748">#F7FAFC</span></div>
+  <div class="swatch" style="background:#FFFFFF; border:1px solid #CBD5E0"><span class="name" style="color:#2D3748">White</span><span class="hex" style="color:#2D3748">#FFFFFF</span></div>
+</div>
+</body>
+</html>

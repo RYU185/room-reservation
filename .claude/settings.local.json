@@ -43,7 +43,20 @@
       "Bash(javap -classpath \"C:/Users/fence/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-redis/4.0.3/484485bf5c0ee4cb8466fb0c95885eb481fb645c/spring-data-redis-4.0.3.jar\" \"org.springframework.data.redis.serializer.GenericJacksonJsonRedisSerializer\")",
       "Bash(javap -classpath \"C:/Users/fence/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-redis/4.0.3/484485bf5c0ee4cb8466fb0c95885eb481fb645c/spring-data-redis-4.0.3.jar\" \"org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer\")",
       "Bash(javap -classpath C:/Users/fence/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-redis/4.0.3/484485bf5c0ee4cb8466fb0c95885eb481fb645c/spring-data-redis-4.0.3.jar 'org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer$GenericJackson2JsonRedisSerializerBuilder')",
-      "Bash(docker exec *)"
+      "Bash(docker exec *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(findstr \":8080\")",
+      "Bash(findstr \"LISTENING\")",
+      "Bash(tasklist /FI \"PID eq 19628\")",
+      "Bash(tasklist /FI \"PID eq 26024\")",
+      "Bash(cmd.exe /c \"tasklist /FI \\\\\"PID eq 19628\\\\\"\")",
+      "Bash(cmd.exe /c \"tasklist /FI \\\\\"PID eq 26024\\\\\"\")",
+      "Bash(cmd.exe /c \"tasklist\")",
+      "Bash(cmd.exe /c \"wmic process where \\\\\"ProcessId=19628\\\\\" get Name,CommandLine 2>nul\")",
+      "Bash(cmd.exe /c \"wmic process where \\\\\"ProcessId=26024\\\\\" get Name,CommandLine 2>nul\")",
+      "Bash(powershell *)",
+      "Bash(findstr \":8081\")"
     ]
   }
 }

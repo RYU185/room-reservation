@@ -49,10 +49,6 @@ export default function MyReservationsPage() {
 
   return (
     <Wrapper>
-      <Header>
-        <Title>내 예약</Title>
-      </Header>
-
       <FilterRow>
         <TabGroup>
           {STATUS_TABS.map((tab) => (
@@ -123,16 +119,6 @@ const Wrapper = styled.div`
   gap: 20px;
 `
 
-const Header = styled.div``
-
-const Title = styled.h1`
-  margin: 0;
-  font-size: 22px;
-  font-weight: 700;
-  color: #111111;
-  letter-spacing: -0.3px;
-`
-
 const FilterRow = styled.div`
   display: flex;
   align-items: center;
@@ -142,23 +128,24 @@ const FilterRow = styled.div`
 
 const TabGroup = styled.div`
   display: flex;
-  gap: 4px;
+  gap: 6px;
 `
 
 const TabButton = styled.button<{ $active: boolean }>`
-  padding: 5px 12px;
-  border-radius: 5px;
-  border: 1px solid ${({ $active }) => ($active ? '#111111' : '#e5e5e5')};
-  background: ${({ $active }) => ($active ? '#111111' : '#fff')};
-  color: ${({ $active }) => ($active ? '#fff' : '#777777')};
-  font-size: 15px;
-  font-weight: ${({ $active }) => ($active ? '500' : '400')};
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid ${({ $active }) => ($active ? '#2C5282' : '#E2E8F0')};
+  background: ${({ $active }) => ($active ? '#2C5282' : '#ffffff')};
+  color: ${({ $active }) => ($active ? '#ffffff' : '#718096')};
+  font-size: 13px;
+  font-weight: ${({ $active }) => ($active ? '600' : '400')};
   cursor: pointer;
-  transition: all 0.1s;
+  font-family: inherit;
+  transition: all 0.5s ease;
 
   &:hover {
-    border-color: #333333;
-    color: ${({ $active }) => ($active ? '#fff' : '#333333')};
+    border-color: #2C5282;
+    color: ${({ $active }) => ($active ? '#ffffff' : '#2C5282')};
   }
 `
 
@@ -169,49 +156,55 @@ const DateRange = styled.div`
 `
 
 const DateInput = styled.input`
-  padding: 5px 9px;
-  border: 1px solid #e5e5e5;
+  padding: 7px 10px;
+  border: 1px solid #CBD5E0;
   border-radius: 6px;
-  font-size: 15px;
-  color: #333333;
+  font-size: 13px;
+  color: #2D3748;
   outline: none;
+  font-family: inherit;
 
   &:focus {
-    border-color: #111111;
+    border-color: #4299E1;
+    box-shadow: 0 0 0 3px rgba(66,153,225,0.15);
   }
 `
 
 const DateSep = styled.span`
-  font-size: 15px;
-  color: #aaaaaa;
+  font-size: 14px;
+  color: #A0AEC0;
 `
 
 const List = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 `
 
 const SkeletonCard = styled.div`
-  background: #fff;
-  border: 1px solid #e5e5e5;
-  border-radius: 7px;
-  padding: 15px 18px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #EDF2F7;
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  &:last-child {
+    border-bottom: none;
+  }
 `
 
 const Empty = styled.p`
   text-align: center;
-  color: #aaaaaa;
-  font-size: 16px;
+  color: #A0AEC0;
+  font-size: 14px;
   padding: 60px 0;
 `
 
 const ErrorMessage = styled.p`
-  color: #dc2626;
-  font-size: 16px;
+  color: #E53E3E;
+  font-size: 14px;
 `
 
 const PaginationWrapper = styled.div`

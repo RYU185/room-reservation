@@ -37,12 +37,23 @@ const Wrapper = styled.div`
 
 const PageButton = styled.button<{ $active?: boolean }>`
   padding: 6px 12px;
-  border: 1px solid ${({ $active }) => ($active ? '#111111' : '#e5e5e5')};
-  border-radius: 4px;
-  background: ${({ $active }) => ($active ? '#111111' : '#fff')};
-  color: ${({ $active }) => ($active ? '#fff' : '#333333')};
+  border: 1px solid ${({ $active }) => ($active ? '#2C5282' : '#E2E8F0')};
+  border-radius: 6px;
+  background: ${({ $active }) => ($active ? '#2C5282' : '#ffffff')};
+  color: ${({ $active }) => ($active ? '#ffffff' : '#4A5568')};
   cursor: pointer;
-  font-size: 16px;
-  &:disabled { opacity: 0.4; cursor: not-allowed; }
-  &:hover:not(:disabled):not([data-active]) { background: #f5f5f5; }
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: ${({ $active }) => ($active ? '600' : '400')};
+  transition: all 150ms ease;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    background: ${({ $active }) => ($active ? '#23407A' : '#EBF8FF')};
+    border-color: ${({ $active }) => ($active ? '#23407A' : '#BEE3F8')};
+  }
 `

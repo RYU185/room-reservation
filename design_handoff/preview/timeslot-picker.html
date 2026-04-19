@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+@font-face {
+  font-family: 'WantedSans';
+  src: url('../fonts/WantedSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+  body { margin: 0; padding: 20px 24px; background: #F7FAFC; font-family: var(--font-sans); }
+  .label { font-size: 11px; font-weight: 600; color: var(--color-gray-600); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+  .grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; }
+  .slot { padding: 8px 4px; border-radius: 6px; text-align: center; font-size: 16px; font-family: 'WantedSans', sans-serif; cursor: pointer; transition: all 150ms; border: 1.5px solid transparent; }
+  .slot-free { background: white; color: #2C5282; border-color: #E2E8F0; }
+  .slot-free:hover { background: #EBF8FF; border-color: #BEE3F8; }
+  .slot-booked { background: #EDF2F7; color: #A0AEC0; cursor: not-allowed; }
+  .slot-selected { background: #2C5282; color: white; border-color: #2C5282; }
+  .slot-mine { background: #EBF8FF; color: #2B6CB0; border-color: #BEE3F8; font-weight: 600; }
+  .legend { display: flex; gap: 12px; margin-top: 12px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #718096; }
+  .dot { width: 10px; height: 10px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<div class="label">Time Slot Picker — 04.19 (금)</div>
+<div class="grid">
+  <div class="slot slot-booked">09:00</div>
+  <div class="slot slot-booked">09:30</div>
+  <div class="slot slot-free">10:00</div>
+  <div class="slot slot-free">10:30</div>
+  <div class="slot slot-selected">11:00</div>
+  <div class="slot slot-selected">11:30</div>
+  <div class="slot slot-free">12:00</div>
+  <div class="slot slot-free">12:30</div>
+  <div class="slot slot-mine">13:00</div>
+  <div class="slot slot-mine">13:30</div>
+  <div class="slot slot-free">14:00</div>
+  <div class="slot slot-booked">14:30</div>
+  <div class="slot slot-booked">15:00</div>
+  <div class="slot slot-booked">15:30</div>
+  <div class="slot slot-free">16:00</div>
+  <div class="slot slot-free">16:30</div>
+</div>
+<div class="legend">
+  <div class="legend-item"><div class="dot" style="background:#E2E8F0"></div>예약됨</div>
+  <div class="legend-item"><div class="dot" style="background:white;border:1.5px solid #E2E8F0"></div>가능</div>
+  <div class="legend-item"><div class="dot" style="background:#2C5282"></div>선택됨</div>
+  <div class="legend-item"><div class="dot" style="background:#EBF8FF;border:1.5px solid #BEE3F8"></div>내 예약</div>
+</div>
+</body>
+</html>

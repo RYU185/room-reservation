@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+@font-face {
+  font-family: 'WantedSans';
+  src: url('../fonts/WantedSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+  body { margin: 0; padding: 20px; background: #fff; font-family: var(--font-sans); }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .token { border-radius: 6px; overflow: hidden; border: 1px solid #E2E8F0; }
+  .color-block { height: 40px; }
+  .meta { padding: 6px 8px; }
+  .meta .tok { font-size: 10px; font-weight: 600; color: #2C5282; font-family: 'Fira Code', monospace; }
+  .meta .desc { font-size: 10px; color: #718096; margin-top: 1px; }
+  .label { font-size: 11px; font-weight: 600; color: var(--color-gray-600); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<div class="label">Semantic Color Tokens</div>
+<div class="grid">
+  <div class="token"><div class="color-block" style="background:#38A169"></div><div class="meta"><div class="tok">--color-success</div><div class="desc">예약 완료 / 확인</div></div></div>
+  <div class="token"><div class="color-block" style="background:#C6F6D5"></div><div class="meta"><div class="tok">--color-success-light</div><div class="desc">성공 배경</div></div></div>
+  <div class="token"><div class="color-block" style="background:#E53E3E"></div><div class="meta"><div class="tok">--color-error</div><div class="desc">충돌 / 오류</div></div></div>
+  <div class="token"><div class="color-block" style="background:#FED7D7"></div><div class="meta"><div class="tok">--color-error-light</div><div class="desc">오류 배경</div></div></div>
+  <div class="token"><div class="color-block" style="background:#D69E2E"></div><div class="meta"><div class="tok">--color-warning</div><div class="desc">임박 / 주의</div></div></div>
+  <div class="token"><div class="color-block" style="background:#FEFCBF"></div><div class="meta"><div class="tok">--color-warning-light</div><div class="desc">경고 배경</div></div></div>
+  <div class="token"><div class="color-block" style="background:#1B2E5E"></div><div class="meta"><div class="tok">--color-bg-nav</div><div class="desc">사이드바 / 탑바</div></div></div>
+  <div class="token"><div class="color-block" style="background:#EBF8FF; border-bottom:1px solid #E2E8F0"></div><div class="meta"><div class="tok">--color-bg-hover</div><div class="desc">호버 배경</div></div></div>
+</div>
+</body>
+</html>

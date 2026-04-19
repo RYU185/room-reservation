@@ -5,6 +5,8 @@ import { AuthProvider } from '@/features/auth/context/AuthContext'
 import { router } from '@/router'
 
 const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Wanted+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
   *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -12,11 +14,21 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', Helvetica, Arial, sans-serif;
-    font-size: 15px;
-    line-height: 1.55;
-    color: #111111;
+    font-family: 'Wanted Sans', 'WantedSans', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #2D3748;
+    background: #F7FAFC;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    color: #3182CE;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #2C5282;
   }
 `
 

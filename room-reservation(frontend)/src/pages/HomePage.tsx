@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { parseISO, format, isToday, isTomorrow } from 'date-fns'
 import { ko } from 'date-fns/locale'
+import { Calendar, BookOpen, Clock, Building2, Plus } from 'lucide-react'
 import { getMyReservations } from '@/features/reservations/api/reservations.api'
 import type { Reservation } from '@/features/reservations/types'
 import { useAuth } from '@/features/auth/context/AuthContext'
@@ -39,31 +40,70 @@ export default function HomePage() {
     <Wrapper>
       <PageHeader>
         <div>
-          <Greeting>안녕하세요, {user?.name}님</Greeting>
+          <Greeting>안녕하세요, {user?.name}님 👋</Greeting>
           <DateText>{todayLabel}</DateText>
         </div>
-        <NewButton onClick={() => navigate('/reservations/new')}>+ 새 예약</NewButton>
+        <NewButton onClick={() => navigate('/reservations/new')}>
+          <Plus size={14} strokeWidth={2} />
+          새 예약
+        </NewButton>
       </PageHeader>
+
+      <StatRow>
+        <StatCard $accent="#4299E1">
+          <StatLabel>오늘 예약</StatLabel>
+          <StatValue>{loading ? '–' : todayReservations.length}</StatValue>
+          <StatSub>건</StatSub>
+        </StatCard>
+        <StatCard $accent="#38A169">
+          <StatLabel>다가오는 예약</StatLabel>
+          <StatValue>{loading ? '–' : upcomingReservations.length}</StatValue>
+          <StatSub>건</StatSub>
+        </StatCard>
+        <StatCard $accent="#D69E2E">
+          <StatLabel>이번 달 예약</StatLabel>
+          <StatValue>{loading ? '–' : reservations.length}</StatValue>
+          <StatSub>건</StatSub>
+        </StatCard>
+      </StatRow>
 
       <QuickLinks>
         <QuickLink onClick={() => navigate('/rooms')}>
-          <QuickLinkTitle>회의실 목록</QuickLinkTitle>
-          <QuickLinkDesc>예약 가능한 회의실 확인</QuickLinkDesc>
+          <QuickIcon $color="#EBF8FF">
+            <Building2 size={20} color="#2C5282" strokeWidth={1.8} />
+          </QuickIcon>
+          <QuickContent>
+            <QuickLinkTitle>회의실 찾기</QuickLinkTitle>
+            <QuickLinkDesc>예약 가능한 회의실 확인</QuickLinkDesc>
+          </QuickContent>
         </QuickLink>
         <QuickLink onClick={() => navigate('/reservations/my')}>
-          <QuickLinkTitle>내 예약</QuickLinkTitle>
-          <QuickLinkDesc>전체 예약 이력 관리</QuickLinkDesc>
+          <QuickIcon $color="#EBF8FF">
+            <BookOpen size={20} color="#2C5282" strokeWidth={1.8} />
+          </QuickIcon>
+          <QuickContent>
+            <QuickLinkTitle>내 예약</QuickLinkTitle>
+            <QuickLinkDesc>전체 예약 이력 관리</QuickLinkDesc>
+          </QuickContent>
         </QuickLink>
         <QuickLink onClick={() => navigate('/calendar')}>
-          <QuickLinkTitle>캘린더</QuickLinkTitle>
-          <QuickLinkDesc>월별 예약 현황 보기</QuickLinkDesc>
+          <QuickIcon $color="#EBF8FF">
+            <Calendar size={20} color="#2C5282" strokeWidth={1.8} />
+          </QuickIcon>
+          <QuickContent>
+            <QuickLinkTitle>캘린더</QuickLinkTitle>
+            <QuickLinkDesc>월별 예약 현황 보기</QuickLinkDesc>
+          </QuickContent>
         </QuickLink>
       </QuickLinks>
 
       <SectionRow>
         <Section>
           <SectionHead>
-            <SectionTitle>오늘의 예약</SectionTitle>
+            <SectionHeadLeft>
+              <Clock size={16} color="#2C5282" strokeWidth={1.8} />
+              <SectionTitle>오늘의 예약</SectionTitle>
+            </SectionHeadLeft>
             <SectionBadge>{loading ? '–' : todayReservations.length}</SectionBadge>
           </SectionHead>
           {loading ? (
@@ -83,13 +123,13 @@ export default function HomePage() {
               <tbody>
                 {todayReservations.map((r) => (
                   <Tr key={r.id} onClick={() => navigate(`/reservations/${r.id}`)}>
-                    <Td>
-                      <TitleCell>{r.title}</TitleCell>
-                    </Td>
+                    <Td><TitleCell>{r.title}</TitleCell></Td>
                     <Td>{r.room.name}</Td>
                     <Td>{r.room.location}</Td>
                     <Td>
-                      {formatTime(r.startTime)} – {formatTime(r.endTime)}
+                      <TimeCell>
+                        {formatTime(r.startTime)} – {formatTime(r.endTime)}
+                      </TimeCell>
                     </Td>
                   </Tr>
                 ))}
@@ -100,7 +140,10 @@ export default function HomePage() {
 
         <Section>
           <SectionHead>
-            <SectionTitle>다가오는 예약</SectionTitle>
+            <SectionHeadLeft>
+              <Calendar size={16} color="#2C5282" strokeWidth={1.8} />
+              <SectionTitle>다가오는 예약</SectionTitle>
+            </SectionHeadLeft>
             <SectionBadge>{loading ? '–' : upcomingReservations.length}</SectionBadge>
           </SectionHead>
           {loading ? (
@@ -120,13 +163,13 @@ export default function HomePage() {
               <tbody>
                 {upcomingReservations.map((r) => (
                   <Tr key={r.id} onClick={() => navigate(`/reservations/${r.id}`)}>
-                    <Td>
-                      <TitleCell>{r.title}</TitleCell>
-                    </Td>
+                    <Td><TitleCell>{r.title}</TitleCell></Td>
                     <Td>{r.room.name}</Td>
                     <Td>{getDateLabel(r.startTime)}</Td>
                     <Td>
-                      {formatTime(r.startTime)} – {formatTime(r.endTime)}
+                      <TimeCell>
+                        {formatTime(r.startTime)} – {formatTime(r.endTime)}
+                      </TimeCell>
                     </Td>
                   </Tr>
                 ))}
@@ -170,31 +213,72 @@ const Greeting = styled.h1`
   margin: 0 0 4px;
   font-size: 20px;
   font-weight: 700;
-  color: #111111;
+  color: #1B2E5E;
   letter-spacing: -0.3px;
 `
 
 const DateText = styled.p`
   margin: 0;
   font-size: 14px;
-  color: #aaaaaa;
+  color: #A0AEC0;
 `
 
 const NewButton = styled.button`
-  padding: 7px 16px;
-  background: #111111;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #2C5282;
   border: none;
-  border-radius: 5px;
-  font-size: 15px;
+  border-radius: 6px;
+  font-size: 14px;
   font-weight: 500;
   color: #ffffff;
   cursor: pointer;
   white-space: nowrap;
   flex-shrink: 0;
+  transition: background 200ms ease;
 
   &:hover {
-    background: #000000;
+    background: #23407A;
   }
+`
+
+const StatRow = styled.div`
+  display: flex;
+  gap: 16px;
+`
+
+const StatCard = styled.div<{ $accent: string }>`
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-top: 3px solid ${({ $accent }) => $accent};
+  border-radius: 8px;
+  padding: 16px 20px;
+  flex: 1;
+`
+
+const StatLabel = styled.div`
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #A0AEC0;
+  margin-bottom: 8px;
+`
+
+const StatValue = styled.div`
+  font-size: 28px;
+  font-weight: 700;
+  color: #1B2E5E;
+  line-height: 1;
+  display: inline;
+`
+
+const StatSub = styled.span`
+  font-size: 14px;
+  color: #A0AEC0;
+  margin-left: 4px;
 `
 
 const QuickLinks = styled.div`
@@ -205,29 +289,46 @@ const QuickLinks = styled.div`
 
 const QuickLink = styled.button`
   background: #ffffff;
-  border: 1px solid #e5e5e5;
-  border-radius: 6px;
-  padding: 16px 18px;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 16px;
   text-align: left;
   cursor: pointer;
-  transition: border-color 0.1s, background 0.1s;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: box-shadow 200ms ease, border-color 200ms ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 
   &:hover {
-    border-color: #cccccc;
-    background: #fafafa;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+    border-color: #BEE3F8;
   }
 `
 
+const QuickIcon = styled.div<{ $color: string }>`
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: ${({ $color }) => $color};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+`
+
+const QuickContent = styled.div``
+
 const QuickLinkTitle = styled.div`
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
-  color: #111111;
-  margin-bottom: 4px;
+  color: #2D3748;
+  margin-bottom: 3px;
 `
 
 const QuickLinkDesc = styled.div`
-  font-size: 13px;
-  color: #aaaaaa;
+  font-size: 12px;
+  color: #A0AEC0;
 `
 
 const SectionRow = styled.div`
@@ -238,33 +339,40 @@ const SectionRow = styled.div`
 
 const Section = styled.div`
   background: #ffffff;
-  border: 1px solid #e5e5e5;
-  border-radius: 6px;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 `
 
 const SectionHead = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
   padding: 14px 20px 12px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #EDF2F7;
+`
+
+const SectionHeadLeft = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `
 
 const SectionTitle = styled.h2`
   margin: 0;
   font-size: 15px;
   font-weight: 600;
-  color: #333333;
+  color: #2D3748;
 `
 
 const SectionBadge = styled.span`
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  color: #888888;
-  background: #f5f5f5;
-  padding: 1px 7px;
-  border-radius: 99px;
+  color: #718096;
+  background: #EDF2F7;
+  padding: 2px 8px;
+  border-radius: 9999px;
 `
 
 const Table = styled.table`
@@ -275,11 +383,11 @@ const Table = styled.table`
 const Th = styled.th`
   padding: 9px 20px;
   text-align: left;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  color: #aaaaaa;
-  background: #fafafa;
-  border-bottom: 1px solid #f0f0f0;
+  color: #A0AEC0;
+  background: #F7FAFC;
+  border-bottom: 1px solid #EDF2F7;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   white-space: nowrap;
@@ -287,41 +395,46 @@ const Th = styled.th`
 
 const Tr = styled.tr`
   cursor: pointer;
-  transition: background 0.1s;
+  transition: background 150ms ease;
 
   &:hover {
-    background: #fafafa;
+    background: #F7FAFC;
   }
 
   &:not(:last-child) td {
-    border-bottom: 1px solid #f5f5f5;
+    border-bottom: 1px solid #EDF2F7;
   }
 `
 
 const Td = styled.td`
-  padding: 11px 20px;
-  font-size: 15px;
-  color: #333333;
+  padding: 12px 20px;
+  font-size: 14px;
+  color: #4A5568;
   vertical-align: middle;
 `
 
 const TitleCell = styled.span`
   font-weight: 500;
-  color: #111111;
+  color: #2D3748;
+`
+
+const TimeCell = styled.span`
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  color: #4A5568;
 `
 
 const Empty = styled.p`
   margin: 0;
   padding: 28px 20px;
-  font-size: 15px;
-  color: #aaaaaa;
+  font-size: 14px;
+  color: #A0AEC0;
   text-align: center;
 `
 
 const SkeletonList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0;
 `
 
 const SkeletonRow = styled.div`
@@ -329,7 +442,7 @@ const SkeletonRow = styled.div`
   gap: 16px;
   align-items: center;
   padding: 12px 20px;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid #EDF2F7;
 
   &:last-child {
     border-bottom: none;

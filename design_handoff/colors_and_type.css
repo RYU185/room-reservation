@@ -1,0 +1,218 @@
+/* ============================================================
+   Book & Meet — Design Tokens
+   Colors, Typography, Spacing, Radii, Shadows
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap');
+
+@font-face {
+  font-family: 'WantedSans';
+  src: url('fonts/WantedSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+
+  /* ── BRAND BLUE SCALE ─────────────────────────────── */
+  --color-blue-950: #0D1B3E;
+  --color-blue-900: #1B2E5E;   /* primary / nav bg */
+  --color-blue-800: #23407A;
+  --color-blue-700: #2C5282;   /* secondary actions */
+  --color-blue-600: #2B6CB0;
+  --color-blue-500: #3182CE;   /* links */
+  --color-blue-400: #4299E1;   /* accent / focus */
+  --color-blue-300: #63B3ED;
+  --color-blue-200: #90CDF4;
+  --color-blue-100: #BEE3F8;
+  --color-blue-50:  #EBF8FF;   /* hover fills / tag bg */
+
+  /* ── NEUTRAL SCALE (blue-tinted grays) ───────────── */
+  --color-gray-900: #1A202C;
+  --color-gray-800: #2D3748;
+  --color-gray-700: #4A5568;
+  --color-gray-600: #718096;
+  --color-gray-500: #A0AEC0;
+  --color-gray-400: #CBD5E0;
+  --color-gray-300: #E2E8F0;
+  --color-gray-200: #EDF2F7;
+  --color-gray-100: #F7FAFC;
+  --color-white:    #FFFFFF;
+
+  /* ── SEMANTIC / STATUS COLORS ────────────────────── */
+  --color-success:       #38A169;
+  --color-success-light: #C6F6D5;
+  --color-error:         #E53E3E;
+  --color-error-light:   #FED7D7;
+  --color-warning:       #D69E2E;
+  --color-warning-light: #FEFCBF;
+
+  /* ── SEMANTIC UI TOKENS ──────────────────────────── */
+  --color-bg-page:       var(--color-gray-100);
+  --color-bg-surface:    var(--color-white);
+  --color-bg-nav:        var(--color-blue-900);
+  --color-bg-nav-hover:  var(--color-blue-800);
+  --color-bg-hover:      var(--color-blue-50);
+  --color-bg-selected:   var(--color-blue-50);
+
+  --color-border:        var(--color-gray-300);
+  --color-border-strong: var(--color-gray-400);
+  --color-border-focus:  var(--color-blue-400);
+
+  --color-text-primary:  var(--color-gray-800);
+  --color-text-secondary:var(--color-gray-600);
+  --color-text-muted:    var(--color-gray-500);
+  --color-text-inverse:  var(--color-white);
+  --color-text-link:     var(--color-blue-500);
+  --color-text-link-hover: var(--color-blue-700);
+
+  --color-btn-primary-bg:      var(--color-blue-700);
+  --color-btn-primary-hover:   var(--color-blue-800);
+  --color-btn-primary-text:    var(--color-white);
+  --color-btn-secondary-bg:    var(--color-white);
+  --color-btn-secondary-border:var(--color-blue-700);
+  --color-btn-secondary-text:  var(--color-blue-700);
+  --color-btn-ghost-hover:     var(--color-blue-50);
+
+  /* ── TYPOGRAPHY ──────────────────────────────────── */
+  --font-sans:  'WantedSans', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:  'Fira Code', 'Courier New', monospace;
+
+  /* weights */
+  --fw-light:   300;
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold:600;
+  --fw-bold:    700;
+
+  /* scale */
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-base: 16px;
+  --text-md:   18px;
+  --text-lg:   20px;
+  --text-xl:   24px;
+  --text-2xl:  32px;
+  --text-3xl:  40px;
+  --text-4xl:  48px;
+
+  /* line heights */
+  --lh-tight:  1.2;
+  --lh-snug:   1.375;
+  --lh-normal: 1.5;
+  --lh-relaxed:1.625;
+
+  /* letter spacing */
+  --ls-tight:  -0.025em;
+  --ls-normal:  0em;
+  --ls-wide:    0.025em;
+  --ls-wider:   0.05em;
+  --ls-widest:  0.1em;
+
+  /* ── SPACING SCALE ───────────────────────────────── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* ── BORDER RADIUS ───────────────────────────────── */
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   8px;
+  --radius-xl:   12px;
+  --radius-pill: 9999px;
+
+  /* ── SHADOWS ─────────────────────────────────────── */
+  --shadow-none: none;
+  --shadow-xs:   0 1px 2px rgba(0,0,0,0.05);
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:   0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg:   0 10px 15px rgba(0,0,0,0.08), 0 4px 6px rgba(0,0,0,0.04);
+  --shadow-modal:0 20px 40px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.06);
+
+  /* ── TRANSITIONS ─────────────────────────────────── */
+  --transition-fast:   150ms ease;
+  --transition-normal: 200ms ease;
+  --transition-slow:   300ms ease;
+
+  /* ── LAYOUT ──────────────────────────────────────── */
+  --sidebar-width:   240px;
+  --topbar-height:   56px;
+  --content-max-w:   1200px;
+}
+
+/* ── SEMANTIC ELEMENT DEFAULTS ───────────────────────── */
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--lh-normal);
+  color: var(--color-text-primary);
+  background: var(--color-bg-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1 {
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--color-gray-900);
+}
+
+h2 {
+  font-size: var(--text-xl);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+  color: var(--color-gray-800);
+}
+
+h3 {
+  font-size: var(--text-lg);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+  color: var(--color-gray-800);
+}
+
+h4 {
+  font-size: var(--text-base);
+  font-weight: var(--fw-semibold);
+  color: var(--color-gray-800);
+}
+
+p {
+  font-size: var(--text-base);
+  line-height: var(--lh-relaxed);
+  color: var(--color-text-primary);
+}
+
+small, .text-sm {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+code, .text-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: var(--color-blue-50);
+  color: var(--color-blue-700);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+a {
+  color: var(--color-text-link);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+a:hover {
+  color: var(--color-text-link-hover);
+}

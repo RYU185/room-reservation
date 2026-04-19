@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 56" fill="none">
+  
+  <rect x="2" y="4" width="48" height="48" rx="12" fill="#1B2E5E"></rect>
+  
+  <rect x="12" y="14" width="28" height="5" rx="2" fill="#4299E1"></rect>
+  
+  <rect x="12" y="23" width="6" height="6" rx="1.5" fill="#90CDF4"></rect>
+  <rect x="21" y="23" width="6" height="6" rx="1.5" fill="#90CDF4"></rect>
+  <rect x="30" y="23" width="6" height="6" rx="1.5" fill="#EBF8FF" opacity="0.5"></rect>
+  <rect x="12" y="33" width="6" height="6" rx="1.5" fill="#90CDF4"></rect>
+  <rect x="21" y="33" width="6" height="6" rx="1.5" fill="#4299E1"></rect>
+  <rect x="30" y="33" width="6" height="6" rx="1.5" fill="#90CDF4"></rect>
+  
+  <rect x="21" y="33" width="6" height="6" rx="1.5" fill="#4299E1"></rect>
+
+  
+  <text x="62" y="26" font-family="-apple-system, &#39;Segoe UI&#39;, sans-serif" font-size="17" font-weight="700" fill="#1B2E5E" letter-spacing="-0.4">Book</text>
+  <text x="62" y="44" font-family="-apple-system, &#39;Segoe UI&#39;, sans-serif" font-size="17" font-weight="700" fill="#2C5282" letter-spacing="-0.4">&amp; Meet</text>
+
+  
+  <line x1="58" y1="10" x2="58" y2="46" stroke="#E2E8F0" stroke-width="1"></line>
+</svg>

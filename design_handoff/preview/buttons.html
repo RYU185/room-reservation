@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+@font-face {
+  font-family: 'WantedSans';
+  src: url('../fonts/WantedSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+  body { margin: 0; padding: 20px 24px; background: #F7FAFC; font-family: var(--font-sans); }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+  .label { font-size: 11px; font-weight: 600; color: var(--color-gray-600); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+  .sublabel { font-size: 10px; color: #A0AEC0; margin-bottom: 6px; }
+
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; font-family: var(--font-sans); cursor: pointer; border: none; transition: all 0.5s ease; }
+  .btn-sm { padding: 6px 12px; font-size: 12px; }
+  .btn-lg { padding: 10px 20px; font-size: 16px; }
+
+  .btn-primary { background: white; color: #2C5282; border: 1.5px solid #2C5282; }
+  .btn-primary:hover { background: #2C5282; color: white; border-color: #2C5282; }
+
+  .btn-secondary { background: white; color: #2C5282; border: 1.5px solid #2C5282; }
+  .btn-secondary:hover { background: #EBF8FF; }
+
+  .btn-ghost { background: transparent; color: #E53E3E; border: 1.5px solid #E53E3E; transition: background 0.5s ease; }
+  .btn-ghost:hover { background: #FED7D7; }
+
+  .btn-danger { background: white; color: #E53E3E; border: 1.5px solid #E53E3E; }
+  .btn-danger:hover { background: #E53E3E; color: white; }
+
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+</style>
+</head>
+<body>
+<div class="label">Buttons</div>
+<div class="sublabel">Primary</div>
+<div class="row">
+  <button class="btn btn-sm btn-primary">예약하기</button>
+  <button class="btn btn-primary">예약하기</button>
+  <button class="btn btn-lg btn-primary">예약하기</button>
+  <button class="btn btn-primary" disabled>예약하기</button>
+</div>
+<div class="sublabel">Secondary</div>
+<div class="row">
+  <button class="btn btn-sm btn-secondary">상세 보기</button>
+  <button class="btn btn-secondary">상세 보기</button>
+  <button class="btn btn-lg btn-secondary">상세 보기</button>
+</div>
+<div class="sublabel">Ghost / Danger</div>
+<div class="row">
+  <button class="btn btn-ghost">취소</button>
+  <button class="btn btn-danger">예약 삭제</button>
+</div>
+</body>
+</html>

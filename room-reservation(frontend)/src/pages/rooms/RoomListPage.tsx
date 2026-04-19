@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
+import { Search, Users, MapPin } from 'lucide-react'
 import { getRooms } from '@/features/rooms/api/rooms.api'
 import type { Room } from '@/features/rooms/types'
 import type { PageMeta } from '@/shared/types'
@@ -69,24 +70,28 @@ export default function RoomListPage() {
 
   return (
     <Wrapper>
-      <Header>
-        <Title>회의실</Title>
-      </Header>
-
       <FilterForm onSubmit={handleSearch}>
-        <FilterInput
-          type="text"
-          placeholder="위치 검색"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-        />
-        <FilterInput
-          type="number"
-          placeholder="최소 수용 인원"
-          min={1}
-          value={minCapacity}
-          onChange={(e) => setMinCapacity(e.target.value)}
-        />
+        <SearchWrapper>
+          <SearchIcon>
+            <Search size={16} color="#A0AEC0" strokeWidth={1.8} />
+          </SearchIcon>
+          <SearchInput
+            type="text"
+            placeholder="위치 검색"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </SearchWrapper>
+        <CapacityWrapper>
+          <Users size={16} color="#A0AEC0" strokeWidth={1.8} />
+          <CapacityInput
+            type="number"
+            placeholder="최소 수용 인원"
+            min={1}
+            value={minCapacity}
+            onChange={(e) => setMinCapacity(e.target.value)}
+          />
+        </CapacityWrapper>
         <SearchButton type="submit">검색</SearchButton>
       </FilterForm>
 
@@ -110,15 +115,23 @@ export default function RoomListPage() {
           {rooms.map((room) => (
             <RoomCard key={room.id} onClick={() => navigate(`/rooms/${room.id}`)}>
               <CardTop>
-                <RoomName>{room.name}</RoomName>
+                <FloorLabel>{room.location}</FloorLabel>
                 <StatusBadge $active={room.isActive}>
+                  <StatusDot $active={room.isActive} />
                   {room.isActive ? '사용 가능' : '비활성'}
                 </StatusBadge>
               </CardTop>
+              <RoomName>{room.name}</RoomName>
               <CardMeta>
-                <MetaItem>{room.location}</MetaItem>
+                <MetaItem>
+                  <MapPin size={12} color="#A0AEC0" strokeWidth={1.8} />
+                  {room.location}
+                </MetaItem>
                 <MetaDot />
-                <MetaItem>최대 {room.capacity}명</MetaItem>
+                <MetaItem>
+                  <Users size={12} color="#A0AEC0" strokeWidth={1.8} />
+                  최대 {room.capacity}명
+                </MetaItem>
               </CardMeta>
               {room.description && <Description>{room.description}</Description>}
               {room.amenities.length > 0 && (
@@ -151,55 +164,83 @@ const Wrapper = styled.div`
   gap: 20px;
 `
 
-const Header = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-const Title = styled.h1`
-  font-size: 22px;
-  font-weight: 700;
-  color: #111111;
-  margin: 0;
-  letter-spacing: -0.3px;
-`
-
 const FilterForm = styled.form`
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  align-items: center;
 `
 
-const FilterInput = styled.input`
-  padding: 7px 11px;
-  border: 1px solid #e5e5e5;
+const SearchWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+`
+
+const SearchIcon = styled.div`
+  position: absolute;
+  left: 10px;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+`
+
+const CapacityWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  border: 1px solid #CBD5E0;
   border-radius: 6px;
-  font-size: 16px;
-  color: #333333;
+  background: #fff;
+
+  &:focus-within {
+    border-color: #4299E1;
+    box-shadow: 0 0 0 3px rgba(66,153,225,0.15);
+  }
+`
+
+const baseInputStyles = `
+  font-size: 14px;
+  color: #2D3748;
   background: #fff;
   outline: none;
+  font-family: inherit;
+  &::placeholder { color: #A0AEC0; }
+`
 
+const SearchInput = styled.input`
+  ${baseInputStyles}
+  padding: 8px 12px 8px 34px;
+  border: 1px solid #CBD5E0;
+  border-radius: 6px;
   &:focus {
-    border-color: #111111;
+    border-color: #4299E1;
+    box-shadow: 0 0 0 3px rgba(66,153,225,0.15);
   }
+`
 
-  &[type='number'] {
-    width: 140px;
-  }
+const CapacityInput = styled.input`
+  ${baseInputStyles}
+  border: none;
+  padding: 8px 0;
+  width: 120px;
 `
 
 const SearchButton = styled.button`
-  padding: 7px 18px;
-  background: #111111;
+  padding: 8px 18px;
+  background: #2C5282;
   color: #fff;
   border: none;
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+  font-family: inherit;
+  transition: background 200ms ease;
 
   &:hover {
-    background: #000000;
+    background: #23407A;
   }
 `
 
@@ -211,9 +252,9 @@ const Grid = styled.div`
 
 const SkeletonCard = styled.div`
   background: #fff;
-  border: 1px solid #e5e5e5;
+  border: 1.5px solid #E2E8F0;
   border-radius: 8px;
-  padding: 18px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -221,17 +262,19 @@ const SkeletonCard = styled.div`
 
 const RoomCard = styled.div`
   background: #fff;
-  border: 1px solid #e5e5e5;
+  border: 1.5px solid #E2E8F0;
   border-radius: 8px;
-  padding: 18px;
+  padding: 16px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  transition: border-color 0.1s;
+  gap: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  transition: box-shadow 200ms ease, border-color 200ms ease;
 
   &:hover {
-    border-color: #aaaaaa;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+    border-color: #BEE3F8;
   }
 `
 
@@ -242,46 +285,68 @@ const CardTop = styled.div`
   gap: 8px;
 `
 
+const FloorLabel = styled.span`
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #A0AEC0;
+`
+
 const RoomName = styled.h3`
   margin: 0;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
-  color: #111111;
+  color: #2D3748;
 `
 
 const StatusBadge = styled.span<{ $active: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   flex-shrink: 0;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 500;
-  padding: 2px 7px;
-  border-radius: 99px;
-  background: ${({ $active }) => ($active ? '#f0fdf4' : '#f5f5f5')};
-  color: ${({ $active }) => ($active ? '#15803d' : '#888888')};
+  padding: 3px 9px;
+  border-radius: 9999px;
+  background: ${({ $active }) => ($active ? '#C6F6D5' : '#EDF2F7')};
+  color: ${({ $active }) => ($active ? '#276749' : '#718096')};
+`
+
+const StatusDot = styled.span<{ $active: boolean }>`
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: ${({ $active }) => ($active ? '#38A169' : '#A0AEC0')};
+  flex-shrink: 0;
 `
 
 const CardMeta = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 `
 
 const MetaItem = styled.span`
-  font-size: 15px;
-  color: #777777;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 13px;
+  color: #718096;
 `
 
 const MetaDot = styled.span`
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: #cccccc;
+  background: #CBD5E0;
   flex-shrink: 0;
 `
 
 const Description = styled.p`
   margin: 0;
-  font-size: 15px;
-  color: #aaaaaa;
+  font-size: 13px;
+  color: #A0AEC0;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -296,21 +361,22 @@ const Amenities = styled.div`
 `
 
 const AmenityTag = styled.span`
-  font-size: 13px;
-  padding: 2px 7px;
-  background: #f5f5f5;
-  color: #555555;
-  border-radius: 4px;
+  font-size: 11px;
+  padding: 2px 8px;
+  background: #EBF8FF;
+  color: #2B6CB0;
+  border: 1px solid #BEE3F8;
+  border-radius: 9999px;
 `
 
 const ErrorMessage = styled.p`
-  color: #dc2626;
-  font-size: 16px;
+  color: #E53E3E;
+  font-size: 14px;
 `
 
 const Empty = styled.p`
-  color: #aaaaaa;
-  font-size: 16px;
+  color: #A0AEC0;
+  font-size: 14px;
   text-align: center;
   padding: 60px 0;
 `

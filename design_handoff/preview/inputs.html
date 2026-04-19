@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+@font-face {
+  font-family: 'WantedSans';
+  src: url('../fonts/WantedSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+  body { margin: 0; padding: 20px 24px; background: #F7FAFC; font-family: var(--font-sans); }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start; margin-bottom: 14px; }
+  .label { font-size: 11px; font-weight: 600; color: var(--color-gray-600); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+  .sublabel { font-size: 10px; color: #A0AEC0; margin-bottom: 6px; }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field label { font-size: 12px; font-weight: 500; color: #4A5568; }
+  input, select { font-family: var(--font-sans); font-size: 14px; color: #2D3748; background: white; border: 1px solid #CBD5E0; border-radius: 6px; padding: 8px 12px; outline: none; transition: border-color 150ms; width: 180px; box-sizing: border-box; }
+  input:focus, select:focus { border-color: #4299E1; box-shadow: 0 0 0 3px rgba(66,153,225,0.15); }
+  input.error { border-color: #E53E3E; }
+  input::placeholder { color: #A0AEC0; }
+  .hint { font-size: 11px; color: #A0AEC0; }
+  .hint.err { color: #E53E3E; }
+</style>
+</head>
+<body>
+<div class="label">Form Inputs</div>
+<div class="row">
+  <div class="field"><label>회의실 검색</label><input placeholder="회의실 이름 또는 층수"></div>
+  <div class="field"><label>날짜 선택</label><input type="date" value="2026-04-19"></div>
+  <div class="field"><label>시작 시간</label><select><option>09:00</option><option>09:30</option><option selected>14:00</option><option>14:30</option></select></div>
+</div>
+<div class="row">
+  <div class="field"><label>참석 인원 <span style="color:#E53E3E">*</span></label><input class="error" placeholder="인원 수" value="12"><span class="hint err">최대 수용 인원을 초과했습니다</span></div>
+  <div class="field"><label>예약 제목</label><input placeholder="예: 주간 팀 미팅" value="Q2 전략 회의"><span class="hint">선택 사항</span></div>
+</div>
+</body>
+</html>

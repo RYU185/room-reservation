@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-type Variant = 'primary' | 'secondary' | 'danger'
+type Variant = 'primary' | 'secondary' | 'danger' | 'ghost'
 type Size = 'sm' | 'md' | 'lg'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -25,26 +25,60 @@ export default function Button({
 }
 
 const sizeStyles = {
-  sm: css`padding: 4px 12px; font-size: 15px;`,
-  md: css`padding: 8px 16px; font-size: 16px;`,
-  lg: css`padding: 12px 24px; font-size: 18px;`,
+  sm: css`padding: 6px 12px; font-size: 12px;`,
+  md: css`padding: 8px 16px; font-size: 14px;`,
+  lg: css`padding: 10px 20px; font-size: 16px;`,
 }
 
 const variantStyles = {
-  primary: css`background: #111111; color: #fff; &:hover:not(:disabled) { background: #000000; }`,
-  secondary: css`background: #f5f5f5; color: #333333; &:hover:not(:disabled) { background: #ebebeb; }`,
-  danger: css`background: #dc2626; color: #fff; &:hover:not(:disabled) { background: #b91c1c; }`,
+  primary: css`
+    background: #ffffff;
+    color: #2C5282;
+    border: 1.5px solid #2C5282;
+    &:hover:not(:disabled) {
+      background: #2C5282;
+      color: #ffffff;
+    }
+  `,
+  secondary: css`
+    background: #ffffff;
+    color: #2C5282;
+    border: 1.5px solid #2C5282;
+    &:hover:not(:disabled) {
+      background: #EBF8FF;
+    }
+  `,
+  danger: css`
+    background: #ffffff;
+    color: #E53E3E;
+    border: 1.5px solid #E53E3E;
+    &:hover:not(:disabled) {
+      background: #E53E3E;
+      color: #ffffff;
+    }
+  `,
+  ghost: css`
+    background: transparent;
+    color: #E53E3E;
+    border: 1.5px solid #E53E3E;
+    &:hover:not(:disabled) {
+      background: #FED7D7;
+    }
+  `,
 }
 
 const StyledButton = styled.button<{ variant: Variant; size: Size }>`
-  border: none;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
-  transition: background 0.15s;
+  font-family: inherit;
+  transition: all 0.5s ease;
   ${({ size }) => sizeStyles[size]}
   ${({ variant }) => variantStyles[variant]}
-  &:disabled { opacity: 0.5; cursor: not-allowed; }
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
 `
 
 const Spinner = styled.span`

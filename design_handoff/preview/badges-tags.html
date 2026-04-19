@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+@font-face {
+  font-family: 'WantedSans';
+  src: url('../fonts/WantedSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+  body { margin: 0; padding: 20px 24px; background: #F7FAFC; font-family: var(--font-sans); }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+  .label { font-size: 11px; font-weight: 600; color: var(--color-gray-600); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+  .sublabel { font-size: 10px; color: #A0AEC0; margin-bottom: 6px; }
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+  .badge-available { background: #C6F6D5; color: #276749; }
+  .badge-booked    { background: #FED7D7; color: #9B2C2C; }
+  .badge-soon      { background: #FEFCBF; color: #7B6413; }
+  .badge-mine      { background: #EBF8FF; color: #2C5282; }
+  .badge-floor     { background: #EDF2F7; color: #4A5568; }
+  .tag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 9999px; font-size: 12px; background: #EBF8FF; color: #2B6CB0; border: 1px solid #BEE3F8; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; }
+</style>
+</head>
+<body>
+<div class="label">Status Badges</div>
+<div class="row">
+  <span class="badge badge-available"><span class="dot" style="background:#38A169"></span>예약 가능</span>
+  <span class="badge badge-booked"><span class="dot" style="background:#E53E3E"></span>예약됨</span>
+  <span class="badge badge-soon"><span class="dot" style="background:#D69E2E"></span>곧 종료</span>
+  <span class="badge badge-mine"><span class="dot" style="background:#4299E1"></span>내 예약</span>
+  <span class="badge badge-floor">3층</span>
+  <span class="badge badge-floor">대회의실</span>
+</div>
+<div class="sublabel">Amenity Tags</div>
+<div class="row">
+  <span class="tag">화이트보드</span>
+  <span class="tag">프로젝터</span>
+  <span class="tag">TV 모니터</span>
+  <span class="tag">화상회의</span>
+  <span class="tag">최대 8인</span>
+  <span class="tag">자연채광</span>
+</div>
+</body>
+</html>

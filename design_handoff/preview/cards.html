@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+@font-face {
+  font-family: 'WantedSans';
+  src: url('../fonts/WantedSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+  body { margin: 0; padding: 20px 24px; background: #F7FAFC; font-family: var(--font-sans); }
+  .label { font-size: 11px; font-weight: 600; color: var(--color-gray-600); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+  .cards { display: flex; gap: 12px; }
+  .card { background: white; border: 1px solid #E2E8F0; border-radius: 8px; padding: 16px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); min-width: 180px; }
+  .card-accent { border-top: 3px solid #2C5282; }
+  .card-title { font-size: 11px; font-weight: 600; color: #718096; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .card-value { font-size: 28px; font-weight: 700; color: #1B2E5E; line-height: 1; }
+  .card-sub { font-size: 12px; color: #A0AEC0; margin-top: 4px; }
+
+  .info-card { background: white; border: 1px solid #E2E8F0; border-radius: 8px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); width: 220px; }
+  .info-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #F0F4F8; font-size: 13px; }
+  .info-row:last-child { border-bottom: none; }
+  .info-key { color: #718096; }
+  .info-val { color: #2D3748; font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="label">Stat Cards</div>
+<div class="cards" style="margin-bottom:16px">
+  <div class="card card-accent">
+    <div class="card-title">오늘 예약</div>
+    <div class="card-value">3</div>
+    <div class="card-sub">총 4.5시간</div>
+  </div>
+  <div class="card card-accent" style="border-top-color:#4299E1">
+    <div class="card-title">가용 회의실</div>
+    <div class="card-value">12</div>
+    <div class="card-sub">전체 18개 중</div>
+  </div>
+  <div class="card card-accent" style="border-top-color:#38A169">
+    <div class="card-title">이번 주 이용률</div>
+    <div class="card-value">74%</div>
+    <div class="card-sub">↑ 지난주 대비 +8%</div>
+  </div>
+</div>
+<div class="label">Info Card</div>
+<div class="info-card">
+  <div class="info-row"><span class="info-key">장소</span><span class="info-val">한강뷰룸 (3층)</span></div>
+  <div class="info-row"><span class="info-key">날짜</span><span class="info-val">2026.04.19 (금)</span></div>
+  <div class="info-row"><span class="info-key">시간</span><span class="info-val" style="font-family:'Fira Code',monospace">11:00 – 12:30</span></div>
+  <div class="info-row"><span class="info-key">인원</span><span class="info-val">6명</span></div>
+  <div class="info-row"><span class="info-key">예약자</span><span class="info-val">김지수</span></div>
+</div>
+</body>
+</html>
