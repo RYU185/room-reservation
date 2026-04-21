@@ -1,300 +1,565 @@
-import { useState, useEffect } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useState, useEffect, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { Search, Users, MapPin } from 'lucide-react'
+import { Search, Users, Calendar, Filter } from 'lucide-react'
 import { getRooms } from '@/features/rooms/api/rooms.api'
+import { getCalendar, createReservation } from '@/features/reservations/api/reservations.api'
+import { useAuth } from '@/features/auth/context/AuthContext'
 import type { Room } from '@/features/rooms/types'
-import type { PageMeta } from '@/shared/types'
+import type { Reservation } from '@/features/reservations/types'
+import TimeSlotGrid, { ALL_SLOTS } from '@/features/rooms/components/TimeSlotGrid'
+import BookingModal from '@/features/reservations/components/BookingModal'
 import Skeleton from '@/shared/components/Skeleton'
-import Pagination from '@/shared/components/Pagination'
+
+// ── Helpers ─────────────────────────────────────────────────────────────────
+
+function todayStr(): string {
+  const d = new Date()
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+}
+
+function addThirtyMin(time: string): string {
+  const [h, m] = time.split(':').map(Number)
+  if (m === 30) return `${String(h + 1).padStart(2, '0')}:00`
+  return `${String(h).padStart(2, '0')}:30`
+}
+
+function computeSlots(
+  reservations: Reservation[],
+  date: string,
+  userId: number,
+): { bookedSlots: string[]; mySlots: string[] } {
+  const booked: string[] = []
+  const mine: string[] = []
+
+  for (const slot of ALL_SLOTS) {
+    const slotStart = new Date(`${date}T${slot}:00`)
+    const slotEnd = new Date(slotStart.getTime() + 30 * 60 * 1000)
+
+    for (const res of reservations) {
+      if (res.status === 'CANCELLED') continue
+      const resStart = new Date(res.startTime)
+      const resEnd = new Date(res.endTime)
+
+      if (resStart < slotEnd && resEnd > slotStart) {
+        if (res.user.id === userId) mine.push(slot)
+        else booked.push(slot)
+        break
+      }
+    }
+  }
+
+  return { bookedSlots: booked, mySlots: mine }
+}
+
+function formatDateDisplay(dateStr: string): string {
+  const d = new Date(dateStr + 'T00:00:00')
+  const days = ['일', '월', '화', '수', '목', '금', '토']
+  const mo = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${mo}.${day} (${days[d.getDay()]})`
+}
+
+// ── Component ────────────────────────────────────────────────────────────────
 
 export default function RoomListPage() {
   const navigate = useNavigate()
-  const [searchParams, setSearchParams] = useSearchParams()
+  const { user } = useAuth()
 
-  const [location, setLocation] = useState(searchParams.get('location') ?? '')
-  const [minCapacity, setMinCapacity] = useState(searchParams.get('minCapacity') ?? '')
-  const [page, setPage] = useState(Number(searchParams.get('page') ?? 1))
+  const [query, setQuery] = useState('')
+  const [minCapacity, setMinCapacity] = useState('')
 
   const [rooms, setRooms] = useState<Room[]>([])
-  const [meta, setMeta] = useState<PageMeta | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [roomsLoading, setRoomsLoading] = useState(true)
+  const [roomsError, setRoomsError] = useState<string | null>(null)
+
+  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null)
+  const [selectedDate, setSelectedDate] = useState(todayStr())
+  const [selectedSlots, setSelectedSlots] = useState<string[]>([])
+
+  const [calendarData, setCalendarData] = useState<Reservation[]>([])
+  const [calendarLoading, setCalendarLoading] = useState(false)
+
+  const [showModal, setShowModal] = useState(false)
+  const [modalLoading, setModalLoading] = useState(false)
+  const [modalError, setModalError] = useState<string | null>(null)
+
+  // ── Fetch rooms ──────────────────────────────────────────────────────────
 
   useEffect(() => {
     let cancelled = false
-
-    async function fetchRooms() {
-      setLoading(true)
-      setError(null)
-      try {
-        const result = await getRooms({
-          location: location || undefined,
-          minCapacity: minCapacity ? Number(minCapacity) : undefined,
-          page,
-          size: 12,
-        })
-        if (!cancelled) {
-          setRooms(result.rooms)
-          setMeta(result.meta)
-        }
-      } catch {
-        if (!cancelled) setError('회의실 목록을 불러오는 데 실패했습니다.')
-      } finally {
-        if (!cancelled) setLoading(false)
-      }
-    }
-
-    fetchRooms()
+    setRoomsLoading(true)
+    setRoomsError(null)
+    getRooms({ size: 50 })
+      .then(({ rooms: data }) => { if (!cancelled) setRooms(data) })
+      .catch(() => { if (!cancelled) setRoomsError('회의실 목록을 불러오는 데 실패했습니다.') })
+      .finally(() => { if (!cancelled) setRoomsLoading(false) })
     return () => { cancelled = true }
-  }, [location, minCapacity, page])
+  }, [])
 
-  function handleSearch(e: React.FormEvent) {
-    e.preventDefault()
-    setPage(1)
-    setSearchParams({
-      ...(location && { location }),
-      ...(minCapacity && { minCapacity }),
-      page: '1',
-    })
+  // ── Fetch calendar when room or month changes ────────────────────────────
+
+  const fetchCalendar = useCallback(
+    (roomId: number, date: string) => {
+      const [year, month] = date.split('-').map(Number)
+      let cancelled = false
+      setCalendarLoading(true)
+      getCalendar({ year, month, roomId })
+        .then((data) => { if (!cancelled) setCalendarData(data) })
+        .catch(() => { if (!cancelled) setCalendarData([]) })
+        .finally(() => { if (!cancelled) setCalendarLoading(false) })
+      return () => { cancelled = true }
+    },
+    [],
+  )
+
+  useEffect(() => {
+    if (!selectedRoom) return
+    return fetchCalendar(selectedRoom.id, selectedDate)
+  }, [selectedRoom, selectedDate, fetchCalendar])
+
+  // ── Derived slot states ──────────────────────────────────────────────────
+
+  const { bookedSlots, mySlots } = user
+    ? computeSlots(calendarData, selectedDate, user.id)
+    : { bookedSlots: [], mySlots: [] }
+
+  // ── Handlers ─────────────────────────────────────────────────────────────
+
+  function handleRoomClick(room: Room) {
+    if (!room.isActive) return
+    setSelectedRoom((prev) => (prev?.id === room.id ? null : room))
+    setSelectedSlots([])
+    setCalendarData([])
   }
 
-  function handlePageChange(newPage: number) {
-    setPage(newPage)
-    setSearchParams((prev) => {
-      const next = new URLSearchParams(prev)
-      next.set('page', String(newPage))
-      return next
-    })
+  function handleSlotToggle(slot: string) {
+    setSelectedSlots((prev) =>
+      prev.includes(slot) ? prev.filter((s) => s !== slot) : [...prev, slot].sort(),
+    )
   }
+
+  function handleDateChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setSelectedDate(e.target.value)
+    setSelectedSlots([])
+  }
+
+  async function handleConfirm(title: string, description: string) {
+    if (!selectedRoom || selectedSlots.length === 0) return
+    const sorted = [...selectedSlots].sort()
+    const startTime = `${selectedDate}T${sorted[0]}:00`
+    const endTime = `${selectedDate}T${addThirtyMin(sorted[sorted.length - 1])}:00`
+
+    setModalLoading(true)
+    setModalError(null)
+    try {
+      await createReservation({ roomId: selectedRoom.id, title, description, startTime, endTime })
+      setShowModal(false)
+      navigate('/', { state: { showConfirmation: true } })
+    } catch {
+      setModalError('예약에 실패했습니다. 다시 시도해 주세요.')
+    } finally {
+      setModalLoading(false)
+    }
+  }
+
+  // ── Filtered rooms ────────────────────────────────────────────────────────
+
+  const filtered = rooms.filter((r) => {
+    const q = query.trim().toLowerCase()
+    const cap = minCapacity ? Number(minCapacity) : 0
+    const matchesQuery = !q || r.name.toLowerCase().includes(q) || r.location.toLowerCase().includes(q)
+    const matchesCap = !cap || r.capacity >= cap
+    return matchesQuery && matchesCap
+  })
 
   return (
     <Wrapper>
-      <FilterForm onSubmit={handleSearch}>
+      {/* ── Page header ── */}
+      <PageHeader>
+        <PageTitle>회의실 검색</PageTitle>
+        <PageSubtitle>날짜와 시간을 선택해 회의실을 예약하세요</PageSubtitle>
+      </PageHeader>
+
+      {/* ── Search bar ── */}
+      <SearchRow>
         <SearchWrapper>
           <SearchIcon>
-            <Search size={16} color="#A0AEC0" strokeWidth={1.8} />
+            <Search size={14} color="#A0AEC0" strokeWidth={1.8} />
           </SearchIcon>
           <SearchInput
-            type="text"
-            placeholder="위치 검색"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="회의실 이름 또는 위치 검색"
           />
         </SearchWrapper>
+
         <CapacityWrapper>
-          <Users size={16} color="#A0AEC0" strokeWidth={1.8} />
+          <Users size={14} color="#A0AEC0" strokeWidth={1.8} />
           <CapacityInput
             type="number"
-            placeholder="최소 수용 인원"
+            placeholder="최소 인원"
             min={1}
             value={minCapacity}
             onChange={(e) => setMinCapacity(e.target.value)}
           />
         </CapacityWrapper>
-        <SearchButton type="submit">검색</SearchButton>
-      </FilterForm>
 
-      {error && <ErrorMessage>{error}</ErrorMessage>}
+        <FilterButton type="button">
+          <Filter size={14} color="#718096" strokeWidth={1.8} />
+          필터
+        </FilterButton>
+      </SearchRow>
 
-      {loading ? (
-        <Grid>
-          {Array.from({ length: 6 }).map((_, i) => (
-            <SkeletonCard key={i}>
-              <Skeleton height="18px" width="60%" />
-              <Skeleton height="13px" width="40%" />
-              <Skeleton height="13px" width="30%" />
-              <Skeleton height="13px" width="80%" />
-            </SkeletonCard>
-          ))}
-        </Grid>
-      ) : rooms.length === 0 ? (
-        <Empty>조건에 맞는 회의실이 없습니다.</Empty>
-      ) : (
-        <Grid>
-          {rooms.map((room) => (
-            <RoomCard key={room.id} onClick={() => navigate(`/rooms/${room.id}`)}>
-              <CardTop>
-                <FloorLabel>{room.location}</FloorLabel>
-                <StatusBadge $active={room.isActive}>
-                  <StatusDot $active={room.isActive} />
-                  {room.isActive ? '사용 가능' : '비활성'}
-                </StatusBadge>
-              </CardTop>
-              <RoomName>{room.name}</RoomName>
-              <CardMeta>
-                <MetaItem>
-                  <MapPin size={12} color="#A0AEC0" strokeWidth={1.8} />
-                  {room.location}
-                </MetaItem>
-                <MetaDot />
-                <MetaItem>
-                  <Users size={12} color="#A0AEC0" strokeWidth={1.8} />
-                  최대 {room.capacity}명
-                </MetaItem>
-              </CardMeta>
-              {room.description && <Description>{room.description}</Description>}
-              {room.amenities.length > 0 && (
-                <Amenities>
-                  {room.amenities.slice(0, 3).map((a) => (
-                    <AmenityTag key={a}>{a}</AmenityTag>
-                  ))}
-                  {room.amenities.length > 3 && (
-                    <AmenityTag>+{room.amenities.length - 3}</AmenityTag>
+      {/* ── 2-column layout ── */}
+      <Columns>
+        {/* Left: room list */}
+        <LeftColumn>
+          <ColumnLabel>회의실 목록 ({filtered.length})</ColumnLabel>
+
+          {roomsError && <ErrorText>{roomsError}</ErrorText>}
+
+          {roomsLoading ? (
+            <RoomCardList>
+              {Array.from({ length: 4 }).map((_, i) => (
+                <SkeletonCard key={i}>
+                  <Skeleton height="12px" width="30%" />
+                  <Skeleton height="16px" width="60%" />
+                  <Skeleton height="12px" width="40%" />
+                  <Skeleton height="22px" width="50%" />
+                </SkeletonCard>
+              ))}
+            </RoomCardList>
+          ) : filtered.length === 0 ? (
+            <EmptyRooms>조건에 맞는 회의실이 없습니다.</EmptyRooms>
+          ) : (
+            <RoomCardList>
+              {filtered.map((room) => (
+                <RoomCard
+                  key={room.id}
+                  $selected={selectedRoom?.id === room.id}
+                  $disabled={!room.isActive}
+                  onClick={() => handleRoomClick(room)}
+                >
+                  <CardTop>
+                    <FloorLabel>{room.location}</FloorLabel>
+                    <StatusBadge $active={room.isActive}>
+                      <StatusDot $active={room.isActive} />
+                      {room.isActive ? '예약 가능' : '비활성'}
+                    </StatusBadge>
+                  </CardTop>
+
+                  <RoomName>{room.name}</RoomName>
+
+                  <CardMeta>
+                    <Users size={12} color="#A0AEC0" strokeWidth={1.8} />
+                    <span>최대 {room.capacity}인</span>
+                  </CardMeta>
+
+                  {room.amenities.length > 0 && (
+                    <Amenities>
+                      {room.amenities.slice(0, 3).map((a) => (
+                        <AmenityTag key={a}>{a}</AmenityTag>
+                      ))}
+                      {room.amenities.length > 3 && (
+                        <AmenityTag>+{room.amenities.length - 3}</AmenityTag>
+                      )}
+                    </Amenities>
                   )}
-                </Amenities>
-              )}
-            </RoomCard>
-          ))}
-        </Grid>
-      )}
+                </RoomCard>
+              ))}
+            </RoomCardList>
+          )}
+        </LeftColumn>
 
-      {meta && (
-        <PaginationWrapper>
-          <Pagination page={page} totalPages={meta.totalPages} onPageChange={handlePageChange} />
-        </PaginationWrapper>
+        {/* Right: slot panel */}
+        <RightColumn>
+          <SlotHeader>
+            <ColumnLabel>
+              {selectedRoom ? `시간 선택 — ${selectedRoom.name}` : '시간 선택'}
+            </ColumnLabel>
+            {selectedRoom && (
+              <DateInput
+                type="date"
+                value={selectedDate}
+                min={todayStr()}
+                onChange={handleDateChange}
+              />
+            )}
+          </SlotHeader>
+
+          {selectedRoom ? (
+            <>
+              <SlotPanel>
+                <DateLabel>
+                  <Calendar size={13} color="#A0AEC0" strokeWidth={1.8} />
+                  {formatDateDisplay(selectedDate)}
+                </DateLabel>
+
+                {calendarLoading ? (
+                  <SlotSkeleton>
+                    <Skeleton height="120px" />
+                  </SlotSkeleton>
+                ) : (
+                  <TimeSlotGrid
+                    bookedSlots={bookedSlots}
+                    mySlots={mySlots}
+                    selectedSlots={selectedSlots}
+                    onToggle={handleSlotToggle}
+                  />
+                )}
+              </SlotPanel>
+
+              <ReserveButton
+                disabled={selectedSlots.length === 0}
+                onClick={() => setShowModal(true)}
+              >
+                {selectedSlots.length > 0
+                  ? `${selectedSlots.length * 0.5}시간 예약하기`
+                  : '시간을 선택하세요'}
+              </ReserveButton>
+            </>
+          ) : (
+            <EmptySlotPanel>
+              <Calendar size={32} color="#CBD5E0" strokeWidth={1.5} />
+              <EmptySlotTitle>회의실을 선택하세요</EmptySlotTitle>
+              <EmptySlotSub>
+                좌측에서 원하는 회의실을 클릭하면
+                <br />
+                시간을 선택할 수 있습니다.
+              </EmptySlotSub>
+            </EmptySlotPanel>
+          )}
+        </RightColumn>
+      </Columns>
+
+      {showModal && selectedRoom && (
+        <BookingModal
+          room={selectedRoom}
+          date={selectedDate}
+          selectedSlots={selectedSlots}
+          loading={modalLoading}
+          error={modalError}
+          onClose={() => { setShowModal(false); setModalError(null) }}
+          onConfirm={handleConfirm}
+        />
       )}
     </Wrapper>
   )
 }
 
+// ── Styles ────────────────────────────────────────────────────────────────────
+
+const PageHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #EDF2F7;
+`
+
+const PageTitle = styled.h1`
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1B2E5E;
+  letter-spacing: -0.3px;
+`
+
+const PageSubtitle = styled.p`
+  margin: 0;
+  font-size: 13px;
+  color: #A0AEC0;
+`
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 `
 
-const FilterForm = styled.form`
+const SearchRow = styled.div`
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
   align-items: center;
+  flex-wrap: wrap;
 `
 
 const SearchWrapper = styled.div`
   position: relative;
-  display: flex;
-  align-items: center;
+  flex: 1;
+  min-width: 180px;
 `
 
 const SearchIcon = styled.div`
   position: absolute;
-  left: 10px;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   pointer-events: none;
   display: flex;
   align-items: center;
 `
 
-const CapacityWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 10px;
+const SearchInput = styled.input`
+  width: 100%;
+  padding: 9px 12px 9px 36px;
   border: 1px solid #CBD5E0;
   border-radius: 6px;
-  background: #fff;
+  font-size: 13px;
+  font-family: inherit;
+  color: #2D3748;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
 
-  &:focus-within {
+  &::placeholder { color: #A0AEC0; }
+
+  &:focus {
     border-color: #4299E1;
-    box-shadow: 0 0 0 3px rgba(66,153,225,0.15);
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
   }
 `
 
-const baseInputStyles = `
-  font-size: 14px;
-  color: #2D3748;
-  background: #fff;
-  outline: none;
-  font-family: inherit;
-  &::placeholder { color: #A0AEC0; }
-`
-
-const SearchInput = styled.input`
-  ${baseInputStyles}
-  padding: 8px 12px 8px 34px;
+const CapacityWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
   border: 1px solid #CBD5E0;
   border-radius: 6px;
-  &:focus {
+  background: white;
+  height: 38px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+
+  &:focus-within {
     border-color: #4299E1;
-    box-shadow: 0 0 0 3px rgba(66,153,225,0.15);
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
   }
 `
 
 const CapacityInput = styled.input`
-  ${baseInputStyles}
   border: none;
-  padding: 8px 0;
-  width: 120px;
+  outline: none;
+  font-size: 13px;
+  font-family: inherit;
+  color: #2D3748;
+  width: 80px;
+  background: transparent;
+
+  &::placeholder { color: #A0AEC0; }
 `
 
-const SearchButton = styled.button`
-  padding: 8px 18px;
-  background: #2C5282;
-  color: #fff;
-  border: none;
+const FilterButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border: 1px solid #CBD5E0;
   border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
+  background: white;
+  color: #718096;
+  font-size: 13px;
   font-family: inherit;
-  transition: background 200ms ease;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.5s ease;
 
   &:hover {
-    background: #23407A;
+    background: #EDF2F7;
   }
 `
 
-const Grid = styled.div`
+const Columns = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 14px;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
 `
 
-const SkeletonCard = styled.div`
-  background: #fff;
-  border: 1.5px solid #E2E8F0;
-  border-radius: 8px;
-  padding: 16px;
+const LeftColumn = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 `
 
-const RoomCard = styled.div`
-  background: #fff;
-  border: 1.5px solid #E2E8F0;
-  border-radius: 8px;
-  padding: 16px;
-  cursor: pointer;
+const RightColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`
+
+const ColumnLabel = styled.div`
+  font-size: 12px;
+  font-weight: 600;
+  color: #A0AEC0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+`
+
+const RoomCardList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-  transition: box-shadow 200ms ease, border-color 200ms ease;
+`
+
+const SkeletonCard = styled.div`
+  background: white;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`
+
+const RoomCard = styled.div<{ $selected: boolean; $disabled: boolean }>`
+  background: white;
+  border: 1.5px solid ${({ $selected }) => ($selected ? '#4299E1' : '#E2E8F0')};
+  border-radius: 8px;
+  padding: 16px;
+  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: ${({ $selected }) =>
+    $selected
+      ? '0 0 0 3px rgba(66,153,225,0.15)'
+      : '0 1px 3px rgba(0,0,0,0.06)'};
+  transition: all 200ms ease;
+  opacity: ${({ $disabled }) => ($disabled ? 0.5 : 1)};
 
   &:hover {
-    box-shadow: 0 4px 6px rgba(0,0,0,0.07);
-    border-color: #BEE3F8;
+    box-shadow: ${({ $selected, $disabled }) =>
+      $disabled
+        ? '0 1px 3px rgba(0,0,0,0.06)'
+        : $selected
+        ? '0 0 0 3px rgba(66,153,225,0.15)'
+        : '0 4px 6px rgba(0,0,0,0.07)'};
+    border-color: ${({ $selected, $disabled }) =>
+      $disabled ? '#E2E8F0' : $selected ? '#4299E1' : '#BEE3F8'};
   }
 `
 
 const CardTop = styled.div`
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 8px;
 `
 
 const FloorLabel = styled.span`
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #A0AEC0;
 `
 
-const RoomName = styled.h3`
-  margin: 0;
+const RoomName = styled.div`
   font-size: 15px;
   font-weight: 600;
   color: #2D3748;
@@ -303,12 +568,12 @@ const RoomName = styled.h3`
 const StatusBadge = styled.span<{ $active: boolean }>`
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  flex-shrink: 0;
+  gap: 4px;
   font-size: 11px;
   font-weight: 500;
   padding: 3px 9px;
   border-radius: 9999px;
+  flex-shrink: 0;
   background: ${({ $active }) => ($active ? '#C6F6D5' : '#EDF2F7')};
   color: ${({ $active }) => ($active ? '#276749' : '#718096')};
 `
@@ -324,40 +589,15 @@ const StatusDot = styled.span<{ $active: boolean }>`
 const CardMeta = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px;
-`
-
-const MetaItem = styled.span`
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  font-size: 13px;
+  gap: 4px;
+  font-size: 12px;
   color: #718096;
-`
-
-const MetaDot = styled.span`
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: #CBD5E0;
-  flex-shrink: 0;
-`
-
-const Description = styled.p`
-  margin: 0;
-  font-size: 13px;
-  color: #A0AEC0;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
 `
 
 const Amenities = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 2px;
+  gap: 4px;
 `
 
 const AmenityTag = styled.span`
@@ -369,18 +609,112 @@ const AmenityTag = styled.span`
   border-radius: 9999px;
 `
 
-const ErrorMessage = styled.p`
-  color: #E53E3E;
-  font-size: 14px;
-`
-
-const Empty = styled.p`
+const EmptyRooms = styled.p`
   color: #A0AEC0;
-  font-size: 14px;
+  font-size: 13px;
   text-align: center;
-  padding: 60px 0;
+  padding: 40px 0;
 `
 
-const PaginationWrapper = styled.div`
-  padding-top: 8px;
+const ErrorText = styled.p`
+  color: #E53E3E;
+  font-size: 13px;
+  margin: 0;
+`
+
+// ── Right panel ───────────────────────────────────────────────────────────────
+
+const SlotHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+`
+
+const DateInput = styled.input`
+  border: 1px solid #CBD5E0;
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 12px;
+  font-family: inherit;
+  color: #2D3748;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+
+  &:focus {
+    border-color: #4299E1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+  }
+`
+
+const SlotPanel = styled.div`
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`
+
+const DateLabel = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: #A0AEC0;
+`
+
+const SlotSkeleton = styled.div`
+  padding: 4px 0;
+`
+
+const ReserveButton = styled.button`
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 150ms ease;
+
+  background: ${({ disabled }) => (disabled ? '#E2E8F0' : '#2C5282')};
+  color: ${({ disabled }) => (disabled ? '#A0AEC0' : 'white')};
+  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
+
+  &:hover:not(:disabled) {
+    background: #23407A;
+  }
+`
+
+const EmptySlotPanel = styled.div`
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  gap: 10px;
+`
+
+const EmptySlotTitle = styled.div`
+  font-size: 13px;
+  font-weight: 500;
+  color: #A0AEC0;
+`
+
+const EmptySlotSub = styled.div`
+  font-size: 12px;
+  color: #CBD5E0;
+  text-align: center;
+  line-height: 1.6;
 `

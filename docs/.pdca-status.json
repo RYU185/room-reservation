@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "lastUpdated": "2026-04-19T12:29:12.962Z",
+  "lastUpdated": "2026-04-20T08:11:48.488Z",
   "activeFeatures": [
     "domain-model",
     "api-spec",
@@ -219,9 +219,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T08:50:17.000Z",
-        "lastUpdated": "2026-04-19T12:16:34.632Z"
+        "lastUpdated": "2026-04-20T05:55:27.093Z"
       },
-      "lastFile": "c:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\shared\\components\\Pagination.tsx"
+      "lastFile": "c:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\pages\\HomePage.tsx"
     },
     "auth": {
       "phase": "do",
@@ -245,7 +245,7 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T13:57:19.293Z",
-        "lastUpdated": "2026-04-19T12:29:12.962Z"
+        "lastUpdated": "2026-04-20T08:11:48.488Z"
       },
       "lastFile": "c:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\pages\\rooms\\RoomListPage.tsx"
     },
@@ -258,9 +258,9 @@
       "documents": {},
       "timestamps": {
         "started": "2026-03-22T13:57:21.161Z",
-        "lastUpdated": "2026-04-19T12:16:21.761Z"
+        "lastUpdated": "2026-04-20T05:53:09.150Z"
       },
-      "lastFile": "c:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\features\\reservations\\components\\ReservationCard.tsx"
+      "lastFile": "c:\\Users\\fence\\OneDrive\\문서\\GitHub\\room-reservation\\room-reservation(frontend)\\src\\features\\reservations\\components\\BookingModal.tsx"
     },
     "admin": {
       "phase": "do",
@@ -363,7 +363,7 @@
   "session": {
     "startedAt": "2026-03-11T16:11:06.398Z",
     "onboardingCompleted": false,
-    "lastActivity": "2026-04-19T12:29:12.962Z"
+    "lastActivity": "2026-04-20T08:11:48.488Z"
   },
   "history": [
     {
@@ -2804,6 +2804,120 @@
     },
     {
       "timestamp": "2026-04-19T12:29:12.962Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T02:36:06.770Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T02:36:17.634Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T05:52:25.463Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T05:53:09.150Z",
+      "feature": "reservations",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T05:54:33.179Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T05:54:59.309Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T05:55:05.415Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T05:55:16.712Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T05:55:27.093Z",
+      "feature": "room-reservation(frontend)",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T07:02:58.200Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T07:17:28.280Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T07:52:42.700Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T07:59:09.898Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T07:59:16.151Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T07:59:22.738Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T07:59:30.246Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T08:11:33.592Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T08:11:43.000Z",
+      "feature": "rooms",
+      "phase": "do",
+      "action": "updated"
+    },
+    {
+      "timestamp": "2026-04-20T08:11:48.488Z",
       "feature": "rooms",
       "phase": "do",
       "action": "updated"

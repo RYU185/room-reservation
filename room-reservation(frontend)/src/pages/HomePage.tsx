@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import { parseISO, format, isToday, isTomorrow } from 'date-fns'
 import { ko } from 'date-fns/locale'
-import { Calendar, BookOpen, Clock, Building2, Plus } from 'lucide-react'
+import { Calendar, BookOpen, Clock, Building2, Plus, CheckCircle, X } from 'lucide-react'
 import { getMyReservations } from '@/features/reservations/api/reservations.api'
 import type { Reservation } from '@/features/reservations/types'
 import { useAuth } from '@/features/auth/context/AuthContext'
@@ -13,8 +13,12 @@ import Skeleton from '@/shared/components/Skeleton'
 export default function HomePage() {
   const { user } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
   const [reservations, setReservations] = useState<Reservation[]>([])
   const [loading, setLoading] = useState(true)
+  const [showConfirmation, setShowConfirmation] = useState(
+    () => !!(location.state as { showConfirmation?: boolean } | null)?.showConfirmation,
+  )
 
   useEffect(() => {
     const from = new Date().toISOString().slice(0, 10)
@@ -38,12 +42,25 @@ export default function HomePage() {
 
   return (
     <Wrapper>
+      {showConfirmation && (
+        <ConfirmationBanner>
+          <CheckCircle size={20} color="#38A169" strokeWidth={1.8} />
+          <BannerText>
+            <BannerTitle>예약이 완료되었습니다</BannerTitle>
+            <BannerSub>예약 내역은 '내 예약'에서 확인할 수 있습니다.</BannerSub>
+          </BannerText>
+          <DismissButton onClick={() => setShowConfirmation(false)}>
+            <X size={16} color="#38A169" strokeWidth={1.8} />
+          </DismissButton>
+        </ConfirmationBanner>
+      )}
+
       <PageHeader>
         <div>
           <Greeting>안녕하세요, {user?.name}님 👋</Greeting>
           <DateText>{todayLabel}</DateText>
         </div>
-        <NewButton onClick={() => navigate('/reservations/new')}>
+        <NewButton onClick={() => navigate('/rooms')}>
           <Plus size={14} strokeWidth={2} />
           새 예약
         </NewButton>
@@ -447,4 +464,40 @@ const SkeletonRow = styled.div`
   &:last-child {
     border-bottom: none;
   }
+`
+
+const ConfirmationBanner = styled.div`
+  background: #C6F6D5;
+  border: 1px solid rgba(56, 161, 105, 0.2);
+  border-radius: 8px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`
+
+const BannerText = styled.div`
+  flex: 1;
+`
+
+const BannerTitle = styled.div`
+  font-size: 13px;
+  font-weight: 600;
+  color: #276749;
+`
+
+const BannerSub = styled.div`
+  font-size: 12px;
+  color: #38A169;
+  margin-top: 1px;
+`
+
+const DismissButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 `

@@ -25,15 +25,22 @@ export default function ReservationNewPage() {
   const [serverError, setServerError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!roomId) return
+    if (!roomId) {
+      setRoomLoading(false)
+      return
+    }
     let cancelled = false
     setRoomLoading(true)
     getRoom(roomId)
       .then((data) => {
         if (!cancelled) setRoom(data)
       })
-      .catch(() => {
+      .catch((err) => {
         if (!cancelled) setRoom(null)
+        const status = err?.response?.status
+        if (status === 401) {
+          setServerError('인증이 만료되었습니다. 다시 로그인해 주세요.')
+        }
       })
       .finally(() => {
         if (!cancelled) setRoomLoading(false)
@@ -62,6 +69,18 @@ export default function ReservationNewPage() {
     } finally {
       setSubmitLoading(false)
     }
+  }
+
+  if (!roomId) {
+    return (
+      <Wrapper>
+        <BackButton onClick={() => navigate(-1)}>← 뒤로가기</BackButton>
+        <Card>
+          <PageTitle>예약 만들기</PageTitle>
+          <RoomError>회의실을 먼저 선택해 주세요.</RoomError>
+        </Card>
+      </Wrapper>
+    )
   }
 
   return (
