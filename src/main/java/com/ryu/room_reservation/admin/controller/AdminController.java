@@ -97,7 +97,7 @@ public class AdminController {
         ));
     }
 
-    @GetMapping("/users/{id}/reservations")
+        @GetMapping("/users/{id}/reservations")
     @Operation(summary = "특정 사용자 예약 이력 조회")
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "조회 성공"),

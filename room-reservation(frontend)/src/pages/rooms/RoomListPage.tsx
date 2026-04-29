@@ -548,7 +548,7 @@ const CardTop = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 8px;
+  gap: 8px; 
 `
 
 const FloorLabel = styled.span`
