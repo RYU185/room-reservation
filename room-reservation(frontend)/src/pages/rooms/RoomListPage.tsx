@@ -18,12 +18,6 @@ function todayStr(): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 }
 
-function addThirtyMin(time: string): string {
-  const [h, m] = time.split(':').map(Number)
-  if (m === 30) return `${String(h + 1).padStart(2, '0')}:00`
-  return `${String(h).padStart(2, '0')}:30`
-}
-
 function computeSlots(
   reservations: Reservation[],
   date: string,
@@ -78,6 +72,14 @@ function calcDurationHours(slots: string[]): number {
     return h * 60 + m
   }
   return (toMin(sorted[sorted.length - 1]) - toMin(sorted[0])) / 60
+}
+
+function formatDuration(hours: number): string {
+  const h = Math.floor(hours)
+  const half = hours % 1 !== 0
+  if (h === 0) return '30분'
+  if (half) return `${h}시간 30분`
+  return `${h}시간`
 }
 
 function formatDateDisplay(dateStr: string): string {
@@ -397,7 +399,7 @@ export default function RoomListPage() {
                   <SummarySection>
                     <SummaryText $mono>{summaryData.start} → {summaryData.end}</SummaryText>
                   </SummarySection>
-                  <SummaryBadge>{summaryData.hours}시간</SummaryBadge>
+                  <SummaryBadge>{formatDuration(summaryData.hours)}</SummaryBadge>
                 </BookingSummary>
               )}
 

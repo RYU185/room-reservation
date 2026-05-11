@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const ALL_SLOTS: string[] = (() => {
   const slots: string[] = []
   for (let h = 9; h < 18; h++) {
@@ -78,8 +79,8 @@ const Slot = styled.div<{ $status: SlotStatus }>`
   padding: 8px 4px;
   border-radius: 6px;
   text-align: center;
-  font-size: 11px;
-  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  font-family: inherit;
   user-select: none;
   transition: all 120ms ease;
   border: 1.5px solid transparent;

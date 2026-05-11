@@ -103,7 +103,7 @@ export default function ReservationDetailPage() {
         <InfoSection>
           <InfoRow>
             <InfoLabel>예약자</InfoLabel>
-            <InfoValue>{reservation.user.name} ({reservation.user.email})</InfoValue>
+            <InfoValue>{reservation.user?.name} ({reservation.user?.email})</InfoValue>
           </InfoRow>
           <InfoRow>
             <InfoLabel>회의실</InfoLabel>
@@ -248,16 +248,17 @@ const StatusBadge = styled.span<{ $confirmed: boolean }>`
 const InfoSection = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 14px 16px;
-  background: #fafafa;
-  border-radius: 6px;
-  border: 1px solid #f0f0f0;
+  border-top: 1px solid #f0f0f0;
 `
 
 const InfoRow = styled.div`
   display: flex;
   gap: 12px;
+  padding: 11px 0;
+
+  & + & {
+    border-top: 1px solid #f5f5f5;
+  }
 `
 
 const InfoLabel = styled.span`
