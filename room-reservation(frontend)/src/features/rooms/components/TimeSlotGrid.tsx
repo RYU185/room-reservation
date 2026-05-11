@@ -6,6 +6,7 @@ export const ALL_SLOTS: string[] = (() => {
     slots.push(`${String(h).padStart(2, '0')}:00`)
     slots.push(`${String(h).padStart(2, '0')}:30`)
   }
+  slots.push('18:00')
   return slots
 })()
 

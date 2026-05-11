@@ -42,7 +42,7 @@ function computeSlots(
       const resEnd = new Date(res.endTime)
 
       if (resStart < slotEnd && resEnd > slotStart) {
-        if (res.user.id === userId) mine.push(slot)
+        if (res.user?.id === userId) mine.push(slot)
         else booked.push(slot)
         break
       }
@@ -50,6 +50,34 @@ function computeSlots(
   }
 
   return { bookedSlots: booked, mySlots: mine }
+}
+
+function formatDateFull(dateStr: string): string {
+  const d = new Date(dateStr + 'T00:00:00')
+  const days = ['일', '월', '화', '수', '목', '금', '토']
+  return `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일 (${days[d.getDay()]})`
+}
+
+function getPastSlots(date: string): string[] {
+  const now = new Date()
+  const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`
+  if (date !== todayStr) return []
+  const currentMinutes = now.getHours() * 60 + now.getMinutes()
+  return ALL_SLOTS.filter((slot) => {
+    if (slot === '18:00') return false
+    const [h, m] = slot.split(':').map(Number)
+    return h * 60 + m <= currentMinutes
+  })
+}
+
+function calcDurationHours(slots: string[]): number {
+  if (slots.length <= 1) return 0.5
+  const sorted = [...slots].sort()
+  const toMin = (t: string) => {
+    const [h, m] = t.split(':').map(Number)
+    return h * 60 + m
+  }
+  return (toMin(sorted[sorted.length - 1]) - toMin(sorted[0])) / 60
 }
 
 function formatDateDisplay(dateStr: string): string {
@@ -76,6 +104,7 @@ export default function RoomListPage() {
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null)
   const [selectedDate, setSelectedDate] = useState(todayStr())
   const [selectedSlots, setSelectedSlots] = useState<string[]>([])
+  const [anchorSlot, setAnchorSlot] = useState<string | null>(null)
 
   const [calendarData, setCalendarData] = useState<Reservation[]>([])
   const [calendarLoading, setCalendarLoading] = useState(false)
@@ -124,31 +153,79 @@ export default function RoomListPage() {
     ? computeSlots(calendarData, selectedDate, user.id)
     : { bookedSlots: [], mySlots: [] }
 
+  const pastSlots = getPastSlots(selectedDate)
+  const unavailableSlots = [...new Set([...bookedSlots, ...pastSlots])]
+
+  const summaryData = selectedSlots.length >= 2
+    ? (() => {
+        const sorted = [...selectedSlots].sort()
+        return { start: sorted[0], end: sorted[sorted.length - 1], hours: calcDurationHours(selectedSlots) }
+      })()
+    : null
+
   // ── Handlers ─────────────────────────────────────────────────────────────
 
   function handleRoomClick(room: Room) {
     if (!room.isActive) return
     setSelectedRoom((prev) => (prev?.id === room.id ? null : room))
     setSelectedSlots([])
+    setAnchorSlot(null)
     setCalendarData([])
   }
 
   function handleSlotToggle(slot: string) {
-    setSelectedSlots((prev) =>
-      prev.includes(slot) ? prev.filter((s) => s !== slot) : [...prev, slot].sort(),
-    )
+    const isEndMarker = slot === '18:00'
+
+    if (!anchorSlot) {
+      if (isEndMarker) return
+      setAnchorSlot(slot)
+      setSelectedSlots([slot])
+      return
+    }
+
+    const anchorIdx = ALL_SLOTS.indexOf(anchorSlot)
+    const slotIdx = ALL_SLOTS.indexOf(slot)
+    const minIdx = Math.min(anchorIdx, slotIdx)
+    const maxIdx = Math.max(anchorIdx, slotIdx)
+
+    if (minIdx === maxIdx) {
+      setAnchorSlot(null)
+      setSelectedSlots([])
+      return
+    }
+
+    // inclusive UI: both clicked slots shown as selected
+    const range = ALL_SLOTS.slice(minIdx, maxIdx + 1)
+
+    // check only the actual reservation blocks (exclude last = end-time marker)
+    const blocks = range.length > 1 ? range.slice(0, -1) : range
+    const hasBlocker = blocks.some((s) => unavailableSlots.includes(s) || mySlots.includes(s))
+    if (hasBlocker) {
+      if (isEndMarker) {
+        setAnchorSlot(null)
+        setSelectedSlots([])
+      } else {
+        setAnchorSlot(slot)
+        setSelectedSlots([slot])
+      }
+      return
+    }
+
+    setSelectedSlots(range)
+    setAnchorSlot(null)
   }
 
   function handleDateChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSelectedDate(e.target.value)
     setSelectedSlots([])
+    setAnchorSlot(null)
   }
 
   async function handleConfirm(title: string, description: string) {
-    if (!selectedRoom || selectedSlots.length === 0) return
+    if (!selectedRoom || selectedSlots.length < 2) return
     const sorted = [...selectedSlots].sort()
     const startTime = `${selectedDate}T${sorted[0]}:00`
-    const endTime = `${selectedDate}T${addThirtyMin(sorted[sorted.length - 1])}:00`
+    const endTime = `${selectedDate}T${sorted[sorted.length - 1]}:00`
 
     setModalLoading(true)
     setModalError(null)
@@ -302,7 +379,7 @@ export default function RoomListPage() {
                   </SlotSkeleton>
                 ) : (
                   <TimeSlotGrid
-                    bookedSlots={bookedSlots}
+                    bookedSlots={unavailableSlots}
                     mySlots={mySlots}
                     selectedSlots={selectedSlots}
                     onToggle={handleSlotToggle}
@@ -310,13 +387,29 @@ export default function RoomListPage() {
                 )}
               </SlotPanel>
 
+              {summaryData && (
+                <BookingSummary>
+                  <SummarySection>
+                    <Calendar size={13} color="#4299E1" strokeWidth={1.8} />
+                    <SummaryText $bold>{formatDateFull(selectedDate)}</SummaryText>
+                  </SummarySection>
+                  <SummaryDivider />
+                  <SummarySection>
+                    <SummaryText $mono>{summaryData.start} → {summaryData.end}</SummaryText>
+                  </SummarySection>
+                  <SummaryBadge>{summaryData.hours}시간</SummaryBadge>
+                </BookingSummary>
+              )}
+
               <ReserveButton
-                disabled={selectedSlots.length === 0}
+                disabled={selectedSlots.length < 2}
                 onClick={() => setShowModal(true)}
               >
-                {selectedSlots.length > 0
-                  ? `${selectedSlots.length * 0.5}시간 예약하기`
-                  : '시간을 선택하세요'}
+                {selectedSlots.length === 0
+                  ? '시간을 선택하세요'
+                  : selectedSlots.length === 1
+                  ? '종료 시간을 선택하세요'
+                  : `${calcDurationHours(selectedSlots)}시간 예약하기`}
               </ReserveButton>
             </>
           ) : (
@@ -717,4 +810,47 @@ const EmptySlotSub = styled.div`
   color: #CBD5E0;
   text-align: center;
   line-height: 1.6;
+`
+
+const BookingSummary = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  background: #EBF4FF;
+  border: 1px solid #BEE3F8;
+  border-radius: 8px;
+`
+
+const SummarySection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`
+
+const SummaryText = styled.span<{ $bold?: boolean; $mono?: boolean }>`
+  font-size: 13px;
+  color: #2C5282;
+  font-weight: ${({ $bold }) => ($bold ? '600' : '400')};
+  font-family: ${({ $mono }) => ($mono ? "'Fira Code', monospace" : 'inherit')};
+  white-space: nowrap;
+`
+
+const SummaryDivider = styled.div`
+  width: 1px;
+  height: 14px;
+  background: #BEE3F8;
+  flex-shrink: 0;
+`
+
+const SummaryBadge = styled.span`
+  margin-left: auto;
+  padding: 3px 10px;
+  background: #2C5282;
+  color: white;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
 `
