@@ -128,7 +128,9 @@ export default function AdminStatsPage() {
           </ChartCard>
 
           <DetailCard>
-            <ChartTitle>상세 데이터</ChartTitle>
+            <DetailCardHeader>
+              <ChartTitle>상세 데이터</ChartTitle>
+            </DetailCardHeader>
             <Table>
               <thead>
                 <tr>
@@ -286,6 +288,10 @@ const DetailCard = styled.div`
   border: 1px solid #e5e5e5;
   border-radius: 8px;
   overflow: hidden;
+`;
+
+const DetailCardHeader = styled.div`
+  padding: 20px 22px 14px;
 `;
 
 const Table = styled.table`
